@@ -1,0 +1,374 @@
+import React, { useState, useMemo } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useApp } from "../context/AppContext";
+import { PERFUME_BRANDS, PERFUME_CATEGORIES } from "../mock";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CartDrawer from "../components/CartDrawer";
+import ScentQuizModal from "../components/ScentQuizModal";
+import { 
+  Search, 
+  Filter, 
+  Star, 
+  ShoppingBag, 
+  Heart, 
+  ArrowUpDown, 
+  RotateCcw,
+  Crown
+} from "lucide-react";
+import { CATALOG } from "../constants/testIds";
+
+export default function CatalogView() {
+  const { perfumes, addToCart, wishlist, toggleWishlist } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
+
+  // Filters state from URL query or default
+  const searchQuery = searchParams.get("search") || "";
+  const categoryFilter = searchParams.get("category") || "all";
+  const brandFilter = searchParams.get("brand") || "all";
+  const sortBy = searchParams.get("sort") || "featured";
+  const maxPrice = Number(searchParams.get("maxPrice")) || 900;
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+
+  const handleSearchChange = (val) => {
+    const params = new URLSearchParams(searchParams);
+    if (val) params.set("search", val); else params.delete("search");
+    setSearchParams(params);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (cat) => {
+    const params = new URLSearchParams(searchParams);
+    if (cat && cat !== "all") params.set("category", cat); else params.delete("category");
+    setSearchParams(params);
+    setCurrentPage(1);
+  };
+
+  const handleBrandChange = (brand) => {
+    const params = new URLSearchParams(searchParams);
+    if (brand && brand !== "all") params.set("brand", brand); else params.delete("brand");
+    setSearchParams(params);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (sort) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", sort);
+    setSearchParams(params);
+  };
+
+  const handlePriceChange = (price) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("maxPrice", price);
+    setSearchParams(params);
+    setCurrentPage(1);
+  };
+
+  const handleResetFilters = () => {
+    setSearchParams({});
+    setCurrentPage(1);
+  };
+
+  // Filter and Sort logic
+  const filteredPerfumes = useMemo(() => {
+    return perfumes.filter(p => {
+      // Search match
+      const matchesSearch = !searchQuery || 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+      // Category match
+      const matchesCategory = categoryFilter === "all" || p.category.toLowerCase() === categoryFilter.toLowerCase();
+
+      // Brand match
+      const matchesBrand = brandFilter === "all" || p.brand.toLowerCase() === brandFilter.toLowerCase();
+
+      // Price match
+      const matchesPrice = p.price <= maxPrice;
+
+      return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
+    }).sort((a, b) => {
+      if (sortBy === "price-low") return a.price - b.price;
+      if (sortBy === "price-high") return b.price - a.price;
+      if (sortBy === "rating") return b.rating - a.rating;
+      if (sortBy === "newest") return b.id.localeCompare(a.id);
+      return 0; // featured
+    });
+  }, [perfumes, searchQuery, categoryFilter, brandFilter, maxPrice, sortBy]);
+
+  // Paginated items
+  const totalPages = Math.ceil(filteredPerfumes.length / itemsPerPage);
+  const currentItems = filteredPerfumes.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  return (
+    <div className="min-h-screen bg-[#0A0A0A] text-neutral-100 font-serif selection:bg-[#D4AF37] selection:text-[#0A0A0A]">
+      <Navbar onOpenCart={() => setIsCartOpen(true)} onOpenQuiz={() => setIsQuizOpen(true)} />
+
+      {/* Header Banner */}
+      <div className="bg-gradient-to-b from-[#14110C] to-[#0A0A0A] border-b border-[#D4AF37]/20 py-16 px-4 text-center">
+        <div className="max-w-4xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 text-[#D4AF37] text-xs uppercase tracking-[0.2em] font-serif">
+            <Crown className="w-4 h-4" />
+            <span>Exclusive Haul • 100 Curated Fragrances</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#F3E5AB]">
+            The Haute Parfumerie Catalog
+          </h1>
+          <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-serif">
+            Filter through our exhaustive collection of 100 masterpieces spanning rare ouds, rich orientals, and crystalline fresh waters.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          
+          {/* Sidebar Filters */}
+          <div className="space-y-6 bg-[#120F0A] border border-[#D4AF37]/30 p-6 rounded-lg h-fit">
+            <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
+              <div className="flex items-center gap-2 text-[#D4AF37] font-serif text-sm font-bold tracking-wider">
+                <Filter className="w-4 h-4" />
+                <span>Refine Collection</span>
+              </div>
+              <button 
+                onClick={handleResetFilters}
+                className="text-[11px] text-neutral-400 hover:text-[#D4AF37] flex items-center gap-1 font-serif underline"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            </div>
+
+            {/* Search Input */}
+            <div className="space-y-2">
+              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Search Scent or Note</label>
+              <div className="relative">
+                <input 
+                  type="text"
+                  placeholder="e.g. Oud, Saffron, Creed..."
+                  value={searchQuery}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif pl-8"
+                  data-testid={CATALOG.searchInput}
+                />
+                <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2.5" />
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="space-y-2">
+              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Fragrance Family</label>
+              <select 
+                value={categoryFilter}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif"
+                data-testid={CATALOG.categoryFilter}
+              >
+                <option value="all">All Families ({perfumes.length})</option>
+                {PERFUME_CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Brand Filter */}
+            <div className="space-y-2">
+              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Perfume House</label>
+              <select 
+                value={brandFilter}
+                onChange={(e) => handleBrandChange(e.target.value)}
+                className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif"
+                data-testid={CATALOG.brandFilter}
+              >
+                <option value="all">All Luxury Houses</option>
+                {PERFUME_BRANDS.map((brand) => (
+                  <option key={brand} value={brand}>{brand}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Max Price Slider */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs text-neutral-300 font-serif">
+                <span className="text-[#D4AF37] uppercase tracking-wider">Max Price</span>
+                <span className="text-[#D4AF37] font-bold">${maxPrice}</span>
+              </div>
+              <input 
+                type="range"
+                min="200"
+                max="900"
+                step="25"
+                value={maxPrice}
+                onChange={(e) => handlePriceChange(Number(e.target.value))}
+                className="w-full accent-[#D4AF37] cursor-pointer"
+              />
+              <div className="flex justify-between text-[10px] text-neutral-500 font-serif">
+                <span>$200</span>
+                <span>$900+</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Main Grid Area */}
+          <div className="lg:col-span-3 space-y-6">
+            
+            {/* Top Toolbar */}
+            <div className="flex flex-col sm:flex-row items-center justify-between bg-[#120F0A] border border-[#D4AF37]/30 p-4 rounded-lg gap-4">
+              <div className="text-xs font-serif text-neutral-300">
+                Showing <span className="text-[#D4AF37] font-bold">{filteredPerfumes.length}</span> luxury fragrances
+              </div>
+
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <div className="flex items-center gap-2 text-xs font-serif text-neutral-400 whitespace-nowrap">
+                  <ArrowUpDown className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>Sort By:</span>
+                </div>
+                <select 
+                  value={sortBy}
+                  onChange={(e) => handleSortChange(e.target.value)}
+                  className="bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-1.5 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif flex-1 sm:w-48"
+                  data-testid={CATALOG.sortSelect}
+                >
+                  <option value="featured">Featured Masterpieces</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="newest">Newest Releases</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Perfumes Grid */}
+            {filteredPerfumes.length === 0 ? (
+              <div className="text-center py-24 bg-[#120F0A] border border-[#D4AF37]/20 rounded-lg space-y-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-[#1A1610] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+                  <Search className="w-8 h-8 opacity-60" />
+                </div>
+                <h4 className="font-serif text-lg text-neutral-300">No Fragrance Found</h4>
+                <p className="text-xs text-neutral-500 max-w-xs mx-auto font-serif">
+                  No luxury perfumes match your current filters or search terms. Try resetting your search parameters.
+                </p>
+                <button
+                  onClick={handleResetFilters}
+                  className="px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-widest rounded-sm hover:opacity-95 transition-all"
+                >
+                  Reset All Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentItems.map((perfume) => {
+                  const isWishlisted = wishlist.includes(perfume.id);
+                  return (
+                    <div 
+                      key={perfume.id}
+                      className="group bg-gradient-to-b from-[#14110C] to-[#0D0B08] border border-[#D4AF37]/30 rounded-lg overflow-hidden hover:border-[#D4AF37] transition-all duration-300 shadow-xl flex flex-col justify-between"
+                      data-testid={CATALOG.perfumeCard}
+                    >
+                      <div className="relative overflow-hidden aspect-square bg-[#0A0A0A]">
+                        <img 
+                          src={perfume.image} 
+                          alt={perfume.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                        />
+                        <div className="absolute top-3 left-3 bg-[#0A0A0A]/80 border border-[#D4AF37]/40 px-2.5 py-1 rounded text-[10px] text-[#D4AF37] font-serif uppercase tracking-widest">
+                          {perfume.category}
+                        </div>
+                        
+                        <button 
+                          onClick={() => toggleWishlist(perfume.id)}
+                          className="absolute top-3 right-3 p-2 rounded-full bg-[#0A0A0A]/80 border border-[#D4AF37]/30 text-neutral-300 hover:text-[#D4AF37] transition-colors"
+                          title="Save to favorites"
+                        >
+                          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#D4AF37] text-[#D4AF37]' : ''}`} />
+                        </button>
+
+                        <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center">
+                          <button
+                            onClick={() => navigate(`/perfume/${perfume.id}`)}
+                            className="w-full py-2 bg-[#D4AF37] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-widest rounded shadow hover:bg-[#F3E5AB] transition-colors"
+                            data-testid={CATALOG.quickViewBtn}
+                          >
+                            Quick View & Notes
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                          <div className="flex items-center justify-between text-xs text-[#D4AF37] font-serif uppercase tracking-widest">
+                            <span>{perfume.brand}</span>
+                            <div className="flex items-center gap-1 text-amber-400">
+                              <Star className="w-3.5 h-3.5 fill-current" />
+                              <span>{perfume.rating}</span>
+                            </div>
+                          </div>
+                          <h3 
+                            onClick={() => navigate(`/perfume/${perfume.id}`)}
+                            className="font-serif text-lg font-bold text-neutral-100 mt-1 cursor-pointer hover:text-[#D4AF37] transition-colors line-clamp-1"
+                          >
+                            {perfume.name}
+                          </h3>
+                          <p className="text-xs text-neutral-400 font-serif line-clamp-2 mt-1">
+                            {perfume.description}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
+                          <div>
+                            <span className="text-[10px] text-neutral-500 uppercase tracking-widest block">Price</span>
+                            <span className="font-serif text-base font-bold text-[#D4AF37]">${perfume.price}</span>
+                          </div>
+
+                          <button
+                            onClick={() => addToCart(perfume, perfume.sizes[1] || "100ml", 1)}
+                            className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-wider rounded hover:opacity-95 transition-all shadow-md flex items-center gap-1.5"
+                            data-testid={CATALOG.addToCartBtn}
+                          >
+                            <ShoppingBag className="w-3.5 h-3.5" />
+                            <span>Add</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 pt-8">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`w-9 h-9 rounded font-serif text-xs flex items-center justify-center transition-all ${currentPage === i + 1 ? 'bg-[#D4AF37] text-[#0A0A0A] font-bold shadow-lg' : 'bg-[#120F0A] border border-[#D4AF37]/30 text-neutral-300 hover:border-[#D4AF37]'}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            )}
+
+          </div>
+
+        </div>
+      </div>
+
+      <Footer />
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <ScentQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
+    </div>
+  );
+}
