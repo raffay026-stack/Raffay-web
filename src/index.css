@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #080706;
+  --bg-secondary: #121010;
+  --surface: rgba(255, 255, 255, 0.03);
+  --text: #f5eee6;
+  --text-muted: #c9b79b;
+  --accent: #c8a871;
+  --border: rgba(255, 241, 208, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #080706;
+  color: #f5eee6;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Keep React/Tailwind layouts predictable */
+main {
+  width: 100%;
+}
+
+button {
+  flex-shrink: 0;
+}
+
+input,
+select,
+textarea {
+  min-width: 0;
+}
+
+/* Luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080706;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6f5a2e;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c8a871;
+}
+
+/* Prevent accidental horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Mobile safety */
+@media (max-width: 640px) {
+  img {
+    max-width: 100%;
+  }
+}
