@@ -1,5 +1,5 @@
-import React from "react";
-import "@/App.css";
+﻿import React from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { Toaster } from "sonner";
@@ -16,11 +16,11 @@ function App() {
   return (
     <AppProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-[#0A0A0A] text-neutral-100 flex flex-col justify-between selection:bg-[#D4AF37] selection:text-[#0A0A0A]">
+        <div className="min-h-screen bg-[#0A0A0A] text-neutral-100 flex flex-col justify-between selection:bg-[#080809] selection:text-[#0A0A0A]">
           <Routes>
             <Route path="/" element={<HomeView />} />
             <Route path="/catalog" element={<CatalogView />} />
-            <Route path="/perfume/:id" element={<ProductDetailView />} />
+            <Route path="/Perfume/:id" element={<ProductDetailView />} />
             <Route path="/checkout" element={<CheckoutView />} />
             <Route path="/order-confirmation/:id" element={<OrderConfirmationView />} />
             <Route path="/orders" element={<MyOrdersView />} />
@@ -34,4 +34,18 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

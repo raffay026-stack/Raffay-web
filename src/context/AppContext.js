@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+﻿import React, { createContext, useContext, useState, useEffect } from "react";
 import { INITIAL_PERFUMES, INITIAL_ORDERS } from "../mock";
 import { toast } from "sonner";
 
@@ -10,13 +10,13 @@ export const AppProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : { name: "Alexander Wright", email: "alexander@lixirnoir.com", role: "Connoisseur VIP" };
   });
 
-  const [perfumes, setPerfumes] = useState(INITIAL_PERFUMES);
+  const [products, setproducts] = useState(INITIAL_PERFUMES);
   
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("lixir_cart");
     return saved ? JSON.parse(saved) : [
-      { ...INITIAL_PERFUMES[0], quantity: 1, selectedSize: "100ml" },
-      { ...INITIAL_PERFUMES[4], quantity: 1, selectedSize: "70ml" }
+      { ...INITIAL_PERFUMES[0], quantity: 1, selectedSize: "L" },
+      { ...INITIAL_PERFUMES[4], quantity: 1, selectedSize: "M" }
     ];
   });
 
@@ -25,7 +25,7 @@ export const AppProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : INITIAL_ORDERS;
   });
 
-  const [wishlist, setWishlist] = useState(["perfume-1", "perfume-5"]);
+  const [wishlist, setWishlist] = useState(["Perfume-1", "Perfume-5"]);
   const [promoCode, setPromoCode] = useState("");
   const [discountAmount, setDiscountAmount] = useState(0);
 
@@ -41,18 +41,18 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("lixir_orders", JSON.stringify(orders));
   }, [orders]);
 
-  const addToCart = (perfume, size = "100ml", qty = 1) => {
+  const addToCart = (product, size = "M", qty = 1) => {
     setCart(prevCart => {
-      const existingIndex = prevCart.findIndex(item => item.id === perfume.id && item.selectedSize === size);
+      const existingIndex = prevCart.findIndex(item => item.id === product.id && item.selectedSize === size);
       if (existingIndex > -1) {
         const updated = [...prevCart];
         updated[existingIndex].quantity += qty;
         return updated;
       } else {
-        return [...prevCart, { ...perfume, quantity: qty, selectedSize: size }];
+        return [...prevCart, { ...product, quantity: qty, selectedSize: size }];
       }
     });
-    toast.success(`Added ${perfume.name} (${size}) to your crystal cart.`);
+    toast.success(`Added ${product.name} (${size}) to your shopping cart.`);
   };
 
   const updateCartQuantity = (id, size, newQty) => {
@@ -75,10 +75,10 @@ export const AppProvider = ({ children }) => {
   const toggleWishlist = (id) => {
     setWishlist(prev => {
       if (prev.includes(id)) {
-        toast.info("Removed from your private salon favorites.");
+        toast.info("Removed from your favorites.");
         return prev.filter(item => item !== id);
       } else {
-        toast.success("Added to your private salon favorites.");
+        toast.success("Added to your favorites.");
         return [...prev, id];
       }
     });
@@ -141,7 +141,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider value={{
       user,
-      perfumes,
+      products,
       cart,
       orders,
       wishlist,
@@ -167,4 +167,21 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

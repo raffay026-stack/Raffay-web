@@ -1,4 +1,4 @@
-export const AUTH = {
+﻿export const AUTH = {
   loginBtn: "login-submit-btn",
   signupBtn: "signup-submit-btn",
   logoutBtn: "logout-nav-btn",
@@ -10,7 +10,7 @@ export const AUTH = {
 export const HOME = {
   emergentLink: "emergent-link",
   heroCta: "hero-explore-collection-btn",
-  quizCta: "hero-scent-quiz-btn",
+  quizCta: "hero-style-quiz-btn",
   royalOudTab: "royal-oud-tab",
   bestsellersTab: "bestsellers-tab",
 };
@@ -20,7 +20,7 @@ export const CATALOG = {
   categoryFilter: "category-filter-select",
   brandFilter: "brand-filter-select",
   sortSelect: "catalog-sort-select",
-  perfumeCard: "perfume-card-item",
+  PerfumeCard: "Perfume-card-item",
   addToCartBtn: "add-to-cart-quick-btn",
   quickViewBtn: "quick-view-btn",
 };
@@ -65,4 +65,18 @@ export const QUIZ = {
   submitBtn: "quiz-submit-btn",
   restartBtn: "quiz-restart-btn",
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

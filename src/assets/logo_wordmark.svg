@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" role="img" aria-labelledby="title">
+  <title id="title">Scentora Wordmark</title>
+  <rect width="600" height="120" fill="transparent" />
+  <g transform="translate(24,84)" fill="#F2E9E1" font-family="Cormorant Garamond, serif" font-size="48">
+    <text x="0" y="0">𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪</text>
+  </g>
+  <g transform="translate(480,38)">
+    <path d="M0 0 c8 6 12 14 12 22" stroke="#8C5F6D" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

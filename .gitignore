@@ -1,0 +1,20 @@
+node_modules/
+build/
+.env
+
+# Dependencies
+node_modules/
+
+# Backups / recovery files
+*.backup
+*.backup.*
+*.before-*
+*.RECOVERED.*
+*.code-search
+
+# Temporary files
+unsplash.html
+
+
+*brand-backup
+perfume-hero.jpg

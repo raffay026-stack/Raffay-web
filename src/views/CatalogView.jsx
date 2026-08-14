@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { PERFUME_BRANDS, PERFUME_CATEGORIES } from "../mock";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartDrawer from "../components/CartDrawer";
-import ScentQuizModal from "../components/ScentQuizModal";
+import StyleQuizModal from '../components/ScentQuizModal';
 import { 
   Search, 
   Filter, 
@@ -19,7 +19,7 @@ import {
 import { CATALOG } from "../constants/testIds";
 
 export default function CatalogView() {
-  const { perfumes, addToCart, wishlist, toggleWishlist } = useApp();
+  const { products, addToCart, wishlist, toggleWishlist } = useApp();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ export default function CatalogView() {
 
   // Filter and Sort logic
   const filteredPerfumes = useMemo(() => {
-    return perfumes.filter(p => {
+    return products.filter(p => {
       // Search match
       const matchesSearch = !searchQuery || 
         p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,25 +103,25 @@ export default function CatalogView() {
       if (sortBy === "newest") return b.id.localeCompare(a.id);
       return 0; // featured
     });
-  }, [perfumes, searchQuery, categoryFilter, brandFilter, maxPrice, sortBy]);
+  }, [products, searchQuery, categoryFilter, brandFilter, maxPrice, sortBy]);
 
   // Paginated items
   const totalPages = Math.ceil(filteredPerfumes.length / itemsPerPage);
   const currentItems = filteredPerfumes.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-neutral-100 font-serif selection:bg-[#D4AF37] selection:text-[#0A0A0A]">
+    <div className="min-h-screen bg-[#0A0A0A] text-neutral-100 font-serif selection:bg-[#080809] selection:text-[#0A0A0A]">
       <Navbar onOpenCart={() => setIsCartOpen(true)} onOpenQuiz={() => setIsQuizOpen(true)} />
 
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-[#14110C] to-[#0A0A0A] border-b border-[#D4AF37]/20 py-16 px-4 text-center">
+      <div className="bg-gradient-to-b from-[#14110C] to-[#0A0A0A] border-b border-[#080809]/20 py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 text-[#D4AF37] text-xs uppercase tracking-[0.2em] font-serif">
+          <div className="inline-flex items-center gap-2 text-[#080809] text-xs uppercase tracking-[0.2em] font-serif">
             <Crown className="w-4 h-4" />
-            <span>Exclusive Haul • 100 Curated Fragrances</span>
+            <span>Summer Drop â€¢ 100 Curated Perfumes</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#F3E5AB]">
-            The Haute Parfumerie Catalog
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#F3EFE6]">
+            Summer Men's Perfume Catalog
           </h1>
           <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto font-serif">
             Filter through our exhaustive collection of 100 masterpieces spanning rare ouds, rich orientals, and crystalline fresh waters.
@@ -133,15 +133,15 @@ export default function CatalogView() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
           {/* Sidebar Filters */}
-          <div className="space-y-6 bg-[#120F0A] border border-[#D4AF37]/30 p-6 rounded-lg h-fit">
+          <div className="space-y-6 bg-[#120F0A] border border-[#080809]/30 p-6 rounded-lg h-fit">
             <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
-              <div className="flex items-center gap-2 text-[#D4AF37] font-serif text-sm font-bold tracking-wider">
+              <div className="flex items-center gap-2 text-[#080809] font-serif text-sm font-bold tracking-wider">
                 <Filter className="w-4 h-4" />
                 <span>Refine Collection</span>
               </div>
               <button 
                 onClick={handleResetFilters}
-                className="text-[11px] text-neutral-400 hover:text-[#D4AF37] flex items-center gap-1 font-serif underline"
+                className="text-[11px] text-neutral-400 hover:text-[#080809] flex items-center gap-1 font-serif underline"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>Reset</span>
@@ -150,14 +150,14 @@ export default function CatalogView() {
 
             {/* Search Input */}
             <div className="space-y-2">
-              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Search Scent or Note</label>
+              <label className="text-xs text-[#080809] uppercase tracking-wider font-serif">Search Style or Note</label>
               <div className="relative">
                 <input 
                   type="text"
-                  placeholder="e.g. Oud, Saffron, Creed..."
+                  placeholder="e.g. Oud, Saffron, StreetForm..."
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif pl-8"
+                  className="w-full bg-[#0A0A0A] border border-[#080809]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#080809] rounded font-serif pl-8"
                   data-testid={CATALOG.searchInput}
                 />
                 <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-2.5" />
@@ -166,14 +166,14 @@ export default function CatalogView() {
 
             {/* Category Filter */}
             <div className="space-y-2">
-              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Fragrance Family</label>
+              <label className="text-xs text-[#080809] uppercase tracking-wider font-serif">Fragrance Family</label>
               <select 
                 value={categoryFilter}
                 onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif"
+                className="w-full bg-[#0A0A0A] border border-[#080809]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#080809] rounded font-serif"
                 data-testid={CATALOG.categoryFilter}
               >
-                <option value="all">All Families ({perfumes.length})</option>
+                <option value="all">All Families ({products.length})</option>
                 {PERFUME_CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>{cat}</option>
                 ))}
@@ -182,11 +182,11 @@ export default function CatalogView() {
 
             {/* Brand Filter */}
             <div className="space-y-2">
-              <label className="text-xs text-[#D4AF37] uppercase tracking-wider font-serif">Perfume House</label>
+              <label className="text-xs text-[#080809] uppercase tracking-wider font-serif">Perfume House</label>
               <select 
                 value={brandFilter}
                 onChange={(e) => handleBrandChange(e.target.value)}
-                className="w-full bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif"
+                className="w-full bg-[#0A0A0A] border border-[#080809]/30 px-3 py-2 text-xs text-neutral-200 focus:outline-none focus:border-[#080809] rounded font-serif"
                 data-testid={CATALOG.brandFilter}
               >
                 <option value="all">All Luxury Houses</option>
@@ -199,8 +199,8 @@ export default function CatalogView() {
             {/* Max Price Slider */}
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-neutral-300 font-serif">
-                <span className="text-[#D4AF37] uppercase tracking-wider">Max Price</span>
-                <span className="text-[#D4AF37] font-bold">${maxPrice}</span>
+                <span className="text-[#080809] uppercase tracking-wider">Max Price</span>
+                <span className="text-[#080809] font-bold">${maxPrice}</span>
               </div>
               <input 
                 type="range"
@@ -209,7 +209,7 @@ export default function CatalogView() {
                 step="25"
                 value={maxPrice}
                 onChange={(e) => handlePriceChange(Number(e.target.value))}
-                className="w-full accent-[#D4AF37] cursor-pointer"
+                className="w-full accent-[#080809] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-neutral-500 font-serif">
                 <span>$200</span>
@@ -223,20 +223,20 @@ export default function CatalogView() {
           <div className="lg:col-span-3 space-y-6">
             
             {/* Top Toolbar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between bg-[#120F0A] border border-[#D4AF37]/30 p-4 rounded-lg gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between bg-[#120F0A] border border-[#080809]/30 p-4 rounded-lg gap-4">
               <div className="text-xs font-serif text-neutral-300">
-                Showing <span className="text-[#D4AF37] font-bold">{filteredPerfumes.length}</span> luxury fragrances
+                Showing <span className="text-[#080809] font-bold">{filteredPerfumes.length}</span> luxury Perfumes
               </div>
 
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="flex items-center gap-2 text-xs font-serif text-neutral-400 whitespace-nowrap">
-                  <ArrowUpDown className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <ArrowUpDown className="w-3.5 h-3.5 text-[#080809]" />
                   <span>Sort By:</span>
                 </div>
                 <select 
                   value={sortBy}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="bg-[#0A0A0A] border border-[#D4AF37]/30 px-3 py-1.5 text-xs text-neutral-200 focus:outline-none focus:border-[#D4AF37] rounded font-serif flex-1 sm:w-48"
+                  className="bg-[#0A0A0A] border border-[#080809]/30 px-3 py-1.5 text-xs text-neutral-200 focus:outline-none focus:border-[#080809] rounded font-serif flex-1 sm:w-48"
                   data-testid={CATALOG.sortSelect}
                 >
                   <option value="featured">Featured Masterpieces</option>
@@ -250,53 +250,53 @@ export default function CatalogView() {
 
             {/* Perfumes Grid */}
             {filteredPerfumes.length === 0 ? (
-              <div className="text-center py-24 bg-[#120F0A] border border-[#D4AF37]/20 rounded-lg space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[#1A1610] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+              <div className="text-center py-24 bg-[#120F0A] border border-[#080809]/20 rounded-lg space-y-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-[#1A1610] border border-[#080809]/30 flex items-center justify-center text-[#080809]">
                   <Search className="w-8 h-8 opacity-60" />
                 </div>
                 <h4 className="font-serif text-lg text-neutral-300">No Fragrance Found</h4>
                 <p className="text-xs text-neutral-500 max-w-xs mx-auto font-serif">
-                  No luxury perfumes match your current filters or search terms. Try resetting your search parameters.
+                  No luxury Perfumes match your current filters or search terms. Try resetting your search parameters.
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-widest rounded-sm hover:opacity-95 transition-all"
+                  className="px-6 py-2.5 bg-gradient-to-r from-[#2FB59A] to-[#2FB59A] text-[#9AE9D8] font-serif text-xs font-bold uppercase tracking-widest rounded-sm hover:opacity-95 transition-all"
                 >
                   Reset All Filters
                 </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentItems.map((perfume) => {
-                  const isWishlisted = wishlist.includes(perfume.id);
+                {currentItems.map((product) => {
+                  const isWishlisted = wishlist.includes(product.id);
                   return (
                     <div 
-                      key={perfume.id}
-                      className="group bg-gradient-to-b from-[#14110C] to-[#0D0B08] border border-[#D4AF37]/30 rounded-lg overflow-hidden hover:border-[#D4AF37] transition-all duration-300 shadow-xl flex flex-col justify-between"
-                      data-testid={CATALOG.perfumeCard}
+                      key={product.id}
+                      className="group bg-gradient-to-b from-[#14110C] to-[#0D0B08] border border-[#080809]/30 rounded-lg overflow-hidden hover:border-[#080809] transition-all duration-300 shadow-xl flex flex-col justify-between"
+                      data-testid={CATALOG.PerfumeCard}
                     >
                       <div className="relative overflow-hidden aspect-square bg-[#0A0A0A]">
                         <img 
-                          src={perfume.image} 
-                          alt={perfume.name}
+                          src={product.image} 
+                          alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                         />
-                        <div className="absolute top-3 left-3 bg-[#0A0A0A]/80 border border-[#D4AF37]/40 px-2.5 py-1 rounded text-[10px] text-[#D4AF37] font-serif uppercase tracking-widest">
-                          {perfume.category}
+                        <div className="absolute top-3 left-3 bg-[#0A0A0A]/80 border border-[#080809]/40 px-2.5 py-1 rounded text-[10px] text-[#080809] font-serif uppercase tracking-widest">
+                          {product.category}
                         </div>
                         
                         <button 
-                          onClick={() => toggleWishlist(perfume.id)}
-                          className="absolute top-3 right-3 p-2 rounded-full bg-[#0A0A0A]/80 border border-[#D4AF37]/30 text-neutral-300 hover:text-[#D4AF37] transition-colors"
+                          onClick={() => toggleWishlist(product.id)}
+                          className="absolute top-3 right-3 p-2 rounded-full bg-[#0A0A0A]/80 border border-[#080809]/30 text-neutral-300 hover:text-[#080809] transition-colors"
                           title="Save to favorites"
                         >
-                          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#D4AF37] text-[#D4AF37]' : ''}`} />
+                          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#080809] text-[#080809]' : ''}`} />
                         </button>
 
                         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center">
                           <button
-                            onClick={() => navigate(`/perfume/${perfume.id}`)}
-                            className="w-full py-2 bg-[#D4AF37] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-widest rounded shadow hover:bg-[#F3E5AB] transition-colors"
+                            onClick={() => navigate(`/Perfume/${product.id}`)}
+                            className="w-full py-2 bg-[#2FB59A] text-[#9AE9D8] font-serif text-xs font-bold uppercase tracking-widest rounded shadow hover:bg-[#2FB59A] transition-colors"
                             data-testid={CATALOG.quickViewBtn}
                           >
                             Quick View & Notes
@@ -306,33 +306,33 @@ export default function CatalogView() {
 
                       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                         <div>
-                          <div className="flex items-center justify-between text-xs text-[#D4AF37] font-serif uppercase tracking-widest">
-                            <span>{perfume.brand}</span>
-                            <div className="flex items-center gap-1 text-amber-400">
+                          <div className="flex items-center justify-between text-xs text-[#080809] font-serif uppercase tracking-widest">
+                            <span>{product.brand}</span>
+                            <div className="flex items-center gap-1 text-[#9AE9D8]">
                               <Star className="w-3.5 h-3.5 fill-current" />
-                              <span>{perfume.rating}</span>
+                              <span>{product.rating}</span>
                             </div>
                           </div>
                           <h3 
-                            onClick={() => navigate(`/perfume/${perfume.id}`)}
-                            className="font-serif text-lg font-bold text-neutral-100 mt-1 cursor-pointer hover:text-[#D4AF37] transition-colors line-clamp-1"
+                            onClick={() => navigate(`/Perfume/${product.id}`)}
+                            className="font-serif text-lg font-bold text-neutral-100 mt-1 cursor-pointer hover:text-[#080809] transition-colors line-clamp-1"
                           >
-                            {perfume.name}
+                            {product.name}
                           </h3>
                           <p className="text-xs text-neutral-400 font-serif line-clamp-2 mt-1">
-                            {perfume.description}
+                            {product.description}
                           </p>
                         </div>
 
                         <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
                           <div>
                             <span className="text-[10px] text-neutral-500 uppercase tracking-widest block">Price</span>
-                            <span className="font-serif text-base font-bold text-[#D4AF37]">${perfume.price}</span>
+                            <span className="font-serif text-base font-bold text-[#080809]">${product.price}</span>
                           </div>
 
                           <button
-                            onClick={() => addToCart(perfume, perfume.sizes[1] || "100ml", 1)}
-                            className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#0A0A0A] font-serif text-xs font-bold uppercase tracking-wider rounded hover:opacity-95 transition-all shadow-md flex items-center gap-1.5"
+                            onClick={() => addToCart(product, product.sizes[1] || "L", 1)}
+                            className="px-4 py-2 bg-gradient-to-r from-[#2FB59A] to-[#2FB59A] text-[#9AE9D8] font-serif text-xs font-bold uppercase tracking-wider rounded hover:opacity-95 transition-all shadow-md flex items-center gap-1.5"
                             data-testid={CATALOG.addToCartBtn}
                           >
                             <ShoppingBag className="w-3.5 h-3.5" />
@@ -353,7 +353,7 @@ export default function CatalogView() {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-9 h-9 rounded font-serif text-xs flex items-center justify-center transition-all ${currentPage === i + 1 ? 'bg-[#D4AF37] text-[#0A0A0A] font-bold shadow-lg' : 'bg-[#120F0A] border border-[#D4AF37]/30 text-neutral-300 hover:border-[#D4AF37]'}`}
+                    className={`w-9 h-9 rounded font-serif text-xs flex items-center justify-center transition-all ${currentPage === i + 1 ? 'bg-[#2FB59A] text-[#9AE9D8] font-bold shadow-lg' : 'bg-[#120F0A] border border-[#2FB59A]/30 text-neutral-300 hover:border-[#2FB59A]'}`}
                   >
                     {i + 1}
                   </button>
@@ -368,8 +368,22 @@ export default function CatalogView() {
 
       <Footer />
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <ScentQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
+      <StyleQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
