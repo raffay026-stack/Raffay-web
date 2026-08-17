@@ -2,1230 +2,278 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* New palette: Obsidian Black + Deep Plum + Smoky Rose */
-  --obsidian: #080809; /* primary background */
-  --deep-plum: #C6A15B; /* secondary panel */
-  --smoky-rose: #C6A15B; /* accent */
-  --ivory: #C6A15B; /* primary text */
-  --muted-mauve: #B9A2A9; /* secondary text */
-  --surface-subtle: #151116; /* subtle surface */
-  --border-rose: rgba(140,95,109,0.30);
-  --glass: rgba(255,255,255,0.02);
-  --shadow-strong: rgba(3,3,3,0.6);
-}
-
-/* Base safety */
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-html, body, #root { min-height: 100%; }
-body {
-  margin: 0;
-  background: radial-gradient(1200px 420px at 70% 20%, rgba(140,95,109,0.03), transparent 8%), linear-gradient(180deg, var(--obsidian) 0%, #050507 60%, var(--deep-plum) 100%);
-  color: var(--ivory);
-  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.45;
-}
-
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-
-/* Scrollbar - subtle and dark */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.09); }
-
-/* Prevent horizontal overflow */
-html, body { overflow-x: hidden; }
-
-/* Typography helpers (editorial hierarchy) */
-h1, h2, h3, h4 { color: var(--ivory); font-family: "Cormorant Garamond", "Playfair Display", serif; }
-h1 { font-size: clamp(2rem, 4vw, 3.8rem); line-height: 1.02; letter-spacing: -0.02em; }
-h2 { font-size: clamp(1.4rem, 2.6vw, 2.25rem); }
-h3 { font-size: 1.1rem; }
-p, span, li, a, button { color: var(--muted-mauve); }
-
-/* Small uppercase labels */
-.uppercase-label { text-transform: uppercase; letter-spacing: .16em; color: var(--muted-mauve); font-size: .72rem; }
-
-/* =========================
-   NAVBAR (target existing structure)
-   ========================= */
-
-/* Make header deep obsidian with thin smoky-rose border */
-header.sticky.top-0.z-40 {
-  background: linear-gradient(180deg, var(--obsidian), rgba(20,10,14,0.95));
-  border-bottom: 1px solid var(--border-rose);
-}
-
-/* Announcement bar style override */
-header > div:first-of-type {
-  background: linear-gradient(90deg, rgba(36,21,34,0.9), rgba(8,6,8,0.9));
-  color: var(--smoky-rose);
-  font-weight: 600;
-  letter-spacing: .12em;
-}
-
-/* Brand look */
-[data-testid="navbar-brand-logo"] { color: var(--ivory); }
-[data-testid="navbar-brand-logo"] .font-serif span:first-child { color: var(--ivory); font-weight:700; }
-[data-testid="navbar-brand-logo"] .w-10.h-10.rounded-full { background: linear-gradient(135deg, var(--deep-plum), rgba(140,95,109,0.12)); box-shadow: 0 8px 30px var(--shadow-strong); border: 1px solid rgba(255,255,255,0.03); }
-
-/* Nav links - ivory default, smoky-rose hover */
-header nav a, header nav button { color: var(--ivory); opacity: .95; transition: color .18s ease, background .18s ease; }
-header nav a:hover, header nav button:hover { color: var(--smoky-rose); background: rgba(36,21,34,0.35); }
-header nav a[aria-current], header nav a.active { color: var(--ivory); border-bottom: 2px solid var(--border-rose); padding-bottom: .25rem; }
-
-/* Icon buttons in navbar */
-header .flex.items-center button { color: var(--ivory); background: transparent; border: 1px solid transparent; }
-header .flex.items-center button:hover { color: var(--smoky-rose); transform: translateY(-2px); }
-
-/* Login / Sign in CTA - subtle glass */
-button[data-testid="nav-login-btn"] { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid var(--border-rose); color: var(--ivory); padding: .45rem .85rem; border-radius: 8px; }
-button[data-testid="nav-login-btn"]:hover { background: var(--deep-plum); color: var(--ivory); }
-
-/* Mobile menu background */
-.md\:hidden + div.md\:hidden, .md\:hidden ~ div.md\:hidden { background: linear-gradient(180deg, var(--deep-plum), rgba(8,6,8,0.9)); border-top: 1px solid var(--border-rose); }
-
-/* =========================
-   HERO
-   ========================= */
-
-/* Targeting the hero section used in HomeView.jsx */
-section.relative.overflow-hidden.py-24 {
-  background: radial-gradient(700px 260px at 60% 25%, rgba(36,21,34,0.12), transparent 12%), radial-gradient(500px 200px at 30% 60%, rgba(140,95,109,0.06), transparent 8%), linear-gradient(180deg, var(--obsidian), var(--deep-plum));
-  color: var(--ivory);
-}
-
-/* Hero headline */
-section .font-serif.text-4xl, section h1, .hero h1 { color: var(--ivory); font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 10px 30px rgba(4,3,4,0.6); }
-section p { color: var(--muted-mauve); font-size: 1.02rem; }
-
-/* Search form in hero: glass dark surface, smoky-rose border */
-form.max-w-xl.mx-auto.mt-6.flex.gap-2.p-2 {
-  background: linear-gradient(180deg, rgba(21,17,18,0.6), rgba(10,8,9,0.45));
-  border: 1px solid var(--border-rose);
-  box-shadow: 0 10px 30px rgba(3,3,3,0.6);
-  border-radius: 10px;
-}
-form.max-w-xl input[type="text"] { background: transparent; color: var(--ivory); border: none; }
-form.max-w-xl button { background: var(--smoky-rose); color: var(--ivory); border: 1px solid rgba(0,0,0,0.12); padding: .6rem 1rem; border-radius: 8px; }
-form.max-w-xl button:hover { background: #783e4a; }
-
-/* Hero badges */
-.inline-flex.items-center.gap-2.px-4.py-1.5.rounded-full { background: rgba(36,21,34,0.35); border: 1px solid rgba(255,255,255,0.02); color: var(--smoky-rose); }
-
-/* =========================
-   PRODUCT CARDS / GRID
-   ========================= */
-
-/* Cards used in HomeView and CatalogView: identify .group card roots */
-.grid > .group, .grid .group { background: linear-gradient(180deg, rgba(8,6,7,0.65), rgba(22,15,16,0.45)); border: 1px solid var(--border-rose); border-radius: 12px; box-shadow: 0 10px 30px var(--shadow-strong); overflow: hidden; }
-.grid > .group:hover, .grid .group:hover { transform: translateY(-8px); box-shadow: 0 28px 68px rgba(3,3,3,0.75); }
-
-/* Image area cinematic framing */
-.aspect-square img, .relative.overflow-hidden img { border-radius: 6px; border: 1px solid rgba(255,255,255,0.02); box-shadow: 0 12px 36px rgba(3,3,3,0.6); }
-
-/* Product text styling */
-.group h3, .group .font-serif.text-lg { color: var(--ivory) !important; font-weight:700; }
-.group .text-[10px], .group .text-xs { color: var(--muted-mauve) !important; }
-.group .font-serif.text-base.font-bold, .group .text-[#080809] { color: var(--smoky-rose) !important; }
-
-/* Price emphasised */
-.group .font-serif.text-base.font-bold.text-[#080809], .group .font-serif.text-base.font-bold { color: var(--smoky-rose) !important; font-weight:800; }
-
-/* Quick view overlay button restyled */
-.group .absolute.inset-x-0.bottom-0 .w-full.py-2 { background: var(--smoky-rose); color: var(--ivory); border-radius: 6px; }
-
-/* Add to cart primary inside cards */
-.group button.px-4.py-2 { background: linear-gradient(180deg, var(--smoky-rose), #7a4a55); color: var(--ivory); border: 1px solid var(--border-rose); border-radius: 8px; }
-.group button.px-4.py-2:hover { background: #6f3a46; }
-
-/* Wishlist icon button restyle */
-.group .absolute.top-3.right-3.p-2.rounded-full { background: rgba(255,255,255,0.02); border: 1px solid var(--border-rose); color: var(--ivory); }
-.group .absolute.top-3.right-3.p-2.rounded-full:hover { color: var(--smoky-rose); }
-
-/* =========================
-   PRODUCT DETAIL
-   ========================= */
-
-.product-detail-root .back button { color: var(--muted-mauve); }
-.product-detail-root .image-wrap { background: linear-gradient(180deg, rgba(12,9,10,0.6), rgba(8,6,7,0.4)); border-radius: 14px; border: 1px solid var(--border-rose); box-shadow: 0 22px 56px rgba(3,3,3,0.7); }
-.product-detail img { border-radius: 10px; }
-
-.product-detail .glass { background: linear-gradient(180deg, rgba(21,17,18,0.6), rgba(10,8,9,0.35)) !important; border: 1px solid var(--border-rose) !important; }
-.product-detail .glass h1 { color: var(--ivory) !important; }
-.product-detail .glass .price { color: var(--smoky-rose) !important; font-weight: 800; }
-.product-detail .glass .rating svg { color: var(--smoky-rose); }
-
-/* Qty controls */
-.product-detail .qty { background: linear-gradient(180deg, rgba(12,9,10,0.5), rgba(8,6,7,0.35)); border: 1px solid var(--border-rose); }
-.product-detail .qty button { color: var(--ivory); }
-
-/* Buttons in detail (Add to Cart / Buy Now) */
-.product-detail button.flex-1.sm\:flex-none.px-6.py-3.rounded-lg { border-radius: 8px; }
-.product-detail button.flex-1.sm\:flex-none.px-6.py-3.rounded-lg:first-child { background: linear-gradient(180deg, var(--smoky-rose), #7a4a55); color: var(--ivory); border: 1px solid var(--border-rose); }
-.product-detail button.flex-1.sm\:flex-none.px-6.py-3.rounded-lg:last-child { background: transparent; border: 1px solid var(--border-rose); color: var(--ivory); }
-.product-detail button.flex-1.sm\:flex-none.px-6.py-3.rounded-lg:first-child:hover { background: #6f3a46; }
-.product-detail button.flex-1.sm\:flex-none.px-6.py-3.rounded-lg:last-child:hover { background: rgba(36,21,34,0.6); }
-
-/* =========================
-   CART DRAWER
-   ========================= */
-
-[data-testid="cart-drawer-modal"] { color: var(--ivory); }
-[data-testid="cart-drawer-modal"] .w-screen.max-w-md { background: linear-gradient(180deg, var(--obsidian), var(--deep-plum)); border-left: 1px solid var(--border-rose); }
-[data-testid="cart-drawer-modal"] .flex.gap-4.p-4.rounded-lg { background: linear-gradient(180deg, rgba(28,18,20,0.6), rgba(20,12,14,0.45)); border: 1px solid var(--border-rose); border-radius: 10px; }
-[data-testid="cart-drawer-modal"] .text-[#080809] { color: var(--smoky-rose) !important; }
-[data-testid="cart-drawer-modal"] button.w-full.py-3 { background: linear-gradient(180deg, var(--smoky-rose), #7a4a55); color: var(--ivory); border-radius: 8px; }
-
-/* Qty + remove buttons in cart */
-[data-testid="cart-drawer-modal"] .flex.items-center.border button { color: var(--ivory); }
-[data-testid="cart-drawer-modal"] .flex.items-center.border { border: 1px solid var(--border-rose); background: linear-gradient(180deg, rgba(15,11,12,0.45), rgba(8,6,7,0.25)); }
-
-/* =========================
-   FORMS / CHECKOUT
-   ========================= */
-
-label, .form-label, .text-sm.font-semibold { color: var(--ivory) !important; }
-input[type="text"], input[type="email"], input[type="tel"], select, textarea { background: linear-gradient(180deg, rgba(36,21,34,0.18), rgba(8,6,7,0.18)); border: 1px solid var(--border-rose); color: var(--ivory); border-radius: 8px; padding: .6rem .75rem; }
-input:focus, select:focus, textarea:focus { border-color: var(--smoky-rose) !important; box-shadow: 0 8px 30px rgba(140,95,109,0.06); outline: none; }
-
-/* Submit button on checkout */
-button[type="submit"], button[data-testid="checkout-btn"] { background: linear-gradient(180deg, var(--smoky-rose), #7a4a55); color: var(--ivory); border-radius: 8px; padding: .75rem 1rem; }
-
-/* =========================
-   ORDERS / CONFIRMATION
-   ========================= */
-
-.order-card, .my-orders .card { background: linear-gradient(180deg, var(--deep-plum), rgba(12,8,9,0.45)); border: 1px solid var(--border-rose); color: var(--ivory); border-radius: 10px; }
-.order-status { color: var(--smoky-rose) !important; font-weight: 700; }
-
-/* =========================
-   FOOTER
-   ========================= */
-
-footer { background: linear-gradient(180deg, var(--obsidian), rgba(20,12,14,0.95)); color: var(--ivory); }
-footer h2, footer h3, footer h4 { color: var(--ivory); }
-footer a { color: var(--muted-mauve); }
-footer .border-t { border-color: var(--border-rose) !important; }
-
-/* =========================
-   BUTTON GLOBAL SAFETY
-   - avoid broad destructive overrides
-   ========================= */
-
-button { transition: transform .16s ease, box-shadow .16s ease; }
-button:hover { transform: translateY(-2px); }
-
-/* Ensure adjacent buttons are spaced */
-.flex.items-center > button + button, .inline-flex > button + button, .flex > button + button { margin-left: .5rem; }
-
-/* Responsive: soften transforms on touch */
-@media (max-width: 768px) {
-  .grid > .group:hover, .grid .group:hover { transform: none; box-shadow: 0 10px 24px rgba(3,3,3,0.55); }
-}
-/* FINAL BUTTON THEME OVERRIDE */
-button,
-.button,
-[type="button"],
-[type="submit"],
-[type="reset"] {
-  --button-accent: #C6A15B;
-  --button-dark: #C6A15B;
-}
-
-/* Primary-looking buttons */
-button[class*="bg-[#080809]"],
-button[class*="bg-[#F4F1E9]"],
-button[class*="bg-[#AA7C11]"],
-button[class*="bg-[#C8A871]"] {
-  background: #C6A15B !important;
-  color: #C6A15B !important;
-  border-color: #C6A15B !important;
-}
-
-/* Gold text/borders on buttons */
-button[class*="text-[#080809]"],
-button[class*="text-[#F4F1E9]"],
-button[class*="text-[#AA7C11]"],
-button[class*="text-[#C8A871]"],
-button[class*="border-[#080809]"],
-button[class*="border-[#F4F1E9]"],
-button[class*="border-[#AA7C11]"],
-button[class*="border-[#C8A871]"] {
-  color: #C6A15B !important;
-  border-color: #C6A15B !important;
-}
-
-/* Gold hover backgrounds */
-button[class*="hover:bg-[#080809]"]:hover,
-button[class*="hover:bg-[#F4F1E9]"]:hover,
-button[class*="hover:bg-[#AA7C11]"]:hover {
-  background: #C6A15B !important;
-  color: #C6A15B !important;
-}
-
-/* Remove gold gradient buttons */
-button[class*="from-[#F4F1E9]"] {
-  background: #C6A15B !important;
-  color: #C6A15B !important;
-}
-/* FINAL LUXURY THEME - GOLD TEXT OVERRIDE */
-
-/* Gold text used on headings, labels, prices and strong/bold text */
-.text-\[\#080809\],
-.text-\[\#F4F1E9\],
-.text-\[\#AA7C11\],
-.text-\[\#C8A871\] {
-  color: #C6A15B !important;
-}
-
-/* Gold text that is also bold */
-.font-bold.text-\[\#080809\],
-.font-bold.text-\[\#F4F1E9\],
-.font-bold.text-\[\#AA7C11\],
-.font-bold.text-\[\#C8A871\] {
-  color: #C6A15B !important;
-}
-
-/* Gold hover text */
-.hover\:text-\[\#080809\]:hover,
-.hover\:text-\[\#F4F1E9\]:hover,
-.hover\:text-\[\#AA7C11\]:hover,
-.hover\:text-\[\#C8A871\]:hover {
-  color: #C6A15B !important;
-}
-
-
-
-
-
-
-
-button { color: #080809 !important; }
-
-/* FINAL BUTTON TEXT VISIBILITY FIX */
-button { color: #F2E9E1 !important; }
-button:hover { color: #F2E9E1 !important; }
-button[class*='bg-[#C6A15B]'], button[class*='bg-[#6B7D6A]'] { color: #080809 !important; }
-
-
-/* UNIVERSAL THEME BUTTON TEXT VISIBILITY */
-button[class*='bg-'], a[class*='bg-'] { color: #F2E9E1 !important; }
-button[class*='border-'], a[class*='border-'] { color: #F2E9E1 !important; }
-button[class*='text-'], a[class*='text-'] { color: #F2E9E1 !important; }
-button span, a span { color: inherit !important; }
-
-
-/* HEADER THEME */
-header, nav { background-color: #241522 !important; color: #F2E9E1 !important; }
-header a, nav a, header button, nav button { color: #F2E9E1 !important; }
-header a:hover, nav a:hover { color: #C6A15B !important; }
-
-
-/* CHAMPAGNE GOLD HEADER */
-header, nav { background: #C6A15B !important; background-color: #C6A15B !important; color: #080809 !important; }
-header a, nav a, header button, nav button { color: #080809 !important; }
-header a:hover, nav a:hover, header button:hover, nav button:hover { color: #241522 !important; }
-
-
-/* ===== SCENTORA MIDNIGHT ROSE LUXURY THEME ===== */
+/* =========================================================
+   SCENTORA CLEAN MASTER THEME
+   Ivory + Burgundy + Champagne
+   ========================================================= */
 
 :root {
-  --scentora-bg: #0b0710;
-  --scentora-bg-soft: #15101b;
-  --scentora-panel: rgba(29, 20, 35, 0.88);
-  --scentora-panel-2: rgba(40, 25, 45, 0.78);
-  --scentora-rose: #d7a3a8;
-  --scentora-rose-light: #f1c8c5;
-  --scentora-gold: #c8a46b;
-  --scentora-gold-light: #ead2a3;
-  --scentora-text: #f7f0f4;
-  --scentora-muted: #b8aeb8;
-  --scentora-border: rgba(215, 163, 168, 0.22);
-  --scentora-shadow: 0 18px 50px rgba(0,0,0,.45);
+  --sc-bg: #FFFDF8;
+  --sc-bg-soft: #F7F1EC;
+  --sc-surface: #FFFFFF;
+  --sc-surface-soft: #F3E8E1;
+
+  --sc-burgundy: #6E1F35;
+  --sc-burgundy-dark: #43111F;
+  --sc-burgundy-light: #9A4C63;
+
+  --sc-champagne: #D8C3A5;
+  --sc-champagne-soft: #EFE5D8;
+
+  --sc-text: #2D2326;
+  --sc-text-soft: #5D5054;
+  --sc-muted: #7C6E72;
+
+  --sc-border: #E5D8D0;
+  --sc-border-strong: #D2BCB0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
 body,
 #root {
-  background:
-    radial-gradient(circle at 18% 15%, rgba(111, 53, 89, .18), transparent 30%),
-    radial-gradient(circle at 85% 20%, rgba(200, 164, 107, .10), transparent 28%),
-    linear-gradient(135deg, #09060c 0%, #100912 48%, #080609 100%) !important;
-  color: var(--scentora-text);
+  min-height: 100%;
 }
 
 body {
+  margin: 0;
+  background: var(--sc-bg);
+  color: var(--sc-text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Luxury headings */
-h1, h2, h3, h4,
-.font-serif {
-  font-family: Didot, "Bodoni MT", "Times New Roman", serif !important;
-  letter-spacing: .02em;
-}
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
 
-/* Global gold/rose text replacement */
-.text-\[\#080809\],
-.text-\[\#C6A15B\],
-.text-\[\#D4AF37\],
-.text-\[\#F4F1E9\] {
-  color: var(--scentora-rose-light) !important;
-}
-
-/* Main backgrounds */
-.bg-\[\#0A0A0A\],
-.bg-\[\#080809\],
-.bg-black {
-  background: transparent !important;
-}
-
-.bg-\[\#12100C\],
-.bg-neutral-950,
-.bg-neutral-900 {
-  background:
-    linear-gradient(145deg, rgba(32,21,39,.94), rgba(17,12,22,.94)) !important;
-  border: 1px solid var(--scentora-border) !important;
-  box-shadow: var(--scentora-shadow);
-  backdrop-filter: blur(16px);
-}
-
-/* Navbar */
-nav,
-header {
-  backdrop-filter: blur(18px);
-}
-
-header,
-nav > div {
-  border-color: rgba(215,163,168,.18) !important;
-}
-
-/* Buttons */
-button,
-a[class*="bg-"] {
-  transition: all .28s ease !important;
-}
-
-button:hover,
-a[class*="bg-"]:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-}
-
-/* Primary luxury buttons */
-.bg-\[\#C6A15B\],
-.bg-\[\#D4AF37\],
-.bg-\[\#F4F1E9\] {
-  background:
-    linear-gradient(135deg, #c88f95 0%, #d6b27a 48%, #f0c9c2 100%) !important;
-  color: #140b12 !important;
-  border: 1px solid rgba(255,255,255,.18) !important;
-  box-shadow:
-    0 10px 28px rgba(171, 94, 113, .22),
-    inset 0 1px 0 rgba(255,255,255,.25) !important;
-}
-
-/* Inputs */
-input,
-select,
-textarea {
-  background: rgba(14, 10, 17, .75) !important;
-  color: var(--scentora-text) !important;
-  border: 1px solid rgba(215,163,168,.24) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none !important;
-  border-color: var(--scentora-rose) !important;
-  box-shadow: 0 0 0 3px rgba(215,163,168,.10) !important;
-}
-
-/* Product cards / panels */
-[class*="rounded-lg"],
-[class*="rounded-xl"],
-[class*="rounded-2xl"] {
-  border-color: rgba(215,163,168,.16);
-}
-
-[class*="shadow"] {
-  box-shadow: 0 18px 45px rgba(0,0,0,.36);
-}
-
-/* Elegant hover for product cards */
-.group:hover {
-  filter: saturate(1.04);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0b0710;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#8f596a, #c8a46b);
-  border-radius: 999px;
-}
-
-/* Selection */
-::selection {
-  background: #c88f95;
-  color: #120b10;
-}
-
-
-/* ===== SCENTORA AURORA EMERALD THEME ===== */
-
-:root {
-  --sc-bg: #07110f;
-  --sc-bg2: #0d1716;
-  --sc-emerald: #1fa58a;
-  --sc-emerald-light: #58d6bd;
-  --sc-violet: #8b6cf6;
-  --sc-violet-light: #b8a7ff;
-  --sc-ivory: #f5f0e8;
-  --sc-muted: #a9b8b4;
-}
-
-/* Main page */
-html,
-body,
-#root {
-  background:
-    radial-gradient(circle at 15% 20%, rgba(31,165,138,.20), transparent 32%),
-    radial-gradient(circle at 85% 15%, rgba(139,108,246,.18), transparent 30%),
-    linear-gradient(135deg,#050b0a 0%,#091513 50%,#0d0b16 100%) !important;
-  color: var(--sc-ivory) !important;
-}
-
-/* GOLD BACKGROUNDS -> EMERALD/VIOLET */
-.bg-\[\#C6A15B\],
-.bg-\[\#D4AF37\],
-.bg-\[\#F4F1E9\] {
-  background: linear-gradient(135deg,#176f61,#704fd8) !important;
-  color: #ffffff !important;
-}
-
-/* GOLD TEXT -> AQUA / VIOLET */
-.text-\[\#C6A15B\],
-.text-\[\#D4AF37\],
-.text-\[\#F4F1E9\],
-.text-\[\#080809\] {
-  color: #70dfc8 !important;
-}
-
-/* Hero gold area */
-.bg-gradient-to-b,
-.bg-gradient-to-br {
-  border-color: rgba(88,214,189,.25) !important;
-}
-
-/* Navbar */
-nav,
-header {
-  background: linear-gradient(
-    90deg,
-    rgba(8,28,24,.97),
-    rgba(20,22,38,.97)
-  ) !important;
-  border-color: rgba(88,214,189,.20) !important;
-}
-
-/* Cards */
-.bg-\[\#12100C\],
-.bg-neutral-900,
-.bg-neutral-950 {
-  background: linear-gradient(
-    145deg,
-    rgba(11,30,27,.94),
-    rgba(24,17,38,.94)
-  ) !important;
-  border: 1px solid rgba(88,214,189,.18) !important;
-}
-
-/* Buttons */
-button {
-  border-color: rgba(88,214,189,.30) !important;
-}
-
-button:hover {
-  box-shadow:
-    0 0 22px rgba(31,165,138,.25),
-    0 0 32px rgba(139,108,246,.15) !important;
-}
-
-/* Inputs */
-input,
-select,
-textarea {
-  background: rgba(5,15,14,.85) !important;
-  border-color: rgba(88,214,189,.28) !important;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #58d6bd !important;
-  box-shadow: 0 0 0 3px rgba(88,214,189,.12) !important;
-}
-
-/* Links / hover accents */
-a:hover {
-  color: #b8a7ff !important;
-}
-
-/* Selection */
-::selection {
-  background: #1fa58a;
-  color: white;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#1fa58a,#8b6cf6) !important;
-}
-
-
-/* =====================================================
-   SCENTORA MASTER UNIFIED THEME
-   Deep Emerald + Charcoal + Soft Mint + Ivory
-   ===================================================== */
-
-:root {
-  --sc-bg: #071412;
-  --sc-bg-2: #0B1D1A;
-  --sc-bg-3: #102622;
-  --sc-card: #0D211E;
-  --sc-card-soft: #122A26;
-  --sc-primary: #2FB59A;
-  --sc-primary-light: #76DEC9;
-  --sc-primary-dark: #177A69;
-  --sc-text: #F4F1E9;
-  --sc-text-soft: #C8D6D1;
-  --sc-muted: #879C96;
-  --sc-border: rgba(118, 222, 201, 0.18);
-  --sc-glow: rgba(47, 181, 154, 0.20);
-}
-
-/* PAGE / BODY */
-html,
-body,
-#root {
-  background: linear-gradient(
-    135deg,
-    var(--sc-bg) 0%,
-    var(--sc-bg-2) 55%,
-    #08100F 100%
-  ) !important;
-  color: var(--sc-text) !important;
-}
-
-/* HEADER + NAVBAR + TOP BAR */
-header,
-nav,
-header > div,
-nav > div {
-  background: var(--sc-bg-2) !important;
-  color: var(--sc-text) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* FOOTER */
-footer,
-footer > div {
-  background: #06100E !important;
-  color: var(--sc-text-soft) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* MAIN SECTIONS */
-section,
-main {
-  border-color: var(--sc-border) !important;
-}
-
-/* ALL COMMON GOLD/BROWN BACKGROUNDS */
-.bg-\[\#C6A15B\],
-.bg-\[\#D4AF37\],
-.bg-\[\#F4F1E9\],
-.bg-\[\#12100C\],
-.bg-\[\#0A0A0A\],
-.bg-\[\#080809\],
-.bg-neutral-950,
-.bg-neutral-900,
-.bg-black {
-  background: var(--sc-bg-2) !important;
-}
-
-/* CARDS / PANELS */
-[class*="rounded-lg"],
-[class*="rounded-xl"],
-[class*="rounded-2xl"] {
-  border-color: var(--sc-border) !important;
-}
-
-.bg-\[\#12100C\],
-.bg-neutral-900,
-.bg-neutral-950 {
-  background: linear-gradient(
-    145deg,
-    var(--sc-card),
-    var(--sc-card-soft)
-  ) !important;
-  box-shadow: 0 14px 36px rgba(0,0,0,.32) !important;
-}
-
-/* PRIMARY TEXT */
+.font-serif,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: var(--sc-text) !important;
+  font-family: Didot, "Bodoni MT", "Times New Roman", serif;
 }
 
-/* GOLD / OLD ACCENT TEXT -> MINT */
-.text-\[\#C6A15B\],
-.text-\[\#D4AF37\],
-.text-\[\#F4F1E9\],
-.text-\[\#080809\],
-
-.text-[#9AE9D8],
-.text-scentora-mint {
-  color: var(--sc-primary-light) !important;
-}
-
-/* NORMAL BODY TEXT */
-p,
-span,
-li,
-label {
-  border-color: var(--sc-border);
-}
-
-.text-neutral-100,
-.text-neutral-200,
-.text-neutral-300,
-.text-white {
-  color: var(--sc-text) !important;
-}
-
-.text-neutral-400,
-.text-neutral-500,
-.text-neutral-600 {
-  color: var(--sc-muted) !important;
-}
-
-/* LINKS */
-a {
-  color: var(--sc-text-soft);
-}
-
-a:hover {
-  color: var(--sc-primary-light) !important;
-}
-
-/* ALL BUTTONS */
-button,
-a[class*="px-"],
-a[class*="py-"] {
-  border-color: rgba(118,222,201,.28) !important;
-  transition: all .25s ease !important;
-}
-
-/* PRIMARY BUTTONS */
-button[class*="bg-"],
-a[class*="bg-"] {
-  background: linear-gradient(
-    135deg,
-    var(--sc-primary-dark),
-    var(--sc-primary)
-  ) !important;
-  color: #F7FFFC !important;
-  border: 1px solid rgba(118,222,201,.32) !important;
-  box-shadow: 0 8px 24px rgba(23,122,105,.18) !important;
-}
-
-button[class*="bg-"]:hover,
-a[class*="bg-"]:hover {
-  background: linear-gradient(
-    135deg,
-    var(--sc-primary),
-    var(--sc-primary-light)
-  ) !important;
-  color: #06110F !important;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 28px var(--sc-glow) !important;
-}
-
-/* OUTLINE BUTTONS */
-button[class*="border"],
-a[class*="border"] {
-  border-color: rgba(118,222,201,.30) !important;
-}
-
-/* ICON COLORS */
-svg {
-  color: currentColor;
-}
-
-.text-\[\#C6A15B\] svg,
-.text-\[\#D4AF37\] svg,
-.text-\[\#F4F1E9\] svg {
-  color: var(--sc-primary-light) !important;
-}
-
-/* INPUTS / SEARCH / FORMS */
-input,
-textarea,
-select {
-  background: #081714 !important;
-  color: var(--sc-text) !important;
-  border: 1px solid rgba(118,222,201,.22) !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #718982 !important;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none !important;
-  border-color: var(--sc-primary) !important;
-  box-shadow: 0 0 0 3px rgba(47,181,154,.12) !important;
-}
-
-/* BADGES / PILLS */
-[class*="rounded-full"] {
-  border-color: rgba(118,222,201,.22) !important;
-}
-
-/* TABLE / RECEIPT / ORDER DIVIDERS */
-.border-neutral-800,
-.border-neutral-700,
-.border-\[\#080809\],
-.border-\[\#C6A15B\],
-.border-\[\#D4AF37\] {
-  border-color: var(--sc-border) !important;
-}
-
-/* PRODUCT PRICE / RATINGS / ACCENTS */
-[class*="price"],
-[class*="rating"] {
-  color: var(--sc-primary-light) !important;
-}
-
-/* SHADOWS */
-.shadow-lg,
-.shadow-xl,
-.shadow-2xl {
-  box-shadow: 0 16px 38px rgba(0,0,0,.36) !important;
-}
-
-/* SELECTION */
-::selection {
-  background: var(--sc-primary);
-  color: #04100D;
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #06100E;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    var(--sc-primary-dark),
-    var(--sc-primary)
-  );
-  border-radius: 999px;
-}
-
-/* PREVENT OLD GOLD GRADIENTS FROM SHOWING */
-.bg-gradient-to-r,
-.bg-gradient-to-l,
-.bg-gradient-to-b,
-.bg-gradient-to-t,
-.bg-gradient-to-br,
-.bg-gradient-to-bl,
-.bg-gradient-to-tr,
-.bg-gradient-to-tl {
-  border-color: var(--sc-border);
-}
-
-/* FORCE OLD INLINE GOLD-LIKE TEXT INTO THEME */
-[style*="#C6A15B"],
-[style*="#D4AF37"],
-[style*="#F4F1E9"] {
-  color: var(--sc-primary-light) !important;
-}
-
-/* SCENTORA BRAND */
-[data-testid="navbar-brand-logo"] {
-  color: var(--sc-text) !important;
-}
-
-
-/* =========================================================
-   SCENTORA — DEEP EMERALD LUXURY TEXTURE
-   ========================================================= */
-
-:root {
-  --sc-bg-1: #03110f;
-  --sc-bg-2: #061b18;
-  --sc-bg-3: #092621;
-  --sc-panel: rgba(7, 31, 27, 0.88);
-  --sc-panel-strong: #08211d;
-  --sc-mint: #57d5bd;
-  --sc-mint-soft: #9ae9d8;
-  --sc-ivory: #f3efe6;
-  --sc-muted: #9bb4ae;
-  --sc-border: rgba(87, 213, 189, 0.22);
-}
-
-/* Main page */
-html,
-body,
-#root {
-  background:
-    radial-gradient(circle at 18% 12%, rgba(33, 134, 113, .17), transparent 30%),
-    radial-gradient(circle at 78% 18%, rgba(23, 91, 79, .14), transparent 32%),
-    linear-gradient(135deg, #020b0a 0%, #061815 48%, #03100e 100%) !important;
-  color: var(--sc-ivory) !important;
-}
-
-/* Subtle luxury grain texture */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: .045;
-  mix-blend-mode: screen;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
-}
-
-/* Header / Navbar / top announcement */
-header,
-nav,
-header > div,
-nav > div {
-  background:
-    linear-gradient(90deg, #041512 0%, #06201b 52%, #041411 100%) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* Remove ALL old gold/brown section backgrounds */
-section,
-main,
-[class*="from-[#14110C]"],
-[class*="via-[#1A1610]"],
-[class*="to-[#0A0A0A]"],
-[class*="from-[#C6A15B]"],
-[class*="from-[#F4F1E9]"],
-[class*="to-[#AA7C11]"] {
-  background:
-    radial-gradient(circle at 22% 22%, rgba(33, 145, 122, .11), transparent 34%),
-    radial-gradient(circle at 82% 12%, rgba(22, 91, 77, .10), transparent 30%),
-    linear-gradient(135deg, #041512 0%, #071e1a 52%, #03100e 100%) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* Hero gets richer smoky emerald texture */
-section:first-of-type {
-  background:
-    radial-gradient(ellipse at 50% 42%, rgba(38, 133, 112, .16), transparent 34%),
-    radial-gradient(circle at 20% 18%, rgba(14, 82, 69, .24), transparent 30%),
-    radial-gradient(circle at 83% 24%, rgba(30, 111, 95, .18), transparent 28%),
-    linear-gradient(145deg, #020b09 0%, #061d18 46%, #041310 100%) !important;
-}
-
-/* Cards and panels */
-.bg-\[\#12100C\],
-.bg-neutral-900,
-.bg-neutral-950,
-[class*="rounded-lg"],
-[class*="rounded-xl"],
-[class*="rounded-2xl"] {
-  background:
-    linear-gradient(145deg, rgba(8, 37, 31, .94), rgba(4, 21, 18, .96)) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* Glass card effect */
-[class*="shadow-lg"],
-[class*="shadow-xl"],
-[class*="shadow-2xl"] {
-  box-shadow:
-    0 18px 42px rgba(0,0,0,.42),
-    0 0 0 1px rgba(87,213,189,.04) !important;
-}
-
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--sc-ivory) !important;
-  text-shadow: 0 3px 20px rgba(0,0,0,.28);
-}
-
-/* Remove remaining gold text */
-.text-\[\#C6A15B\],
-.text-\[\#D4AF37\],
-.text-\[\#F4F1E9\],
-.text-\[\#AA7C11\],
-.text-\[\#080809\],
-
-.text-[#9AE9D8],
-.text-scentora-mint {
-  color: var(--sc-mint-soft) !important;
-}
-
-/* General text */
-.text-white,
-.text-neutral-100,
-.text-neutral-200,
-.text-neutral-300 {
-  color: var(--sc-ivory) !important;
-}
-
-.text-neutral-400,
-.text-neutral-500,
-.text-neutral-600 {
-  color: var(--sc-muted) !important;
-}
-
-/* Buttons */
-button[class*="bg-"],
-a[class*="bg-"] {
-  background:
-    linear-gradient(135deg, #137866 0%, #2aa98f 55%, #55cdb6 100%) !important;
-  color: #f8fffc !important;
-  border: 1px solid rgba(117,229,207,.32) !important;
-  box-shadow:
-    0 8px 24px rgba(17,123,103,.24),
-    inset 0 1px 0 rgba(255,255,255,.14) !important;
-}
-
-button[class*="bg-"]:hover,
-a[class*="bg-"]:hover {
-  background:
-    linear-gradient(135deg, #209a82, #65d7c0) !important;
-  color: #02110e !important;
-  transform: translateY(-1px);
-  box-shadow:
-    0 12px 30px rgba(66,190,163,.25) !important;
-}
-
-/* Inputs */
-input,
-textarea,
-select {
-  background: rgba(3, 20, 17, .9) !important;
-  color: var(--sc-ivory) !important;
-  border: 1px solid rgba(87,213,189,.24) !important;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #78938c !important;
-}
-
-/* Borders / dividers */
-.border-neutral-800,
-.border-neutral-700,
-.border-\[\#080809\],
-.border-\[\#C6A15B\],
-.border-\[\#D4AF37\] {
-  border-color: var(--sc-border) !important;
-}
-
-/* Footer */
-footer,
-footer > div {
-  background:
-    linear-gradient(180deg, #03110f 0%, #020a09 100%) !important;
-  color: var(--sc-ivory) !important;
-  border-color: var(--sc-border) !important;
-}
-
-/* Mint icons */
-svg {
-  color: currentColor;
-}
-
-button svg,
-.text-\[\#C6A15B\] svg,
-.text-\[\#D4AF37\] svg {
-  color: var(--sc-mint-soft) !important;
-}
-
-/* Product prices and accents */
-[class*="price"],
-[class*="rating"] {
-  color: var(--sc-mint-soft) !important;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 9px;
-}
-
-::-webkit-scrollbar-track {
-  background: #020b09;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#167765,#54cdb5);
-  border-radius: 20px;
-}
-
-/* Selection */
-::selection {
-  background: #45bca4;
-  color: #02100d;
-}
-
-
-/* =========================================================
-   SCENTORA — FINAL GOLD TEXT REMOVAL
-   Keep emerald texture, replace gold typography only
-   ========================================================= */
-
-/* Tailwind arbitrary gold text classes */
-.text-\[\#C6A15B\],
-.text-\[\#D4AF37\],
-.text-\[\#F4F1E9\],
-.text-\[\#AA7C11\],
-.text-\[\#B8860B\],
-.text-\[\#DAA520\],
-.text-\[\#FFD700\],
-.text-[#9AE9D8],
-.text-[#9AE9D8],
-
-
-
-
-.text-scentora-teal {
-  color: #9AE9D8 !important;
-  -webkit-text-fill-color: #9AE9D8 !important;
-}
-
-/* Gradient text which was still rendering gold */
-[class*="bg-gradient"][class*="bg-clip-text"],
-.text-transparent[class*="bg-gradient"] {
-  background-image: none !important;
-  background-color: transparent !important;
-  color: #F3EFE6 !important;
-  -webkit-text-fill-color: #F3EFE6 !important;
-}
-
-/* Product titles / major headings */
 h1,
 h2,
 h3 {
-  color: #F3EFE6 !important;
-  -webkit-text-fill-color: #F3EFE6 !important;
+  color: var(--sc-burgundy-dark);
 }
 
-/* Small luxury accent headings */
 h4,
 h5,
 h6 {
-  color: #9AE9D8 !important;
-  -webkit-text-fill-color: #9AE9D8 !important;
+  color: var(--sc-burgundy);
 }
 
-/* Price/accent text */
-[class*="price"],
-[class*="Price"] {
-  color: #57D5BD !important;
-  -webkit-text-fill-color: #57D5BD !important;
+/* =========================================================
+   HEADER / NAVBAR
+   ========================================================= */
+
+header {
+  background: rgba(255, 253, 248, 0.98);
+  color: var(--sc-text);
+  border-color: var(--sc-border);
 }
 
-/* Footer headings + brand text */
-footer h1,
-footer h2,
-footer h3,
-footer h4,
-footer h5,
-footer h6,
-footer strong {
-  color: #9AE9D8 !important;
-  -webkit-text-fill-color: #9AE9D8 !important;
+header > div:first-child {
+  background: linear-gradient(
+    90deg,
+    var(--sc-burgundy-dark),
+    var(--sc-burgundy),
+    var(--sc-burgundy-dark)
+  );
+  color: #FFFFFF;
 }
 
-/* Keep normal body text ivory */
-p,
-li {
-  --sc-normal-text: #F3EFE6;
+header > div:first-child * {
+  color: #FFFFFF !important;
 }
 
-/* Gold SVG/icon colors -> mint */
-.text-\[\#C6A15B\] svg,
-.text-\[\#D4AF37\] svg,
-.text-\[\#F4F1E9\] svg,
-.text-\[\#AA7C11\] svg {
-  color: #57D5BD !important;
-  stroke: #57D5BD !important;
+header nav a,
+header nav button {
+  color: var(--sc-text-soft);
 }
 
+header nav a:hover,
+header nav button:hover {
+  color: var(--sc-burgundy);
+}
 
+/* =========================================================
+   LOGO BADGE
+   Gold icon remains inside SVG
+   ========================================================= */
 
-
-
-
-/* ===== SCENTORA GLOBAL LOGO BADGE ===== */
 .scentora-logo-badge {
   background:
-    radial-gradient(circle at 35% 30%,
-      rgba(154,233,216,.30),
-      rgba(47,181,154,.20) 45%,
-      rgba(5,31,27,.92) 100%) !important;
+    radial-gradient(
+      circle at 35% 30%,
+      #FFFFFF 0%,
+      var(--sc-champagne-soft) 50%,
+      rgba(110,31,53,.14) 100%
+    ) !important;
 
-  border: 1px solid rgba(87,213,189,.50) !important;
+  border: 1px solid rgba(110,31,53,.28) !important;
   border-radius: 9999px !important;
   padding: 5px !important;
   object-fit: contain !important;
 
   box-shadow:
-    0 0 0 1px rgba(47,181,154,.08),
-    0 0 18px rgba(47,181,154,.24),
-    inset 0 0 14px rgba(87,213,189,.10) !important;
+    0 6px 18px rgba(110,31,53,.12) !important;
 }
 
+/* =========================================================
+   NORMAL PAGE SECTIONS
+   ========================================================= */
 
-/* ===== SCENTORA CINEMATIC HERO ===== */
+main {
+  background: var(--sc-bg);
+  color: var(--sc-text);
+}
+
+section:not(.scentora-cinematic-hero) {
+  background:
+    linear-gradient(
+      180deg,
+      var(--sc-bg) 0%,
+      var(--sc-bg-soft) 100%
+    );
+  color: var(--sc-text);
+  border-color: var(--sc-border);
+}
+
+/* =========================================================
+   CARDS / PANELS
+   ========================================================= */
+
+article {
+  background: var(--sc-surface);
+  color: var(--sc-text);
+  border-color: var(--sc-border);
+
+  box-shadow:
+    0 14px 34px rgba(67,17,31,.08);
+}
+
+main [class*="rounded"][class*="border"] {
+  border-color: var(--sc-border);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  transition:
+    background .22s ease,
+    color .22s ease,
+    border-color .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  background: #FFFFFF;
+  color: var(--sc-text);
+  border-color: var(--sc-border-strong);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9B8B90;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--sc-burgundy) !important;
+  box-shadow: 0 0 0 3px rgba(110,31,53,.10);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--sc-burgundy);
+}
+
+/* =========================================================
+   CART DRAWER
+   ========================================================= */
+
+[data-testid="cart-drawer-modal"] .w-screen.max-w-md {
+  background: var(--sc-bg) !important;
+  color: var(--sc-text) !important;
+  border-left: 1px solid var(--sc-border) !important;
+}
+
+[data-testid="cart-drawer-modal"] [class*="rounded"] {
+  border-color: var(--sc-border) !important;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  background:
+    linear-gradient(
+      180deg,
+      #F3E8E1 0%,
+      #EADCD4 100%
+    ) !important;
+
+  color: var(--sc-text-soft) !important;
+  border-color: var(--sc-border-strong) !important;
+}
+
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6 {
+  color: var(--sc-burgundy-dark) !important;
+}
+
+footer a {
+  color: var(--sc-text-soft);
+}
+
+footer a:hover {
+  color: var(--sc-burgundy);
+}
+
+/* =========================================================
+   CINEMATIC HERO
+   Keep generated perfume image + animation
+   ========================================================= */
 
 .scentora-cinematic-hero {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  color: #FFFFFF;
+  background: #07110F;
 }
 
 .scentora-cinematic-hero::before {
@@ -1237,10 +285,10 @@ li {
   background-image:
     linear-gradient(
       90deg,
-      rgba(2,18,15,.92) 0%,
-      rgba(3,28,23,.72) 40%,
-      rgba(3,24,21,.48) 67%,
-      rgba(2,16,14,.78) 100%
+      rgba(18,5,10,.88) 0%,
+      rgba(45,10,22,.66) 40%,
+      rgba(23,8,13,.40) 68%,
+      rgba(15,5,9,.72) 100%
     ),
     var(--scentora-hero-image);
 
@@ -1259,21 +307,47 @@ li {
   background:
     radial-gradient(
       circle at 72% 46%,
-      rgba(117,229,207,.16),
+      rgba(216,195,165,.12),
       transparent 24%
     ),
     radial-gradient(
       circle at 25% 30%,
-      rgba(47,181,154,.14),
+      rgba(110,31,53,.18),
       transparent 32%
     ),
     linear-gradient(
       to bottom,
-      rgba(2,18,15,.20),
-      rgba(2,18,15,.70)
+      rgba(18,5,10,.12),
+      rgba(18,5,10,.58)
     );
 
   animation: scentoraMist 7s ease-in-out infinite alternate;
+}
+
+.scentora-cinematic-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.scentora-cinematic-hero h1,
+.scentora-cinematic-hero h2,
+.scentora-cinematic-hero h3 {
+  color: #FFFDF8 !important;
+  -webkit-text-fill-color: #FFFDF8 !important;
+}
+
+.scentora-cinematic-hero p {
+  color: #F5ECE7 !important;
+}
+
+.scentora-cinematic-hero input {
+  background: rgba(18,5,10,.72) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.25) !important;
+}
+
+.scentora-cinematic-hero input::placeholder {
+  color: rgba(255,255,255,.62);
 }
 
 @keyframes scentoraHeroMotion {
@@ -1293,7 +367,7 @@ li {
 @keyframes scentoraMist {
   from {
     opacity: .58;
-    filter: blur(0px);
+    filter: blur(0);
   }
 
   to {
@@ -1302,11 +376,1032 @@ li {
   }
 }
 
-/* Keep hero content clear */
-.scentora-cinematic-hero > * {
+/* =========================================================
+   SELECTION / SCROLLBAR
+   ========================================================= */
+
+::selection {
+  background: var(--sc-burgundy);
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4ECE7;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      var(--sc-burgundy-dark),
+      var(--sc-burgundy)
+    );
+
+  border-radius: 999px;
+}
+
+/* ===== HEADER LOGO VISIBILITY FIX ===== */
+
+header [data-testid="navbar-brand-logo"] img {
+  width: 42px !important;
+  height: 42px !important;
+  padding: 4px !important;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #FFFDF8 0%,
+      #EFE5D8 52%,
+      rgba(110,31,53,.18) 100%
+    ) !important;
+
+  border: 1px solid rgba(110,31,53,.28) !important;
+  border-radius: 9999px !important;
+
+  filter: none !important;
+  opacity: 1 !important;
+
+  box-shadow:
+    0 5px 16px rgba(67,17,31,.12) !important;
+}
+
+header [data-testid="navbar-brand-logo"] span:first-of-type {
+  color: #43111F !important;
+  -webkit-text-fill-color: #43111F !important;
+  opacity: 1 !important;
+}
+
+header [data-testid="navbar-brand-logo"] span:last-of-type {
+  color: #6E1F35 !important;
+  -webkit-text-fill-color: #6E1F35 !important;
+  opacity: .85 !important;
+}
+
+
+/* ===== HERO SEARCH BUTTON FIX ===== */
+
+.scentora-cinematic-hero form button,
+.scentora-cinematic-hero button[type="submit"] {
+  background:
+    linear-gradient(
+      135deg,
+      #43111F 0%,
+      #6E1F35 100%
+    ) !important;
+
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+
+  border: 1px solid rgba(255,255,255,.18) !important;
+
+  font-weight: 700 !important;
+
+  box-shadow:
+    0 8px 22px rgba(67,17,31,.24) !important;
+}
+
+.scentora-cinematic-hero form button *,
+.scentora-cinematic-hero button[type="submit"] * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+.scentora-cinematic-hero form button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #6E1F35,
+      #9A4C63
+    ) !important;
+}
+
+
+/* ===== SCENTORA LARGE LUXURY BRAND MARK ===== */
+
+header [data-testid="navbar-brand-logo"] img.scentora-logo-badge {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  padding: 8px !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  filter: contrast(1.15) saturate(1.15) !important;
+
+  background: linear-gradient(
+    145deg,
+    #FFFFFF,
+    #F3E8E1
+  ) !important;
+
+  border: 1.5px solid rgba(110,31,53,.45) !important;
+  border-radius: 50% !important;
+
+  box-shadow:
+    0 5px 16px rgba(67,17,31,.15),
+    inset 0 0 0 3px rgba(255,255,255,.75) !important;
+}
+
+/* Generated-reference style hero alignment */
+.scentora-cinematic-hero .max-w-7xl {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .scentora-cinematic-hero::before {
+    background-position: center right !important;
+  }
+}
+
+
+/* ===== SCENTORA CATALOG FINAL LIGHT FIX ===== */
+
+/* Catalog dark filter/sort/pagination surfaces */
+main aside,
+main aside > div {
+  background: #FFFDF8 !important;
+  color: #2D2326 !important;
+  border-color: #E5D8D0 !important;
+}
+
+main aside label,
+main aside span,
+main aside p {
+  color: #5D5054 !important;
+}
+
+/* Product hover buttons */
+main article button,
+main article a {
+  border-color: #6E1F35;
+}
+
+main article button[class*="bg-[#6E1F35]"],
+main article button[class*="bg-[#43111F]"] {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+main article button[class*="bg-[#6E1F35]"] *,
+main article button[class*="bg-[#43111F]"] * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Pagination */
+main nav button {
+  background: #FFFDF8 !important;
+  color: #43111F !important;
+  border: 1px solid #D2BCB0 !important;
+}
+
+main nav button:hover {
+  background: #F3E8E1 !important;
+  color: #6E1F35 !important;
+}
+
+
+/* ===== CATALOG QUICK VIEW VISIBILITY ===== */
+
+[data-testid="catalog-quick-view-btn"],
+button[data-testid*="quick"],
+main article .absolute.inset-x-0.bottom-0 button {
+  background: linear-gradient(135deg,#43111F,#6E1F35) !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+[data-testid="catalog-quick-view-btn"] *,
+button[data-testid*="quick"] *,
+main article .absolute.inset-x-0.bottom-0 button * {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+
+/* ===== SCENTORA HERO VIDEO ===== */
+
+.scentora-cinematic-hero::before,
+.scentora-cinematic-hero::after {
+  display: none !important;
+}
+
+.scentora-hero-video {
+  z-index: 0 !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.scentora-hero-video-overlay {
+  z-index: 1 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(24,5,11,.88) 0%,
+      rgba(42,9,19,.70) 34%,
+      rgba(20,6,10,.32) 64%,
+      rgba(8,5,7,.18) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.10),
+      rgba(20,5,10,.28)
+    ) !important;
+}
+
+.scentora-cinematic-hero > .max-w-7xl {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Keep man more visible on right side */
+@media (min-width: 1024px) {
+  .scentora-hero-video {
+    object-position: center center !important;
+  }
+}
+
+
+/* ===== HERO VIDEO FULL-BLEED FIX ===== */
+
+.scentora-cinematic-hero {
+  position: relative !important;
+  min-height: 640px !important;
+  overflow: hidden !important;
+  background: #14070C !important;
+}
+
+/* Video fills the ENTIRE hero */
+.scentora-cinematic-hero .scentora-hero-video {
+  position: absolute !important;
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 100% !important;
+  min-height: 100% !important;
+
+  object-fit: cover !important;
+
+  /* adjust this to move man left/right */
+  object-position: 25% center !important;
+
+  z-index: 0 !important;
+}
+
+/* Overlay over complete video */
+.scentora-cinematic-hero .scentora-hero-video-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18,5,10,.12) 0%,
+      rgba(18,5,10,.22) 42%,
+      rgba(7,17,15,.76) 62%,
+      rgba(5,17,14,.94) 100%
+    ) !important;
+}
+
+/* Content above video */
+.scentora-cinematic-hero > .max-w-7xl {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+}
+
+/* Move hero content to RIGHT like your screenshot */
+.scentora-cinematic-hero > .max-w-7xl > div {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  max-width: 580px !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .scentora-cinematic-hero {
+    min-height: 620px !important;
+  }
+
+  .scentora-cinematic-hero .scentora-hero-video {
+    object-position: 42% center !important;
+  }
+
+  .scentora-cinematic-hero .scentora-hero-video-overlay {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(18,5,10,.20),
+        rgba(8,18,15,.80)
+      ) !important;
+  }
+
+  .scentora-cinematic-hero > .max-w-7xl > div {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+
+/* =========================================================
+   SCENTORA HOME LUXURY ANIMATIONS
+   ========================================================= */
+
+/* Hero content entrance */
+.scentora-cinematic-hero > .max-w-7xl > div {
+  animation: scentoraHeroContentIn 1.15s cubic-bezier(.22,.8,.25,1) both;
+}
+
+@keyframes scentoraHeroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero badge floating */
+.scentora-cinematic-hero .inline-flex.rounded-full {
+  animation: scentoraBadgeFloat 4.5s ease-in-out infinite;
+}
+
+@keyframes scentoraBadgeFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Hero heading subtle cinematic reveal */
+.scentora-cinematic-hero h1 {
+  animation: scentoraTitleReveal 1.3s ease-out both;
+  transform-origin: left center;
+}
+
+@keyframes scentoraTitleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(.985);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Hero paragraph delayed reveal */
+.scentora-cinematic-hero p {
+  animation: scentoraFadeUp 1s .22s ease-out both;
+}
+
+@keyframes scentoraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search bar soft breathing glow */
+.scentora-cinematic-hero form {
+  animation: scentoraSearchGlow 4s ease-in-out infinite;
+}
+
+@keyframes scentoraSearchGlow {
+  0%, 100% {
+    box-shadow: 0 10px 32px rgba(67,17,31,.14);
+  }
+  50% {
+    box-shadow:
+      0 14px 38px rgba(67,17,31,.24),
+      0 0 0 1px rgba(216,195,165,.18);
+  }
+}
+
+/* Buttons premium hover */
+.scentora-cinematic-hero button,
+.scentora-cinematic-hero a {
+  transition:
+    transform .28s ease,
+    box-shadow .28s ease,
+    background .28s ease,
+    color .28s ease !important;
+}
+
+.scentora-cinematic-hero button:hover,
+.scentora-cinematic-hero a:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 14px 28px rgba(67,17,31,.22);
+}
+
+/* Home section headings */
+section:not(.scentora-cinematic-hero) h2 {
+  animation: scentoraSectionTitle 1s ease both;
+}
+
+@keyframes scentoraSectionTitle {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Product cards */
+section:not(.scentora-cinematic-hero) article,
+section:not(.scentora-cinematic-hero) .group {
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease !important;
+}
+
+section:not(.scentora-cinematic-hero) article:hover,
+section:not(.scentora-cinematic-hero) .group:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 18px 42px rgba(67,17,31,.13) !important;
+}
+
+/* Product image zoom */
+section:not(.scentora-cinematic-hero) article img,
+section:not(.scentora-cinematic-hero) .group img {
+  transition: transform .55s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+section:not(.scentora-cinematic-hero) article:hover img,
+section:not(.scentora-cinematic-hero) .group:hover img {
+  transform: scale(1.045);
+}
+
+/* Soft moving light over hero */
+.scentora-cinematic-hero::after {
+  content: "";
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255,255,255,.025) 42%,
+      rgba(216,195,165,.07) 50%,
+      transparent 62%
+    );
+
+  transform: translateX(-120%);
+  animation: scentoraHeroShimmer 9s ease-in-out infinite;
+}
+
+@keyframes scentoraHeroShimmer {
+  0%, 18% {
+    transform: translateX(-120%);
+  }
+  55% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* Keep content above shimmer */
+.scentora-cinematic-hero > .max-w-7xl {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* =========================================================
+   SCENTORA ULTRA LUXURY SCROLL REVEAL
+   Cinematic depth + stagger + premium motion
+   ========================================================= */
+
+.luxury-reveal {
+  opacity: 0;
+  transform:
+    perspective(1200px)
+    translateY(70px)
+    translateZ(-35px)
+    scale(.965);
+  filter: blur(12px);
+  transform-origin: center center;
+
+  transition:
+    opacity 1.25s cubic-bezier(.16,1,.3,1),
+    transform 1.35s cubic-bezier(.16,1,.3,1),
+    filter 1.15s ease;
+}
+
+.luxury-reveal.luxury-visible {
+  opacity: 1;
+  transform:
+    perspective(1200px)
+    translateY(0)
+    translateZ(0)
+    scale(1);
+  filter: blur(0);
+}
+
+/* Alternate section movement for richer feel */
+.luxury-reveal:nth-of-type(even) {
+  transform:
+    perspective(1200px)
+    translateY(65px)
+    translateX(-24px)
+    translateZ(-30px)
+    scale(.97);
+}
+
+.luxury-reveal:nth-of-type(odd) {
+  transform:
+    perspective(1200px)
+    translateY(65px)
+    translateX(24px)
+    translateZ(-30px)
+    scale(.97);
+}
+
+.luxury-reveal.luxury-visible:nth-of-type(even),
+.luxury-reveal.luxury-visible:nth-of-type(odd) {
+  transform:
+    perspective(1200px)
+    translateY(0)
+    translateX(0)
+    translateZ(0)
+    scale(1);
+}
+
+/* Elegant heading reveal */
+.luxury-reveal h2,
+.luxury-reveal h3 {
+  opacity: 0;
+  transform: translateY(30px);
+  letter-spacing: .035em;
+
+  transition:
+    opacity 1s ease .12s,
+    transform 1.15s cubic-bezier(.16,1,.3,1) .12s,
+    letter-spacing 1.2s ease .12s;
+}
+
+.luxury-reveal.luxury-visible h2,
+.luxury-reveal.luxury-visible h3 {
+  opacity: 1;
+  transform: translateY(0);
+  letter-spacing: normal;
+}
+
+/* Small labels / eyebrow text */
+.luxury-reveal > div span[class*="uppercase"],
+.luxury-reveal span[class*="tracking"] {
+  opacity: 0;
+  transform: translateY(14px);
+
+  transition:
+    opacity .9s ease .05s,
+    transform .9s cubic-bezier(.16,1,.3,1) .05s;
+}
+
+.luxury-reveal.luxury-visible > div span[class*="uppercase"],
+.luxury-reveal.luxury-visible span[class*="tracking"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Product/card reveal */
+.luxury-reveal article,
+.luxury-reveal .group {
+  opacity: 0;
+  transform:
+    perspective(1000px)
+    translateY(55px)
+    rotateX(3deg)
+    scale(.97);
+
+  transition:
+    opacity .95s ease,
+    transform 1.15s cubic-bezier(.16,1,.3,1),
+    box-shadow .4s ease;
+}
+
+.luxury-reveal.luxury-visible article,
+.luxury-reveal.luxury-visible .group {
+  opacity: 1;
+  transform:
+    perspective(1000px)
+    translateY(0)
+    rotateX(0)
+    scale(1);
+}
+
+/* Refined stagger */
+.luxury-reveal.luxury-visible article:nth-child(1),
+.luxury-reveal.luxury-visible .group:nth-child(1) {
+  transition-delay: .10s;
+}
+
+.luxury-reveal.luxury-visible article:nth-child(2),
+.luxury-reveal.luxury-visible .group:nth-child(2) {
+  transition-delay: .20s;
+}
+
+.luxury-reveal.luxury-visible article:nth-child(3),
+.luxury-reveal.luxury-visible .group:nth-child(3) {
+  transition-delay: .30s;
+}
+
+.luxury-reveal.luxury-visible article:nth-child(4),
+.luxury-reveal.luxury-visible .group:nth-child(4) {
+  transition-delay: .40s;
+}
+
+/* Premium card hover after reveal */
+.luxury-reveal.luxury-visible article:hover,
+.luxury-reveal.luxury-visible .group:hover {
+  transform:
+    perspective(1000px)
+    translateY(-10px)
+    scale(1.015);
+
+  box-shadow:
+    0 28px 60px rgba(67,17,31,.16) !important;
+}
+
+/* Luxury light sweep across section */
+.luxury-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      transparent 36%,
+      rgba(255,255,255,.18) 47%,
+      rgba(216,195,165,.14) 51%,
+      transparent 63%,
+      transparent 100%
+    );
+
+  transform: translateX(-130%);
+  opacity: 0;
+}
+
+.luxury-reveal.luxury-visible::after {
+  animation: scentoraSectionSweep 1.8s cubic-bezier(.16,1,.3,1) .22s both;
+}
+
+@keyframes scentoraSectionSweep {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+  15% {
+    opacity: .7;
+  }
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+/* Thin champagne line reveal */
+.luxury-reveal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 1px;
+  width: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(110,31,53,.35),
+      rgba(216,195,165,.75),
+      rgba(110,31,53,.35),
+      transparent
+    );
+
+  transform: translateX(-50%);
+  transition: width 1.5s cubic-bezier(.16,1,.3,1) .18s;
+}
+
+.luxury-reveal.luxury-visible::before {
+  width: 88%;
+}
+
+/* Keep content above light sweep */
+.luxury-reveal > * {
   position: relative;
   z-index: 2;
 }
 
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .luxury-reveal,
+  .luxury-reveal *,
+  .luxury-reveal::before {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
 
+
+
+/* =========================================================
+   SCENTORA GLOBAL PRODUCT SCROLL ANIMATION
+   Applies to product cards across the whole website
+   ========================================================= */
+
+.luxury-product-reveal {
+  opacity: 0;
+  transform:
+    perspective(1100px)
+    translateY(58px)
+    translateZ(-28px)
+    rotateX(3deg)
+    scale(.97);
+
+  filter: blur(8px);
+
+  transition:
+    opacity 1s cubic-bezier(.16,1,.3,1),
+    transform 1.18s cubic-bezier(.16,1,.3,1),
+    filter 1s ease,
+    box-shadow .35s ease;
+
+  transition-delay: var(--luxury-delay, 0ms);
+  will-change: transform, opacity, filter;
+}
+
+.luxury-product-reveal.luxury-visible {
+  opacity: 1;
+  transform:
+    perspective(1100px)
+    translateY(0)
+    translateZ(0)
+    rotateX(0)
+    scale(1);
+
+  filter: blur(0);
+}
+
+/* Alternating cinematic direction */
+.luxury-product-reveal:nth-child(4n+1) {
+  transform:
+    perspective(1100px)
+    translateY(52px)
+    translateX(-20px)
+    rotateY(2deg)
+    scale(.97);
+}
+
+.luxury-product-reveal:nth-child(4n+2) {
+  transform:
+    perspective(1100px)
+    translateY(58px)
+    translateX(-8px)
+    scale(.97);
+}
+
+.luxury-product-reveal:nth-child(4n+3) {
+  transform:
+    perspective(1100px)
+    translateY(58px)
+    translateX(8px)
+    scale(.97);
+}
+
+.luxury-product-reveal:nth-child(4n+4) {
+  transform:
+    perspective(1100px)
+    translateY(52px)
+    translateX(20px)
+    rotateY(-2deg)
+    scale(.97);
+}
+
+.luxury-product-reveal.luxury-visible:nth-child(n) {
+  transform:
+    perspective(1100px)
+    translateY(0)
+    translateX(0)
+    translateZ(0)
+    rotateX(0)
+    rotateY(0)
+    scale(1);
+}
+
+/* Premium product hover after reveal */
+.luxury-product-reveal.luxury-visible:hover {
+  transform:
+    perspective(1100px)
+    translateY(-9px)
+    scale(1.012);
+
+  box-shadow:
+    0 24px 52px rgba(67,17,31,.14) !important;
+}
+
+/* Product image luxury zoom */
+.luxury-product-reveal img {
+  transition:
+    transform .6s cubic-bezier(.16,1,.3,1),
+    filter .5s ease !important;
+}
+
+.luxury-product-reveal.luxury-visible:hover img {
+  transform: scale(1.045);
+}
+
+/* Softer on mobile */
+@media (max-width: 768px) {
+  .luxury-product-reveal {
+    transform:
+      translateY(28px)
+      scale(.985);
+
+    filter: blur(4px);
+  }
+
+  .luxury-product-reveal.luxury-visible {
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+
+/* =========================================================
+   CATALOG ULTRA LUXURY PRODUCT REVEAL
+   ========================================================= */
+
+.catalog-luxury-product {
+  opacity: 0;
+
+  transform:
+    perspective(1200px)
+    translateY(70px)
+    translateZ(-35px)
+    rotateX(4deg)
+    scale(.965);
+
+  filter: blur(9px);
+
+  transition:
+    opacity 1s cubic-bezier(.16,1,.3,1),
+    transform 1.25s cubic-bezier(.16,1,.3,1),
+    filter 1s ease,
+    box-shadow .4s ease;
+
+  transition-delay: var(--catalog-delay, 0ms);
+
+  will-change:
+    transform,
+    opacity,
+    filter;
+}
+
+/* Alternate entry directions */
+.catalog-luxury-product:nth-child(4n+1) {
+  transform:
+    perspective(1200px)
+    translateY(65px)
+    translateX(-30px)
+    rotateY(3deg)
+    scale(.965);
+}
+
+.catalog-luxury-product:nth-child(4n+2) {
+  transform:
+    perspective(1200px)
+    translateY(72px)
+    translateX(-10px)
+    scale(.965);
+}
+
+.catalog-luxury-product:nth-child(4n+3) {
+  transform:
+    perspective(1200px)
+    translateY(72px)
+    translateX(10px)
+    scale(.965);
+}
+
+.catalog-luxury-product:nth-child(4n+4) {
+  transform:
+    perspective(1200px)
+    translateY(65px)
+    translateX(30px)
+    rotateY(-3deg)
+    scale(.965);
+}
+
+/* Visible state */
+.catalog-luxury-product.catalog-luxury-visible {
+  opacity: 1;
+
+  transform:
+    perspective(1200px)
+    translateY(0)
+    translateX(0)
+    translateZ(0)
+    rotateX(0)
+    rotateY(0)
+    scale(1);
+
+  filter: blur(0);
+}
+
+/* Premium hover */
+.catalog-luxury-product.catalog-luxury-visible:hover {
+  transform:
+    perspective(1200px)
+    translateY(-10px)
+    scale(1.015);
+
+  box-shadow:
+    0 26px 55px rgba(67,17,31,.16) !important;
+}
+
+/* Product image cinematic zoom */
+.catalog-luxury-product img {
+  transition:
+    transform .65s cubic-bezier(.16,1,.3,1),
+    filter .55s ease !important;
+}
+
+.catalog-luxury-product.catalog-luxury-visible:hover img {
+  transform: scale(1.05);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .catalog-luxury-product {
+    transform:
+      translateY(34px)
+      scale(.985);
+
+    filter: blur(4px);
+  }
+
+  .catalog-luxury-product.catalog-luxury-visible {
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
 
