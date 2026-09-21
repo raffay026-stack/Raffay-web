@@ -2306,3 +2306,208 @@ a {
     object-position: center center !important;
   }
 }
+
+/* =========================================================
+   FK DECOR - RESPONSIVE MOBILE + DESKTOP
+   ========================================================= */
+
+/* Prevent horizontal overflow */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 3 / 0.9 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .Decore-cinematic-hero {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+  }
+
+  /* Mobile video */
+  .Decore-cinematic-hero .Decore-hero-video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  /* Hero content */
+  .Decore-cinematic-hero > .max-w-7xl {
+    width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .Decore-cinematic-hero > .max-w-7xl > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+  }
+
+  /* Hero heading */
+  .Decore-cinematic-hero h1 {
+    font-size: clamp(34px, 10vw, 52px) !important;
+    line-height: 1.05 !important;
+    word-break: normal !important;
+  }
+
+  /* Hero paragraph */
+  .Decore-cinematic-hero p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+  }
+
+  /* Search bar */
+  .Decore-cinematic-hero form {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .Decore-cinematic-hero form input {
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: 1 1 60% !important;
+  }
+
+  .Decore-cinematic-hero form button {
+    flex: 1 1 auto !important;
+    white-space: nowrap !important;
+  }
+
+  /* Explore button */
+  .fk-explore-decor-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 54px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 12px !important;
+  }
+
+  /* Breadcrumb / navigation */
+  .fk-breadcrumb {
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .fk-breadcrumb::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .fk-breadcrumb a {
+    flex: 0 0 auto !important;
+    min-width: 125px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    font-size: 11px !important;
+  }
+
+  /* General sections */
+  section {
+    max-width: 100% !important;
+  }
+
+  /* Images never overflow */
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  /* Product grids */
+  .grid {
+    width: 100%;
+  }
+
+  /* Prevent oversized text */
+  h1,
+  h2,
+  h3 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  /* Buttons */
+  button,
+  a {
+    max-width: 100%;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+
+  .Decore-cinematic-hero > .max-w-7xl > div {
+    padding-top: 75px !important;
+    padding-bottom: 75px !important;
+  }
+
+  .Decore-cinematic-hero h1 {
+    font-size: 34px !important;
+  }
+
+  .Decore-cinematic-hero p {
+    font-size: 14px !important;
+  }
+
+  .Decore-cinematic-hero form {
+    padding: 6px !important;
+  }
+
+  .Decore-cinematic-hero form button {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
+  .fk-explore-decor-btn {
+    width: 100% !important;
+  }
+
+  .fk-breadcrumb a {
+    min-width: 110px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* FK DECOR RESPONSIVE */
+@media (min-width: 769px) { .Decore-cinematic-hero { aspect-ratio: 3 / 0.9 !important; min-height: 0 !important; height: auto !important; } .Decore-hero-video { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; } }
+@media (max-width: 768px) { .Decore-cinematic-hero { width: 100% !important; min-height: 620px !important; height: auto !important; aspect-ratio: auto !important; overflow: hidden !important; } .Decore-hero-video { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; } .Decore-cinematic-hero > .max-w-7xl { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; } .Decore-cinematic-hero h1 { font-size: clamp(34px,10vw,52px) !important; line-height: 1.05 !important; } .Decore-cinematic-hero p { font-size: 15px !important; line-height: 1.6 !important; } .fk-explore-decor-btn { width: 100% !important; max-width: 100% !important; } .fk-breadcrumb { width: 100% !important; overflow-x: auto !important; white-space: nowrap !important; } .fk-breadcrumb a { flex: 0 0 auto !important; } }
