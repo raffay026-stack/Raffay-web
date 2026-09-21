@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
-  <title id="title">Scentora Monogram</title>
+  <title id="title">FK Decore Monogram</title>
   <rect width="120" height="120" rx="20" fill="#241522"/>
   <g transform="translate(60,60)" fill="none" stroke="#F2E9E1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M-18 8 C-8 28 22 28 22 -4 C22 -26 -10 -28 -18 -8" />
@@ -7,3 +7,7 @@
   </g>
   <circle cx="60" cy="18" r="4" fill="#8C5F6D" />
 </svg>
+
+
+
+

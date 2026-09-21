@@ -66,3 +66,4 @@ export const QUIZ = {
   restartBtn: "quiz-restart-btn",
 };
 
+

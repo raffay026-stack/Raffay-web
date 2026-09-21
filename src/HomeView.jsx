@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from './AppContext';
 
@@ -34,7 +34,7 @@ const HomeView = () => {
               }`}
             >
               <span className="inline-flex text-sm uppercase tracking-[0.35em] text-[#D8FFF5]/80">
-                ð“¢ð“¬ð“®ð“·ð“½ð“¸ð“»ð“ª Perfumes
+                𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪 Perfumes
               </span>
               <h1 className="font-serif text-5xl tracking-tight leading-[1.02] text-white sm:text-6xl lg:text-7xl">
                 A modern heirloom, captured in every bottle.
@@ -276,6 +276,10 @@ const HomeView = () => {
 };
 
 export default HomeView;
+
+
+
+
 
 
 

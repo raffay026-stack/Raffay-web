@@ -1,4 +1,5 @@
-﻿import React, { Suspense } from 'react'
+import SitePage from './views/SitePages';
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -22,7 +23,7 @@ export default function App() {
 
           <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Suspense kept minimal to avoid interfering with existing component behavior */}
-            <Suspense fallback={<div className="py-20 text-center">Loadingâ€¦</div>}>
+            <Suspense fallback={<div className="py-20 text-center">Loading…</div>}>
               <div className="transition-opacity duration-300 ease-in-out">
                 <Routes>
                   <Route path="/" element={<HomeView />} />
@@ -33,7 +34,12 @@ export default function App() {
                   <Route path="/order-confirmation/:id" element={<OrderConfirmationView />} />
                   {/* Preserve any legacy/default navigation */}
                   <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
+                          <Route path="/sale-products" element={<SitePage type="sale" />} />
+          <Route path="/categories" element={<SitePage type="categories" />} />
+          <Route path="/new-arrivals" element={<SitePage type="arrivals" />} />
+          <Route path="/about-us" element={<SitePage type="about" />} />
+          <Route path="/hot-articles" element={<SitePage type="articles" />} />
+        </Routes>
               </div>
             </Suspense>
           </main>
@@ -46,6 +52,10 @@ export default function App() {
     </AppProvider>
   )
 }
+
+
+
+
 
 
 

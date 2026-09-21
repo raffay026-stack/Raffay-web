@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useApp } from "../context/AppContext";
 import { X, Plus, Minus, Trash2, ArrowRight, ShieldCheck, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -197,6 +197,9 @@ export default function CartDrawer({ isOpen, onClose }) {
     </div>
   );
 }
+
+
+
 
 
 

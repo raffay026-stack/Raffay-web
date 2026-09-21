@@ -1,5 +1,5 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="logoTitle" preserveAspectRatio="xMidYMid meet">
-  <title id="logoTitle">Scentora logo</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="logoTitle" preserveAspectRatio="xMidYMid meet">
+  <title id="logoTitle">FK Decore logo</title>
   <defs>
     <linearGradient id="goldGrad" x1="0" x2="1">
       <stop offset="0%" stop-color="#D4AF37" />
@@ -28,4 +28,9 @@
 
   <!-- Accessible label (keeps existing wording) -->
 </svg>
+
+
+
+
+
 

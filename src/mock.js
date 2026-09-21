@@ -1,4 +1,4 @@
-﻿export const PERFUME_BRANDS = [
+export const PERFUME_BRANDS = [
   "Tom Ford",
   "Creed",
   "Byredo",
@@ -23,7 +23,7 @@ export const PERFUME_CATEGORIES = [
 export const INITIAL_PERFUMES = [
   {
     id: "perfume-1",
-    name: "Oud Wood ImpÃ©rial",
+    name: "Oud Wood Impérial",
     brand: "Tom Ford",
     category: "Oud & Woody",
     price: 395,
@@ -274,7 +274,7 @@ export const INITIAL_ORDERS = [
     date: "2026-06-12",
     status: "Delivered",
     items: [
-      { id: "perfume-1", name: "Oud Wood ImpÃ©rial", brand: "Tom Ford", price: 395, quantity: 1, size: "100ml", image: INITIAL_PERFUMES[0].image }
+      { id: "perfume-1", name: "Oud Wood Impérial", brand: "Tom Ford", price: 395, quantity: 1, size: "100ml", image: INITIAL_PERFUMES[0].image }
     ],
     subtotal: 395,
     shipping: 0,
@@ -288,7 +288,7 @@ export const INITIAL_ORDERS = [
       postalCode: "10021",
       country: "United States"
     },
-    paymentMethod: "Credit Card (â€¢â€¢â€¢â€¢ 4242)"
+    paymentMethod: "Credit Card (•••• 4242)"
   },
   {
     id: "ORD-97512",
@@ -345,6 +345,9 @@ export const SCENT_QUIZ_QUESTIONS = [
     ]
   }
 ];
+
+
+
 
 
 

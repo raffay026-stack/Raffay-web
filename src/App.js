@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
@@ -102,6 +102,9 @@ function App() {
 }
 
 export default App;
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -119,7 +119,7 @@ export default function MyOrdersView() {
                       <div className="flex-1">
                         <div className="text-[9px] text-[#43111F] uppercase tracking-wider">{item.brand}</div>
                         <div className="font-serif text-xs font-medium text-[#2D2326] line-clamp-1">{item.name}</div>
-                        <div className="text-[10px] text-[#7C6E72]">Size: {item.selectedSize} Ã— {item.quantity}</div>
+                        <div className="text-[10px] text-[#7C6E72]">Size: {item.selectedSize} × {item.quantity}</div>
                       </div>
                       <div className="font-serif text-xs font-bold text-[#43111F]">${item.price * item.quantity}</div>
                     </div>
@@ -149,6 +149,9 @@ export default function MyOrdersView() {
     </div>
   );
 }
+
+
+
 
 
 

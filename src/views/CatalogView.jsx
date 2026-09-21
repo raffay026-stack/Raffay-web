@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { PERFUME_BRANDS, PERFUME_CATEGORIES } from "../mock";
@@ -149,7 +149,7 @@ export default function CatalogView() {
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 text-[#43111F] text-xs uppercase tracking-[0.2em] font-serif">
             <Crown className="w-4 h-4" />
-            <span>Summer Drop â€¢ 100 Curated Perfumes</span>
+            <span>Summer Drop • 100 Curated Perfumes</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#F3EFE6]">
             Summer Men's Perfume Catalog
@@ -403,6 +403,9 @@ export default function CatalogView() {
     </div>
   );
 }
+
+
+
 
 
 

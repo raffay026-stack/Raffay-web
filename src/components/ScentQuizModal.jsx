@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { useApp } from "../context/AppContext";
 import { SCENT_QUIZ_QUESTIONS } from "../mock";
 import { X, Sparkles, Crown, ArrowRight, RotateCcw } from "lucide-react";
@@ -148,6 +148,9 @@ export default function StyleQuizModal({ isOpen, onClose }) {
     </div>
   );
 }
+
+
+
 
 
 

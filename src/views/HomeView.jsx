@@ -1,10 +1,9 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartDrawer from "../components/CartDrawer";
-import StyleQuizModal from '../components/ScentQuizModal';
 import { 
   Crown, 
   Sparkles, 
@@ -21,7 +20,6 @@ import { HOME, CATALOG } from "../constants/testIds";
 export default function HomeView() {
   const { products, addToCart, wishlist, toggleWishlist } = useApp();
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("summer");
   const [quickSearch, setQuickSearch] = useState("");
   const navigate = useNavigate();
@@ -65,23 +63,23 @@ export default function HomeView() {
 
   return (
     <div className="min-h-screen bg-[#FFFDF8] text-[#2D2326] font-serif selection:bg-[#6E1F35] selection:text-[#FFFDF8]">
-      <Navbar onOpenCart={() => setIsCartOpen(true)} onOpenQuiz={() => setIsQuizOpen(true)} />
+      <Navbar onOpenCart={() => setIsCartOpen(true)} />
 
       {/* Hero Section */}
-      <section className="scentora-cinematic-hero relative overflow-hidden min-h-[640px] flex items-center border-b border-[#6E1F35]/20">
+      <section className="FK Decore-cinematic-hero relative overflow-hidden min-h-[640px] flex items-center border-b border-[#6E1F35]/20">
 
         <video
-          className="scentora-hero-video absolute inset-0 w-full h-full object-cover"
+          className="FK Decore-hero-video absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
         >
-          <source src="/perfume-man-hero.mp4" type="video/mp4" />
+          <source src="/WhatsApp%20Video%202026-09-21%20at%209.05.41%20PM.mp4" type="video/mp4" />
         </video>
 
-        <div className="scentora-hero-video-overlay absolute inset-0 pointer-events-none" />
+        <div className="FK Decore-hero-video-overlay absolute inset-0 pointer-events-none" />
         {/* Background glow effects */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#6E1F35]/10 blur-[140px] rounded-full pointer-events-none" />
         
@@ -90,15 +88,15 @@ export default function HomeView() {
             
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F3E8E1] border border-[#6E1F35]/40 text-[#6E1F35] text-xs uppercase tracking-[0.25em] shadow-lg">
               <Crown className="w-4 h-4 text-[#6E1F35]" />
-              <span>Premium Summer Menswear</span>
+              <span>PREMIUM HOME DECOR</span>
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#43111F] bg-clip-text text-transparent font-serif leading-tight">
-              Summer Men's Perfume Collection
+              Elevate Your Space
             </h1>
 
             <p className="text-base sm:text-lg text-[#F5ECE7] font-serif max-w-xl leading-relaxed">
-              Discover breathable men's Perfumes made for sunny days, casual weekends, and effortless summer style.
+              Discover elegant decor pieces designed to bring beauty, warmth, and character to every corner of your home.
             </p>
 
             {/* Quick search input */}
@@ -108,7 +106,7 @@ export default function HomeView() {
               </div>
               <input 
                 type="text"
-                placeholder="Search 100 summer Perfumes by name, brand, color, or style..."
+                placeholder="Search decor pieces by name, category, color, or style..."
                 value={quickSearch}
                 onChange={(e) => setQuickSearch(e.target.value)}
                 className="flex-1 bg-transparent border-none text-[#2D2326] text-xs sm:text-sm font-serif focus:outline-none px-2"
@@ -124,19 +122,11 @@ export default function HomeView() {
             </form>
 
             <div className="flex flex-wrap items-center justify-start gap-4 pt-4">
-              <button 
-                onClick={() => setIsQuizOpen(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 border border-[#FFFDF8]/70 text-[#FFFDF8] hover:bg-[#FFFDF8] hover:text-[#6E1F35] font-serif text-xs uppercase tracking-widest transition-all rounded shadow-md"
-                data-testid={HOME.quizCta}
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>Take Style Profiler Quiz</span>
-              </button>
               <Link 
                 to="/catalog"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#F7F1EC] border border-[#6E1F35]/30 text-[#2D2326] hover:text-[#6E1F35] font-serif text-xs uppercase tracking-widest transition-all rounded"
+                className="fk-explore-decor-btn"
               >
-                <span>Browse All 100 Perfumes</span>
+                <span>EXPLORE ALL DECOR</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -146,6 +136,18 @@ export default function HomeView() {
       </section>
 
       {/* Featured Showcase Tabs */}
+            <nav className="fk-breadcrumb" aria-label="Main navigation">
+        <a href="/sale-products">Sale Products</a>
+        <span>�</span>
+        <a href="/categories">Categories</a>
+        <span>�</span>
+        <a href="/new-arrivals">New Arrivals</a>
+        <span>�</span>
+        <a href="/about-us">About Us</a>
+        <span>�</span>
+        <a href="/hot-articles">Hot Articles</a>
+      </nav>
+
       <section className="luxury-reveal py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-[#E5D8D0] pb-6">
           <div>
@@ -276,7 +278,7 @@ export default function HomeView() {
                 Handcrafted in Grasse & Aged in French Oak Casks
               </h2>
               <p className="text-sm sm:text-base text-[#5D5054] font-serif leading-relaxed">
-                Every flacon of ð“¢ð“¬ð“®ð“·ð“½ð“¸ð“»ð“ª undergoes a meticulous 6-month maceration process. Our master Perfumers blend rare essential oils with pristine botanical alcohol, creating an opulent sillage that develops exquisitely on the skin over 24 hours.
+                Every flacon of 𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪 undergoes a meticulous 6-month maceration process. Our master Perfumers blend rare essential oils with pristine botanical alcohol, creating an opulent sillage that develops exquisitely on the skin over 24 hours.
               </p>
               <div className="grid grid-cols-3 gap-6 pt-4 border-t border-[#E5D8D0] font-serif">
                 <div>
@@ -316,10 +318,31 @@ export default function HomeView() {
       <Footer />
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <StyleQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

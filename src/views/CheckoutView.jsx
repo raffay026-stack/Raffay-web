@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -38,7 +38,7 @@ export default function CheckoutView() {
     postalCode: "10021",
     country: "United States",
     paymentMethod: "credit-card",
-    cardNumber: "â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 4242",
+    cardNumber: "•••• •••• •••• 4242",
     cardExp: "08/28",
     cardCvc: "888"
   });
@@ -73,7 +73,7 @@ export default function CheckoutView() {
           postalCode: formData.postalCode,
           country: formData.country
         },
-        paymentMethod: formData.paymentMethod === 'credit-card' ? 'Credit Card (â€¢â€¢â€¢â€¢ 4242)' : formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment (Apple Pay)'
+        paymentMethod: formData.paymentMethod === 'credit-card' ? 'Credit Card (•••• 4242)' : formData.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment (Apple Pay)'
       });
       setIsSubmitting(false);
       navigate(`/order-confirmation/${order.id}`);
@@ -116,7 +116,7 @@ export default function CheckoutView() {
             <span>256-Bit Encrypted Secure Checkout</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#43111F]">
-            SCENTORA Checkout
+            FK Decore Checkout
           </h1>
         </div>
 
@@ -326,7 +326,7 @@ export default function CheckoutView() {
                     <div className="flex-1">
                       <div className="text-[10px] text-[#43111F] uppercase tracking-wider font-serif">{item.brand}</div>
                       <div className="font-serif text-xs text-[#2D2326] line-clamp-1">{item.name}</div>
-                      <div className="text-[11px] text-[#7C6E72] font-serif">Size: {item.selectedSize} Ã— {item.quantity}</div>
+                      <div className="text-[11px] text-[#7C6E72] font-serif">Size: {item.selectedSize} × {item.quantity}</div>
                     </div>
                     <div className="font-serif text-xs font-bold text-[#43111F]">${item.price * item.quantity}</div>
                   </div>
@@ -392,6 +392,13 @@ export default function CheckoutView() {
     </div>
   );
 }
+
+
+
+
+
+
+
 
 
 

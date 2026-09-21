@@ -1,9 +1,9 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/fk-logo.jpeg";
 import CartDrawer from "../components/CartDrawer";
 import StyleQuizModal from '../components/ScentQuizModal';
 import { 
@@ -41,7 +41,7 @@ export default function OrderConfirmationView() {
       postalCode: "10021",
       country: "United States"
     },
-    paymentMethod: "Credit Card (â€¢â€¢â€¢â€¢ 4242)"
+    paymentMethod: "Credit Card (•••• 4242)"
   };
 
   return (
@@ -53,7 +53,7 @@ export default function OrderConfirmationView() {
         {/* Success header */}
         <div className="text-center space-y-4 mb-12">
           <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-[#43111F] to-[#87344D] flex items-center justify-center text-[#FFFDF8] shadow-2xl animate-in zoom-in duration-300">
-            <img src={Logo} alt="SCENTORA" className="w-14 h-14 object-contain scentora-logo-badge" />
+            <img src={Logo} alt="FK Decore" className="w-14 h-14 object-contain FK Decore-logo-badge" />
           </div>
 
           <div className="space-y-1">
@@ -195,6 +195,13 @@ export default function OrderConfirmationView() {
     </div>
   );
 }
+
+
+
+
+
+
+
 
 
 

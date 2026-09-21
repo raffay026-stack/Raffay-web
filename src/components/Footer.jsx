@@ -1,8 +1,8 @@
-﻿import { Crown } from "lucide-react";
+import { Crown } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ShieldCheck, Truck, RefreshCw, Heart } from "lucide-react";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/fk-logo.jpeg";
 
 export default function Footer() {
   return (
@@ -48,14 +48,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 py-16 border-b border-[#E5D8D0]">
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
-              <img src={Logo} alt="SCENTORA" className="w-8 h-8 rounded-full object-cover scentora-logo-badge" />
-              <span className="font-serif text-lg font-bold tracking-widest text-[#F3EFE6]">SCENTORA</span>
+              <img src={Logo} alt="FK Decore" className="w-8 h-8 rounded-full object-cover FK Decore-logo-badge" />
+              <span className="font-serif text-lg font-bold tracking-widest text-[#F3EFE6]">FK Decore</span>
             </div>
             <p className="text-xs text-[#7C6E72] max-w-sm leading-relaxed font-serif">
               An uncompromising sanctuary for high-end Perfumery connoisseurs. We curate rare elixirs, legendary vintage formulas, and contemporary avant-garde masterpieces.
             </p>
             <div className="pt-2 text-xs text-[#43111F] font-serif tracking-widest">
-              PARIS â€¢ LONDON â€¢ MILAN â€¢ NEW YORK â€¢ TOKYO
+              PARIS • LONDON • MILAN • NEW YORK • TOKYO
             </div>
           </div>
 
@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>© 2026 SCENTORA. All rights reserved.</p>
+          <p>� 2026 FK Decore. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <span className="hover:text-[#43111F] cursor-pointer">Privacy Policy</span>
             <span className="hover:text-[#43111F] cursor-pointer">Terms of Salon</span>
@@ -114,6 +114,13 @@ export default function Footer() {
     </footer>
   );
 }
+
+
+
+
+
+
+
 
 
 

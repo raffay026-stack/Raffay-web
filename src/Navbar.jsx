@@ -1,6 +1,6 @@
-﻿import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import Logo from "./assets/logo.svg";
+import Logo from "./assets/fk-logo.jpeg";
 import { AppContext } from "./AppContext";
 
 const navItems = [
@@ -139,10 +139,10 @@ const Navbar = () => {
             to="/"
             className="group inline-flex items-center gap-3 text-white no-underline"
           >
-            <img src={Logo} alt="Styleora" className="w-10 h-10 rounded-full object-cover scentora-logo-badge" />
+            <img src={Logo} alt="FK Decore" className="w-10 h-10 rounded-full object-cover FK Decore-logo-badge" />
             <div className="flex flex-col leading-none">
               <span className="text-2xl font-semibold uppercase tracking-[0.35em] text-slate-50 transition-colors duration-300 group-hover:text-[#9AE9D8]">
-                ð“¢ð“¬ð“®ð“·ð“½ð“¸ð“»ð“ª
+                𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪
               </span>
               <span className="text-[0.65rem] uppercase tracking-[0.35em] text-slate-400">
                 Maison de Perfume
@@ -453,6 +453,13 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
+
 
 
 

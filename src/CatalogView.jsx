@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppContext from "./AppContext";
 
@@ -90,7 +90,7 @@ const CatalogView = () => {
               <div className="mt-auto flex items-center justify-between">
                 <div className="meta text-xs text-gray-400">
                   <span className="category mr-2">{product.category}</span>
-                  {product.rating && <span className="rating">â˜… {product.rating}</span>}
+                  {product.rating && <span className="rating">★ {product.rating}</span>}
                 </div>
                 <div className="actions flex gap-2">
                   <button onClick={()=>addToCart(product)} className="btn-add px-3 py-2 rounded-lg bg-[#2FB59A] text-white hover:bg-[#46CDB3] font-semibold transform transition hover:scale-105">Add</button>
@@ -125,6 +125,9 @@ const CatalogView = () => {
 }
 
 export default CatalogView;
+
+
+
 
 
 

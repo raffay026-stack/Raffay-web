@@ -1,9 +1,9 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =========================================================
-   SCENTORA CLEAN MASTER THEME
+   FK Decore CLEAN MASTER THEME
    Ivory + Burgundy + Champagne
    ========================================================= */
 
@@ -114,7 +114,7 @@ header nav button:hover {
    Gold icon remains inside SVG
    ========================================================= */
 
-.scentora-logo-badge {
+.FK Decore-logo-badge {
   background:
     radial-gradient(
       circle at 35% 30%,
@@ -141,7 +141,7 @@ main {
   color: var(--sc-text);
 }
 
-section:not(.scentora-cinematic-hero) {
+section:not(.FK Decore-cinematic-hero) {
   background:
     linear-gradient(
       180deg,
@@ -268,7 +268,7 @@ footer a:hover {
    Keep generated perfume image + animation
    ========================================================= */
 
-.scentora-cinematic-hero {
+.FK Decore-cinematic-hero {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -276,7 +276,7 @@ footer a:hover {
   background: #07110F;
 }
 
-.scentora-cinematic-hero::before {
+.FK Decore-cinematic-hero::before {
   content: "";
   position: absolute;
   inset: -6%;
@@ -290,14 +290,14 @@ footer a:hover {
       rgba(23,8,13,.40) 68%,
       rgba(15,5,9,.72) 100%
     ),
-    var(--scentora-hero-image);
+    var(--FK Decore-hero-image);
 
   background-size: cover;
   background-position: center;
-  animation: scentoraHeroMotion 18s ease-in-out infinite alternate;
+  animation: FK DecoreHeroMotion 18s ease-in-out infinite alternate;
 }
 
-.scentora-cinematic-hero::after {
+.FK Decore-cinematic-hero::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -321,36 +321,36 @@ footer a:hover {
       rgba(18,5,10,.58)
     );
 
-  animation: scentoraMist 7s ease-in-out infinite alternate;
+  animation: FK DecoreMist 7s ease-in-out infinite alternate;
 }
 
-.scentora-cinematic-hero > * {
+.FK Decore-cinematic-hero > * {
   position: relative;
   z-index: 2;
 }
 
-.scentora-cinematic-hero h1,
-.scentora-cinematic-hero h2,
-.scentora-cinematic-hero h3 {
+.FK Decore-cinematic-hero h1,
+.FK Decore-cinematic-hero h2,
+.FK Decore-cinematic-hero h3 {
   color: #FFFDF8 !important;
   -webkit-text-fill-color: #FFFDF8 !important;
 }
 
-.scentora-cinematic-hero p {
+.FK Decore-cinematic-hero p {
   color: #F5ECE7 !important;
 }
 
-.scentora-cinematic-hero input {
+.FK Decore-cinematic-hero input {
   background: rgba(18,5,10,.72) !important;
   color: #FFFFFF !important;
   border-color: rgba(255,255,255,.25) !important;
 }
 
-.scentora-cinematic-hero input::placeholder {
+.FK Decore-cinematic-hero input::placeholder {
   color: rgba(255,255,255,.62);
 }
 
-@keyframes scentoraHeroMotion {
+@keyframes FK DecoreHeroMotion {
   0% {
     transform: scale(1.04) translate3d(-1%,0,0);
   }
@@ -364,7 +364,7 @@ footer a:hover {
   }
 }
 
-@keyframes scentoraMist {
+@keyframes FK DecoreMist {
   from {
     opacity: .58;
     filter: blur(0);
@@ -443,8 +443,8 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
 
 /* ===== HERO SEARCH BUTTON FIX ===== */
 
-.scentora-cinematic-hero form button,
-.scentora-cinematic-hero button[type="submit"] {
+.FK Decore-cinematic-hero form button,
+.FK Decore-cinematic-hero button[type="submit"] {
   background:
     linear-gradient(
       135deg,
@@ -463,13 +463,13 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
     0 8px 22px rgba(67,17,31,.24) !important;
 }
 
-.scentora-cinematic-hero form button *,
-.scentora-cinematic-hero button[type="submit"] * {
+.FK Decore-cinematic-hero form button *,
+.FK Decore-cinematic-hero button[type="submit"] * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-.scentora-cinematic-hero form button:hover {
+.FK Decore-cinematic-hero form button:hover {
   background:
     linear-gradient(
       135deg,
@@ -479,9 +479,9 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
 }
 
 
-/* ===== SCENTORA LARGE LUXURY BRAND MARK ===== */
+/* ===== FK Decore LARGE LUXURY BRAND MARK ===== */
 
-header [data-testid="navbar-brand-logo"] img.scentora-logo-badge {
+header [data-testid="navbar-brand-logo"] img.FK Decore-logo-badge {
   width: 64px !important;
   height: 64px !important;
   min-width: 64px !important;
@@ -505,18 +505,18 @@ header [data-testid="navbar-brand-logo"] img.scentora-logo-badge {
 }
 
 /* Generated-reference style hero alignment */
-.scentora-cinematic-hero .max-w-7xl {
+.FK Decore-cinematic-hero .max-w-7xl {
   width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .scentora-cinematic-hero::before {
+  .FK Decore-cinematic-hero::before {
     background-position: center right !important;
   }
 }
 
 
-/* ===== SCENTORA CATALOG FINAL LIGHT FIX ===== */
+/* ===== FK Decore CATALOG FINAL LIGHT FIX ===== */
 
 /* Catalog dark filter/sort/pagination surfaces */
 main aside,
@@ -582,20 +582,20 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 
-/* ===== SCENTORA HERO VIDEO ===== */
+/* ===== FK Decore HERO VIDEO ===== */
 
-.scentora-cinematic-hero::before,
-.scentora-cinematic-hero::after {
+.FK Decore-cinematic-hero::before,
+.FK Decore-cinematic-hero::after {
   display: none !important;
 }
 
-.scentora-hero-video {
+.FK Decore-hero-video {
   z-index: 0 !important;
   object-fit: cover !important;
   object-position: center center !important;
 }
 
-.scentora-hero-video-overlay {
+.FK Decore-hero-video-overlay {
   z-index: 1 !important;
 
   background:
@@ -613,14 +613,14 @@ main article .absolute.inset-x-0.bottom-0 button * {
     ) !important;
 }
 
-.scentora-cinematic-hero > .max-w-7xl {
+.FK Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 2 !important;
 }
 
 /* Keep man more visible on right side */
 @media (min-width: 1024px) {
-  .scentora-hero-video {
+  .FK Decore-hero-video {
     object-position: center center !important;
   }
 }
@@ -628,7 +628,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 /* ===== HERO VIDEO FULL-BLEED FIX ===== */
 
-.scentora-cinematic-hero {
+.FK Decore-cinematic-hero {
   position: relative !important;
   min-height: 640px !important;
   overflow: hidden !important;
@@ -636,7 +636,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Video fills the ENTIRE hero */
-.scentora-cinematic-hero .scentora-hero-video {
+.FK Decore-cinematic-hero .FK Decore-hero-video {
   position: absolute !important;
   inset: 0 !important;
 
@@ -655,7 +655,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Overlay over complete video */
-.scentora-cinematic-hero .scentora-hero-video-overlay {
+.FK Decore-cinematic-hero .FK Decore-hero-video-overlay {
   position: absolute !important;
   inset: 0 !important;
   z-index: 1 !important;
@@ -671,14 +671,14 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Content above video */
-.scentora-cinematic-hero > .max-w-7xl {
+.FK Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 2 !important;
   width: 100% !important;
 }
 
 /* Move hero content to RIGHT like your screenshot */
-.scentora-cinematic-hero > .max-w-7xl > div {
+.FK Decore-cinematic-hero > .max-w-7xl > div {
   margin-left: auto !important;
   margin-right: 0 !important;
   max-width: 580px !important;
@@ -686,15 +686,15 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .scentora-cinematic-hero {
+  .FK Decore-cinematic-hero {
     min-height: 620px !important;
   }
 
-  .scentora-cinematic-hero .scentora-hero-video {
+  .FK Decore-cinematic-hero .FK Decore-hero-video {
     object-position: 42% center !important;
   }
 
-  .scentora-cinematic-hero .scentora-hero-video-overlay {
+  .FK Decore-cinematic-hero .FK Decore-hero-video-overlay {
     background:
       linear-gradient(
         to bottom,
@@ -703,7 +703,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
       ) !important;
   }
 
-  .scentora-cinematic-hero > .max-w-7xl > div {
+  .FK Decore-cinematic-hero > .max-w-7xl > div {
     margin-left: 0 !important;
     max-width: 100% !important;
   }
@@ -711,15 +711,15 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 
 /* =========================================================
-   SCENTORA HOME LUXURY ANIMATIONS
+   FK Decore HOME LUXURY ANIMATIONS
    ========================================================= */
 
 /* Hero content entrance */
-.scentora-cinematic-hero > .max-w-7xl > div {
-  animation: scentoraHeroContentIn 1.15s cubic-bezier(.22,.8,.25,1) both;
+.FK Decore-cinematic-hero > .max-w-7xl > div {
+  animation: FK DecoreHeroContentIn 1.15s cubic-bezier(.22,.8,.25,1) both;
 }
 
-@keyframes scentoraHeroContentIn {
+@keyframes FK DecoreHeroContentIn {
   from {
     opacity: 0;
     transform: translateY(28px);
@@ -731,11 +731,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero badge floating */
-.scentora-cinematic-hero .inline-flex.rounded-full {
-  animation: scentoraBadgeFloat 4.5s ease-in-out infinite;
+.FK Decore-cinematic-hero .inline-flex.rounded-full {
+  animation: FK DecoreBadgeFloat 4.5s ease-in-out infinite;
 }
 
-@keyframes scentoraBadgeFloat {
+@keyframes FK DecoreBadgeFloat {
   0%, 100% {
     transform: translateY(0);
   }
@@ -745,12 +745,12 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero heading subtle cinematic reveal */
-.scentora-cinematic-hero h1 {
-  animation: scentoraTitleReveal 1.3s ease-out both;
+.FK Decore-cinematic-hero h1 {
+  animation: FK DecoreTitleReveal 1.3s ease-out both;
   transform-origin: left center;
 }
 
-@keyframes scentoraTitleReveal {
+@keyframes FK DecoreTitleReveal {
   from {
     opacity: 0;
     transform: translateY(22px) scale(.985);
@@ -764,11 +764,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero paragraph delayed reveal */
-.scentora-cinematic-hero p {
-  animation: scentoraFadeUp 1s .22s ease-out both;
+.FK Decore-cinematic-hero p {
+  animation: FK DecoreFadeUp 1s .22s ease-out both;
 }
 
-@keyframes scentoraFadeUp {
+@keyframes FK DecoreFadeUp {
   from {
     opacity: 0;
     transform: translateY(16px);
@@ -780,11 +780,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Search bar soft breathing glow */
-.scentora-cinematic-hero form {
-  animation: scentoraSearchGlow 4s ease-in-out infinite;
+.FK Decore-cinematic-hero form {
+  animation: FK DecoreSearchGlow 4s ease-in-out infinite;
 }
 
-@keyframes scentoraSearchGlow {
+@keyframes FK DecoreSearchGlow {
   0%, 100% {
     box-shadow: 0 10px 32px rgba(67,17,31,.14);
   }
@@ -796,8 +796,8 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Buttons premium hover */
-.scentora-cinematic-hero button,
-.scentora-cinematic-hero a {
+.FK Decore-cinematic-hero button,
+.FK Decore-cinematic-hero a {
   transition:
     transform .28s ease,
     box-shadow .28s ease,
@@ -805,18 +805,18 @@ main article .absolute.inset-x-0.bottom-0 button * {
     color .28s ease !important;
 }
 
-.scentora-cinematic-hero button:hover,
-.scentora-cinematic-hero a:hover {
+.FK Decore-cinematic-hero button:hover,
+.FK Decore-cinematic-hero a:hover {
   transform: translateY(-3px) scale(1.015);
   box-shadow: 0 14px 28px rgba(67,17,31,.22);
 }
 
 /* Home section headings */
-section:not(.scentora-cinematic-hero) h2 {
-  animation: scentoraSectionTitle 1s ease both;
+section:not(.FK Decore-cinematic-hero) h2 {
+  animation: FK DecoreSectionTitle 1s ease both;
 }
 
-@keyframes scentoraSectionTitle {
+@keyframes FK DecoreSectionTitle {
   from {
     opacity: 0;
     transform: translateY(18px);
@@ -828,34 +828,34 @@ section:not(.scentora-cinematic-hero) h2 {
 }
 
 /* Product cards */
-section:not(.scentora-cinematic-hero) article,
-section:not(.scentora-cinematic-hero) .group {
+section:not(.FK Decore-cinematic-hero) article,
+section:not(.FK Decore-cinematic-hero) .group {
   transition:
     transform .35s cubic-bezier(.2,.8,.2,1),
     box-shadow .35s ease,
     border-color .35s ease !important;
 }
 
-section:not(.scentora-cinematic-hero) article:hover,
-section:not(.scentora-cinematic-hero) .group:hover {
+section:not(.FK Decore-cinematic-hero) article:hover,
+section:not(.FK Decore-cinematic-hero) .group:hover {
   transform: translateY(-8px);
   box-shadow:
     0 18px 42px rgba(67,17,31,.13) !important;
 }
 
 /* Product image zoom */
-section:not(.scentora-cinematic-hero) article img,
-section:not(.scentora-cinematic-hero) .group img {
+section:not(.FK Decore-cinematic-hero) article img,
+section:not(.FK Decore-cinematic-hero) .group img {
   transition: transform .55s cubic-bezier(.2,.8,.2,1) !important;
 }
 
-section:not(.scentora-cinematic-hero) article:hover img,
-section:not(.scentora-cinematic-hero) .group:hover img {
+section:not(.FK Decore-cinematic-hero) article:hover img,
+section:not(.FK Decore-cinematic-hero) .group:hover img {
   transform: scale(1.045);
 }
 
 /* Soft moving light over hero */
-.scentora-cinematic-hero::after {
+.FK Decore-cinematic-hero::after {
   content: "";
   display: block !important;
   position: absolute;
@@ -873,10 +873,10 @@ section:not(.scentora-cinematic-hero) .group:hover img {
     );
 
   transform: translateX(-120%);
-  animation: scentoraHeroShimmer 9s ease-in-out infinite;
+  animation: FK DecoreHeroShimmer 9s ease-in-out infinite;
 }
 
-@keyframes scentoraHeroShimmer {
+@keyframes FK DecoreHeroShimmer {
   0%, 18% {
     transform: translateX(-120%);
   }
@@ -889,7 +889,7 @@ section:not(.scentora-cinematic-hero) .group:hover img {
 }
 
 /* Keep content above shimmer */
-.scentora-cinematic-hero > .max-w-7xl {
+.FK Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 3 !important;
 }
@@ -908,7 +908,7 @@ section:not(.scentora-cinematic-hero) .group:hover img {
 
 
 /* =========================================================
-   SCENTORA ULTRA LUXURY SCROLL REVEAL
+   FK Decore ULTRA LUXURY SCROLL REVEAL
    Cinematic depth + stagger + premium motion
    ========================================================= */
 
@@ -1092,10 +1092,10 @@ section:not(.scentora-cinematic-hero) .group:hover img {
 }
 
 .luxury-reveal.luxury-visible::after {
-  animation: scentoraSectionSweep 1.8s cubic-bezier(.16,1,.3,1) .22s both;
+  animation: FK DecoreSectionSweep 1.8s cubic-bezier(.16,1,.3,1) .22s both;
 }
 
-@keyframes scentoraSectionSweep {
+@keyframes FK DecoreSectionSweep {
   0% {
     transform: translateX(-130%);
     opacity: 0;
@@ -1157,7 +1157,7 @@ section:not(.scentora-cinematic-hero) .group:hover img {
 
 
 /* =========================================================
-   SCENTORA GLOBAL PRODUCT SCROLL ANIMATION
+   FK Decore GLOBAL PRODUCT SCROLL ANIMATION
    Applies to product cards across the whole website
    ========================================================= */
 
@@ -1405,3 +1405,904 @@ section:not(.scentora-cinematic-hero) .group:hover img {
   }
 }
 
+
+
+
+
+
+
+/* FORCE LARGE FK DECORE LOGO */
+header [data-testid="navbar-brand-logo"] img {
+  width: 90px !important;
+  height: 90px !important;
+  min-width: 90px !important;
+  min-height: 90px !important;
+  max-width: 90px !important;
+  max-height: 90px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+/* Give the navbar enough height for the larger logo */
+header [data-testid="navbar-brand-logo"] {
+  min-height: 100px !important;
+}
+
+/* Make logo fill its circular frame */
+header img {
+  object-fit: contain !important;
+  transform: scale(1.35) !important;
+  transform-origin: center !important;
+}
+
+/* Slightly smaller logo circle */
+header img {
+  width: 52px !important;
+  height: 52px !important;
+  transform: none !important;
+  object-fit: contain !important;
+}
+
+/* Zoom logo image inside the existing circle */
+header img {
+  width: 52px !important;
+  height: 52px !important;
+  object-fit: contain !important;
+  transform: scale(1.35) !important;
+  transform-origin: center center !important;
+}
+
+/* FK Decore logo badge - smaller circle */
+header img.FK.Decore-logo-badge {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
+  transform: none !important;
+  object-fit: contain !important;
+}
+
+
+
+/* FK Decore logo badge - smaller circle */
+
+header img.FK.Decore-logo-badge {
+
+  width: 64px !important; 
+
+  height: 64px !important; 
+
+  min-width: 64px !important; 
+
+  min-height: 64px !important; 
+
+  max-width: 64px !important; 
+
+  max-height: 64px !important; 
+
+  transform: none !important;
+
+  object-fit: contain !important;
+
+}
+
+
+
+
+/* FK Decore logo badge - smaller circle */
+
+header img.FK.Decore-logo-badge {
+
+  width: 74px !important; 
+
+  height: 74px !important; 
+
+  min-width: 74px !important; 
+
+  min-height: 74px !important; 
+
+  max-width: 74px !important; 
+
+  max-height: 74px !important; 
+
+  transform: none !important;
+
+  object-fit: contain !important;
+
+}
+
+
+/* Keep the 74px circle fixed; zoom only the logo artwork */
+header img {
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+  max-width: 74px !important;
+  max-height: 74px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* FK Decore navbar logo - same on every page */
+img.Decore-logo-badge {
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+  max-width: 74px !important;
+  max-height: 74px !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+/* Remove background circle behind Order Confirmation logo */
+.order-confirmation-logo {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide circular background behind confirmation-page logo */
+.order-confirmation-logo,
+.order-confirmation-logo::before,
+.order-confirmation-logo::after {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove white background from Order Confirmation center logo */
+main img[src*="fk-logo"] {
+  background: transparent !important;
+  mix-blend-mode: multiply !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Order Confirmation center logo - remove all background */
+main img[src*="fk-logo"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Remove the parent container background behind Order Confirmation logo */
+main div:has(> img[src*="fk-logo"]) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Also handle one extra wrapper level */
+main div:has(> div > img[src*="fk-logo"]) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove only the circular border/background from navbar logo */
+header img.Decore-logo-badge {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Navbar logo size: 80px */
+header img.Decore-logo-badge {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Enlarge the actual FK Decore artwork without enlarging navbar layout */
+header img.Decore-logo-badge {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: contain !important;
+  transform: scale(1.65) !important;
+  transform-origin: center center !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Move logo closer to FK Decore text */
+header img.Decore-logo-badge {
+  margin-right: -12px !important;
+}
+
+/* Slightly larger FK Decore navbar logo */
+header img.Decore-logo-badge {
+  width: 90px !important;
+  height: 90px !important;
+  min-width: 90px !important;
+  min-height: 90px !important;
+  max-width: 90px !important;
+  max-height: 90px !important;
+  object-fit: contain !important;
+  transform: scale(1.65) !important;
+  transform-origin: center center !important;
+  margin-right: -12px !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Enlarge the actual FK logo artwork and raise it slightly */
+header img[src*="fk-logo"] {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  max-width: 80px !important;
+  max-height: 80px !important;
+  object-fit: contain !important;
+  transform: scale(2.0) translateY(-5px) !important;
+  transform-origin: center center !important;
+  margin-right: -20px !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* FK Decore breadcrumb */
+.fk-breadcrumb {
+  width: 100%;
+  padding: 16px 8%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fffaf5;
+  border-top: 1px solid #eaded5;
+  border-bottom: 1px solid #eaded5;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+.fk-breadcrumb a {
+  color: #65152c;
+  text-decoration: none;
+}
+
+.fk-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.fk-breadcrumb span {
+  color: #a88b8b;
+}
+
+.fk-breadcrumb .current {
+  color: #777;
+}
+
+/* FK Decore Breadcrumb Navigation */
+.fk-breadcrumb {
+  width: 100%;
+  padding: 14px 8%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fffdf8;
+  border-top: 1px solid #eaded5;
+  border-bottom: 1px solid #eaded5;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fk-breadcrumb a {
+  color: #6e1f35;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.fk-breadcrumb a:hover {
+  opacity: 0.65;
+}
+
+.fk-breadcrumb span {
+  color: #a88b8b;
+}
+
+
+/* FK Decore - Compact Centered Breadcrumb Navigation */
+.fk-breadcrumb {
+  width: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap;
+  gap: 5px !important;
+  padding: 10px 12px !important;
+  background: #43111F !important;
+  border: none !important;
+  box-sizing: border-box;
+}
+
+.fk-breadcrumb a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px !important;
+  background: #6E1F35 !important;
+  color: #FFFDF8 !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  font-family: Georgia, serif;
+  font-size: 11px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.fk-breadcrumb a:hover {
+  background: #FFFDF8 !important;
+  color: #43111F !important;
+}
+
+.fk-breadcrumb span {
+  color: #E5D8D0 !important;
+  font-size: 12px !important;
+  margin: 0 1px !important;
+}
+
+/* Hide the current-page breadcrumb text if it exists */
+.fk-breadcrumb .current {
+  color: #E5D8D0 !important;
+}
+
+
+/* FK Decore - Full Width Breadcrumb Buttons */
+.fk-breadcrumb {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 10px 10px !important;
+  box-sizing: border-box;
+}
+
+.fk-breadcrumb a {
+  flex: 1 1 0 !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  padding: 10px 8px !important;
+  text-align: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+}
+
+
+/* FK Decore - Diamond Breadcrumb Separators */
+.fk-breadcrumb span {
+  font-size: 0 !important;
+  color: #E5D8D0 !important;
+  margin: 0 2px !important;
+}
+
+.fk-breadcrumb span::after {
+  content: "?";
+  font-size: 10px !important;
+  color: #E5D8D0 !important;
+}
+
+
+/* FK Decore - Proper Diamond Separators */
+.fk-breadcrumb span {
+  font-size: 0 !important;
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  background: #E5D8D0 !important;
+  display: inline-block !important;
+  transform: rotate(45deg) !important;
+  margin: 0 6px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.fk-breadcrumb span::after {
+  content: none !important;
+}
+
+
+.fk-breadcrumb a {
+  font-weight: 700 !important;
+}
+
+
+/* Move About Us to the end */
+.fk-breadcrumb a[href="/about-us"] {
+  order: 5 !important;
+}
+
+.fk-breadcrumb a[href="/hot-articles"] {
+  order: 4 !important;
+}
+
+
+/* Correct navbar order with diamonds */
+.fk-breadcrumb a[href="/sale-products"] { order: 1 !important; }
+.fk-breadcrumb a[href="/categories"] { order: 2 !important; }
+.fk-breadcrumb a[href="/new-arrivals"] { order: 3 !important; }
+.fk-breadcrumb a[href="/hot-articles"] { order: 4 !important; }
+.fk-breadcrumb a[href="/about-us"] { order: 5 !important; }
+
+.fk-breadcrumb span:nth-of-type(1) { order: 1.5 !important; }
+.fk-breadcrumb span:nth-of-type(2) { order: 2.5 !important; }
+.fk-breadcrumb span:nth-of-type(3) { order: 3.5 !important; }
+.fk-breadcrumb span:nth-of-type(4) { order: 4.5 !important; }
+
+
+/* Diamond with every navbar button */
+.fk-breadcrumb span {
+  display: none !important;
+}
+
+.fk-breadcrumb a::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: #E5D8D0;
+  display: inline-block;
+  transform: rotate(45deg);
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.fk-breadcrumb a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+/* Diamonds outside navbar boxes */
+.fk-breadcrumb {
+  gap: 10px !important;
+}
+
+.fk-breadcrumb a::before {
+  display: none !important;
+}
+
+.fk-breadcrumb a::after {
+  content: "?";
+  position: absolute;
+  right: -14px;
+  color: #E5D8D0;
+  font-size: 9px;
+}
+
+.fk-breadcrumb a {
+  position: relative !important;
+}
+
+.fk-breadcrumb a:last-child::after {
+  display: none !important;
+}
+
+
+/* FINAL: Diamonds between boxes */
+.fk-breadcrumb {
+  gap: 16px !important;
+  overflow: visible !important;
+}
+
+.fk-breadcrumb a {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.fk-breadcrumb a::before {
+  display: none !important;
+  content: none !important;
+}
+
+.fk-breadcrumb a::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  width: 7px !important;
+  height: 7px !important;
+  background: #E5D8D0 !important;
+  transform: rotate(45deg) !important;
+  right: -12px !important;
+  top: 50% !important;
+  margin-top: -4px !important;
+  z-index: 20 !important;
+}
+
+.fk-breadcrumb a:last-child::after {
+  display: none !important;
+}
+
+
+/* About Us diamond - move before button only */
+.fk-breadcrumb a[href="/about-us"]::after {
+  display: none !important;
+}
+
+.fk-breadcrumb a[href="/about-us"]::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  width: 7px !important;
+  height: 7px !important;
+  background: #E5D8D0 !important;
+  transform: rotate(45deg) !important;
+  left: -12px !important;
+  top: 50% !important;
+  margin-top: -4px !important;
+  z-index: 20 !important;
+}
+
+
+/* FK Decore Navbar Slide Animation */
+.fk-breadcrumb {
+  animation: fkNavbarSlide 0.8s ease-out both !important;
+  transform-origin: center;
+}
+
+@keyframes fkNavbarSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Continuous Navbar Sliding */
+.fk-breadcrumb {
+  animation: fkContinuousSlide 4s ease-in-out infinite alternate !important;
+  will-change: transform;
+}
+
+@keyframes fkContinuousSlide {
+  0% {
+    transform: translateX(-25px);
+  }
+  100% {
+    transform: translateX(25px);
+  }
+}
+
+
+/* Smooth Continuous Loop Motion */
+.fk-breadcrumb {
+  animation: fkSmoothLoop 3s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+@keyframes fkSmoothLoop {
+  0% {
+    transform: translateX(-18px);
+  }
+  50% {
+    transform: translateX(18px);
+  }
+  100% {
+    transform: translateX(-18px);
+  }
+}
+
+
+/* Disable navbar sliding */
+.fk-breadcrumb {
+  animation: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+
+/* FK Decore Navbar Slide Animation */
+.fk-breadcrumb {
+  animation: fkNavbarSlide 0.8s ease-out both !important;
+  transform-origin: center;
+}
+
+@keyframes fkNavbarSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* FK Decore - Navbar Entrance Animation */
+.fk-breadcrumb {
+  animation: fkNavbarEntrance 1s cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes fkNavbarEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-35px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* FK Decore - Single Centered Decor Button */
+.fk-breadcrumb + * {}
+
+.fk-breadcrumb ~ * {}
+
+button,
+a {
+  transition: all 0.3s ease;
+}
+
+
+/* FK Decore - Explore All Decor Hero Button */
+.fk-explore-decor-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 360px !important;
+  height: 58px !important;
+  margin: 25px auto 0 !important;
+  background: #6E1F35 !important;
+  color: #FFFDF8 !important;
+  border: 1px solid #8B3A50 !important;
+  border-radius: 4px !important;
+  font-family: Georgia, serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 12px rgba(67,17,31,0.20);
+  transition: all 0.3s ease !important;
+}
+
+.fk-explore-decor-btn:hover {
+  background: #43111F !important;
+  color: #FFFDF8 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(67,17,31,0.28);
+}
+
+.fk-explore-decor-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+
+/* ===== FK DECOR HERO 16:9 VIDEO RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* Mobile: keep enough height for hero content */
+@media (max-width: 768px) {
+  .FK.Decore-cinematic-hero {
+    min-height: 620px !important;
+    aspect-ratio: auto !important;
+  }
+}
+
+/* ===== FK DECOR HERO - SMALLER VIDEO RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 21 / 8 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: 600px !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:2 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:1 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:2 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:1.5 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 1.5 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:2 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 2.5:1 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 2.5 / 1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 2.4:1 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 2.4 / 1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:0.8 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 0.8 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* ===== FK DECOR HERO - 3:0.9 RATIO ===== */
+@media (min-width: 769px) {
+  .FK.Decore-cinematic-hero {
+    aspect-ratio: 3 / 0.9 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .FK.Decore-cinematic-hero .FK.Decore-hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}

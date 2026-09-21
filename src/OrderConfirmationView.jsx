@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -36,7 +36,7 @@ export default function OrderConfirmationView() {
       postalCode: "10021",
       country: "Pakistan"
     },
-    paymentMethod: "Credit Card (â€¢â€¢â€¢â€¢ 4242)"
+    paymentMethod: "Credit Card (•••• 4242)"
   };
 
   return (
@@ -188,6 +188,9 @@ export default function OrderConfirmationView() {
     </div>
   );
 }
+
+
+
 
 
 

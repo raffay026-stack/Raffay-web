@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { 
@@ -36,17 +36,17 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           
           {/* Brand Logo */}
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-2 group" data-testid="navbar-brand-logo">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-[#D4AF37]/20 group-hover:scale-105 transition-transform">
-                <Crown className="w-6 h-6 fill-current text-[#0A0A0A]" />
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-[#D4AF37]/20 group-hover:scale-105 transition-transform">
+                <Crown className="w-9 h-9 fill-current text-[#0A0A0A]" />
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-xl font-bold tracking-widest bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent">
-                  L'Ã‰LIXIR NOIR
+                  L'ÉLIXIR NOIR
                 </span>
                 <span className="text-[9px] tracking-[0.25em] text-[#C5A059] uppercase">Haute Parfumerie</span>
               </div>
@@ -155,7 +155,7 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
               className="md:hidden p-2 text-neutral-300 hover:text-[#D4AF37]"
               data-testid="mobile-menu-toggle"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-9 h-9" /> : <Menu className="w-9 h-9" />}
             </button>
           </div>
         </div>
@@ -214,5 +214,6 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
     </header>
   );
 }
+
 
 

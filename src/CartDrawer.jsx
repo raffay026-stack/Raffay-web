@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AppContext from './AppContext'
 
@@ -165,6 +165,9 @@ const CartDrawer = (props) => {
 }
 
 export default CartDrawer
+
+
+
 
 
 

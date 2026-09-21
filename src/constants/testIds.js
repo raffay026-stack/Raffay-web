@@ -1,4 +1,4 @@
-﻿export const AUTH = {
+export const AUTH = {
   loginBtn: "login-submit-btn",
   signupBtn: "signup-submit-btn",
   logoutBtn: "logout-nav-btn",
@@ -65,6 +65,9 @@ export const QUIZ = {
   submitBtn: "quiz-submit-btn",
   restartBtn: "quiz-restart-btn",
 };
+
+
+
 
 
 

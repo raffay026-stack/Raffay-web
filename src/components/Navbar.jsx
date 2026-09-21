@@ -12,11 +12,11 @@ import {
   PackageCheck,
   LogOut
 } from "lucide-react";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/fk-logo.jpeg";
 import { useState } from "react";
 import { CART, HOME } from "../constants/testIds";
 
-export default function Navbar({ onOpenCart, onOpenQuiz }) {
+export default function Navbar({ onOpenCart }) {
   const { user, cart, wishlist, logoutUser } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -41,10 +41,10 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
           {/* Brand Logo */}
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-4 group" data-testid="navbar-brand-logo">
-              <img src={Logo} alt="Styleora" className="w-16 h-16 object-contain group-hover:scale-105 transition-transform scentora-logo-badge" />
+              <img src={Logo} alt="FK Decore" className="w-16 h-16 object-contain group-hover:scale-105 transition-transform FK Decore-logo-badge" />
               <div className="flex flex-col">
-                <span className="text-3xl font-bold tracking-[0.16em] bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#87344D] bg-clip-text text-transparent" style={{ fontFamily: "Didot, Bodoni 72, Bodoni MT, Times New Roman, serif" }}>SCENTORA</span>
-                <span className="text-[10px] tracking-[0.32em] font-semibold text-[#6E1F35] uppercase">Haute Perfumeerie</span>
+                <span className="text-4xl font-bold tracking-[0.16em] bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#87344D] bg-clip-text text-transparent" style={{ fontFamily: "Didot, Bodoni 72, Bodoni MT, Times New Roman, serif" }}>FK Decore</span>
+                <span className="text-sm tracking-[0.18em] font-semibold text-[#6E1F35] text-center">Come first  Get first</span>
               </div>
             </Link>
           </div>
@@ -65,14 +65,7 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
             >
               Collection (100)
             </Link>
-            <button 
-              onClick={() => onOpenQuiz?.()} 
-              className="text-[#5D5054] hover:text-[#6E1F35] transition-colors flex items-center gap-1.5"
-              data-testid={HOME.quizCta}
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#6E1F35]" />
-              <span>Style Profiler Quiz</span>
-            </button>
+            <Link to="/new-arrivals" className={`transition-colors hover:text-[#6E1F35] ${isActive('/new-arrivals') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}>New Arrivals</Link>
             <Link 
               to="/orders" 
               className={`transition-colors hover:text-[#6E1F35] ${isActive('/orders') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}
@@ -174,13 +167,7 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
           >
             Collection (100)
           </Link>
-          <button 
-            onClick={() => { setMobileMenuOpen(false); onOpenQuiz?.(); }}
-            className="w-full text-left text-[#2D2326] hover:text-[#6E1F35] font-serif py-2 border-b border-[#E5D8D0] flex items-center gap-2"
-          >
-            <Sparkles className="w-4 h-4 text-[#6E1F35]" />
-            <span>Style Profiler Quiz</span>
-          </button>
+          <Link to="/new-arrivals" onClick={() => setMobileMenuOpen(false)} className="block text-[#2D2326] hover:text-[#43111F] font-serif py-2 border-b border-[#E5D8D0]">New Arrivals</Link>
           <Link 
             to="/orders" 
             onClick={() => setMobileMenuOpen(false)}
@@ -210,6 +197,18 @@ export default function Navbar({ onOpenCart, onOpenQuiz }) {
     </header>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

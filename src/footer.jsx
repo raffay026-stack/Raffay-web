@@ -1,6 +1,6 @@
-﻿import React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import Logo from './assets/logo.svg'
+import Logo from './assets/fk-logo.jpeg'
 
 export default function Footer() {
   return (
@@ -10,11 +10,11 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand */}
             <div className="flex flex-col space-y-4">
-              <h2 className="text-2xl md:text-3xl font-serif tracking-wide text-[#9AE9D8]">ð“¢ð“¬ð“®ð“·ð“½ð“¸ð“»ð“ª</h2>
+              <h2 className="text-2xl md:text-3xl font-serif tracking-wide text-[#9AE9D8]">𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪</h2>
               <p className="text-sm text-[#D8FFF5]/70 max-w-xs">A curated house of fine Perfumes crafting timeless styles for the discerning. Discover compositions that linger like a memory.</p>
                 <div className="flex items-center space-x-3 mt-2">
-                  <img src={Logo} alt="Styleora" className="w-12 h-12 rounded-full object-cover shadow-sm scentora-logo-badge" />
-                  <div className="text-xs text-[#9AE9D8]/60">Â© {new Date().getFullYear()} Styleora</div>
+                  <img src={Logo} alt="FK Decore" className="w-12 h-12 rounded-full object-cover shadow-sm FK Decore-logo-badge" />
+                  <div className="text-xs text-[#9AE9D8]/60">© {new Date().getFullYear()} FK Decore</div>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-8 border-t border-[rgba(255,215,170,0.06)] pt-6 flex flex-col sm:flex-row items-center justify-between text-sm text-[#D8FFF5]/60">
-            <div className="mb-3 sm:mb-0">Made with care Â· Luxury styles worldwide</div>
+            <div className="mb-3 sm:mb-0">Made with care · Luxury styles worldwide</div>
             <div className="flex items-center space-x-4">
               <Link to="/privacy" className="hover:text-[#9AE9D8] transition">Privacy</Link>
               <Link to="/shipping" className="hover:text-[#9AE9D8] transition">Shipping</Link>
@@ -80,6 +80,13 @@ export default function Footer() {
     </footer>
   )
 }
+
+
+
+
+
+
+
 
 
 

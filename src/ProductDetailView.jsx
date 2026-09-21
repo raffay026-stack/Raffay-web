@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from './AppContext';
 
@@ -29,7 +29,7 @@ const ProductDetailView = () => {
   return (
     <div className="product-detail-root max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="back mb-6">
-        <button onClick={() => navigate(-1)} className="text-sm text-gray-300 hover:text-white transition">â† Back to catalog</button>
+        <button onClick={() => navigate(-1)} className="text-sm text-gray-300 hover:text-white transition">← Back to catalog</button>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10 items-start">
@@ -80,7 +80,7 @@ const ProductDetailView = () => {
 
             <div className="controls flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="qty inline-flex items-center bg-black/40 border border-gray-800 rounded-lg p-1">
-                <button onClick={decrease} className="px-3 py-2 text-lg text-white/90 hover:text-[#9AE9D8] transition">âˆ’</button>
+                <button onClick={decrease} className="px-3 py-2 text-lg text-white/90 hover:text-[#9AE9D8] transition">−</button>
                 <div className="px-5 text-lg font-medium">{qty}</div>
                 <button onClick={increase} className="px-3 py-2 text-lg text-white/90 hover:text-[#9AE9D8] transition">+</button>
               </div>
@@ -107,6 +107,9 @@ const ProductDetailView = () => {
 };
 
 export default ProductDetailView;
+
+
+
 
 
 

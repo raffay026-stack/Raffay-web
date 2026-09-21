@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import AppContext from "./AppContext";
 
 const CheckoutView = () => {
@@ -557,6 +557,9 @@ const CheckoutView = () => {
 };
 
 export default CheckoutView;
+
+
+
 
 
 

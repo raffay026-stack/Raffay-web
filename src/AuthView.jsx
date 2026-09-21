@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -12,7 +12,7 @@ export default function AuthView() {
 
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("alexander@lixirnoir.com");
-  const [password, setPassword] = useState("â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢");
+  const [password, setPassword] = useState("••••••••");
   const [name, setName] = useState("Alexander Wright");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -124,7 +124,7 @@ export default function AuthView() {
           {/* Toggle login/signup */}
           <div className="text-center pt-4 border-t border-neutral-800 text-xs font-serif">
             <span className="text-neutral-400">
-              {isLogin ? "New to ð“¢ð“¬ð“®ð“·ð“½ð“¸ð“»ð“ª?" : "Already a connoisseur?"}
+              {isLogin ? "New to 𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪?" : "Already a connoisseur?"}
             </span>{" "}
             <button
               onClick={() => setIsLogin(!isLogin)}
@@ -142,6 +142,9 @@ export default function AuthView() {
     </div>
   );
 }
+
+
+
 
 
 

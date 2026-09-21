@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
-  <title id="title">Scentora Emblem</title>
+  <title id="title">FK Decore Emblem</title>
   <circle cx="60" cy="60" r="56" fill="#241522" stroke="#8C5F6D" stroke-width="2" />
   <g transform="translate(60,58)">
     <path d="M0 -20 C8 -12 18 -8 12 4 C6 18 -6 24 -12 18 C-18 12 -8 2 0 -4" fill="none" stroke="#F2E9E1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -7,3 +7,7 @@
   </g>
   <text x="60" y="106" font-family="Inter, serif" font-size="9" fill="#F2E9E1" text-anchor="middle">MAISON DE PARFUM</text>
 </svg>
+
+
+
+

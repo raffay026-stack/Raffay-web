@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { INITIAL_PERFUMES, INITIAL_ORDERS } from "../mock";
 import { toast } from "sonner";
 
@@ -167,6 +167,9 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
+
+
 
 
 
