@@ -2639,3 +2639,47 @@ body {
     height: 17px !important;
   }
 }
+@media (max-width: 768px) {
+  .Decore-cinematic-hero {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background: #000 !important;
+  }
+
+  .Decore-hero-video {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}
+@media (max-width: 768px) {
+  .Decore-cinematic-hero {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background: #000 !important;
+  }
+
+  .Decore-hero-video {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: none !important;
+  }
+}
