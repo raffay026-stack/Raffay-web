@@ -2511,3 +2511,131 @@ body {
 /* FK DECOR RESPONSIVE */
 @media (min-width: 769px) { .Decore-cinematic-hero { aspect-ratio: 3 / 0.9 !important; min-height: 0 !important; height: auto !important; } .Decore-hero-video { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; } }
 @media (max-width: 768px) { .Decore-cinematic-hero { width: 100% !important; min-height: 620px !important; height: auto !important; aspect-ratio: auto !important; overflow: hidden !important; } .Decore-hero-video { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; } .Decore-cinematic-hero > .max-w-7xl { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; } .Decore-cinematic-hero h1 { font-size: clamp(34px,10vw,52px) !important; line-height: 1.05 !important; } .Decore-cinematic-hero p { font-size: 15px !important; line-height: 1.6 !important; } .fk-explore-decor-btn { width: 100% !important; max-width: 100% !important; } .fk-breadcrumb { width: 100% !important; overflow-x: auto !important; white-space: nowrap !important; } .fk-breadcrumb a { flex: 0 0 auto !important; } }
+
+/* =========================================================
+   FK DECOR - MOBILE NAVBAR FIX
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* Announcement bar */
+  header > div:first-child {
+    font-size: 8px !important;
+    line-height: 1.3 !important;
+    letter-spacing: .08em !important;
+    padding: 6px 10px !important;
+    min-height: 30px !important;
+  }
+
+  header > div:first-child svg {
+    width: 11px !important;
+    height: 11px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Main navbar container */
+  header > div:nth-child(2) {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  header > div:nth-child(2) > div {
+    height: 70px !important;
+    min-height: 70px !important;
+  }
+
+  /* Logo area */
+  header a[data-testid="navbar-brand-logo"] {
+    gap: 8px !important;
+  }
+
+  header a[data-testid="navbar-brand-logo"] img {
+    width: 46px !important;
+    height: 46px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* FK Decore text */
+  header a[data-testid="navbar-brand-logo"] span:first-child {
+    font-size: 21px !important;
+    letter-spacing: .08em !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Tagline */
+  header a[data-testid="navbar-brand-logo"] span:last-child {
+    font-size: 7px !important;
+    letter-spacing: .10em !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Action icons */
+  header > div:nth-child(2) > div > div:last-child {
+    gap: 2px !important;
+    margin-left: 6px !important;
+    flex-shrink: 0 !important;
+  }
+
+  header > div:nth-child(2) > div > div:last-child > button {
+    padding: 7px !important;
+  }
+
+  header > div:nth-child(2) > div > div:last-child > button svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  /* Cart */
+  header > div:nth-child(2) > div > div:last-child > button[data-testid="cart-drawer-btn"] {
+    padding: 8px !important;
+  }
+
+  /* Mobile menu icon */
+  header button[data-testid="mobile-menu-toggle"] {
+    padding: 7px !important;
+    margin-left: 1px !important;
+  }
+
+  header button[data-testid="mobile-menu-toggle"] svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  /* Mobile dropdown */
+  header > div.md\:hidden {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+}
+
+/* Very small phones */
+@media (max-width: 390px) {
+
+  header a[data-testid="navbar-brand-logo"] img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  header a[data-testid="navbar-brand-logo"] span:first-child {
+    font-size: 18px !important;
+  }
+
+  header a[data-testid="navbar-brand-logo"] span:last-child {
+    font-size: 6px !important;
+  }
+
+  header > div:nth-child(2) > div > div:last-child > button {
+    padding: 5px !important;
+  }
+
+  header > div:nth-child(2) > div > div:last-child > button svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+}
