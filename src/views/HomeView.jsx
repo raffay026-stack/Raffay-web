@@ -76,7 +76,7 @@ export default function HomeView() {
           playsInline
           preload="auto"
         >
-          <source src="/WhatsApp%20Video%202026-09-21%20at%209.05.41%20PM.mp4" type="video/mp4" />
+          <source src="/InShot_20260921_223258666.mp4" type="video/mp4" />
         </video>
 
         <div className="FK Decore-hero-video-overlay absolute inset-0 pointer-events-none" />
@@ -278,6 +278,7 @@ export default function HomeView() {
     </div>
   );
 }
+
 
 
 
