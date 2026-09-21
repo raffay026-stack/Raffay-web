@@ -85,51 +85,8 @@ export default function HomeView() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-left max-w-2xl mr-auto space-y-6 py-20">
-            
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F3E8E1] border border-[#6E1F35]/40 text-[#6E1F35] text-xs uppercase tracking-[0.25em] shadow-lg">
-              <Crown className="w-4 h-4 text-[#6E1F35]" />
-              <span>PREMIUM HOME DECOR</span>
-            </div>
-
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#43111F] bg-clip-text text-transparent font-serif leading-tight">
-              Elevate Your Space
-            </h1>
-
-            <p className="text-base sm:text-lg text-[#F5ECE7] font-serif max-w-xl leading-relaxed">
-              Discover elegant decor pieces designed to bring beauty, warmth, and character to every corner of your home.
-            </p>
 
             {/* Quick search input */}
-            <form onSubmit={handleQuickSearchSubmit} className="max-w-2xl mt-7 flex gap-2 p-2 bg-[#FFFDF8]/90 border border-[#6E1F35]/40 rounded-lg shadow-2xl backdrop-blur-md">
-              <div className="flex items-center pl-3 text-[#6E1F35]">
-                <Search className="w-5 h-5" />
-              </div>
-              <input 
-                type="text"
-                placeholder="Search decor pieces by name, category, color, or style..."
-                value={quickSearch}
-                onChange={(e) => setQuickSearch(e.target.value)}
-                className="flex-1 bg-transparent border-none text-[#2D2326] text-xs sm:text-sm font-serif focus:outline-none px-2"
-                data-testid={CATALOG.searchInput}
-              />
-              <button 
-                type="submit"
-                className="px-7 py-3 bg-gradient-to-r from-[#43111F] to-[#6E1F35] text-white font-serif text-xs font-bold uppercase tracking-widest rounded hover:from-[#6E1F35] hover:to-[#87344D] transition-all shadow-md whitespace-nowrap"
-                data-testid={HOME.heroCta}
-              >
-                Explore Catalog
-              </button>
-            </form>
-
-            <div className="flex flex-wrap items-center justify-start gap-4 pt-4">
-              <Link 
-                to="/catalog"
-                className="fk-explore-decor-btn"
-              >
-                <span>EXPLORE ALL DECOR</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
 
           </div>
         </div>
@@ -321,6 +278,8 @@ export default function HomeView() {
     </div>
   );
 }
+
+
 
 
 
