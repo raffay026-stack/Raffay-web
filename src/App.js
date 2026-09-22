@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+﻿import React, { useEffect } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { Toaster } from "sonner";
 
 import HomeView from "./views/HomeView";
+import NewArrivalsView from "./views/NewArrivalsView";
+import CategoryView from "./views/CategoryView";
+import SaleProductsView from "./views/SaleProductsView";
 import CatalogView from "./views/CatalogView";
 import ProductDetailView from "./views/ProductDetailView";
 import CheckoutView from "./views/CheckoutView";
@@ -87,13 +90,16 @@ function App() {
         <div className="min-h-screen bg-[#FFFDF8] text-[#2D2326] flex flex-col justify-between selection:bg-[#6E1F35] selection:text-white">
           <Routes>
             <Route path="/" element={<HomeView />} />
+            <Route path="/new-arrivals" element={<NewArrivalsView />} />
+            <Route path="/sale-products" element={<SaleProductsView />} />
             <Route path="/catalog" element={<CatalogView />} />
+            <Route path="/category/:slug" element={<CategoryView />} />
             <Route path="/Perfume/:id" element={<ProductDetailView />} />
             <Route path="/checkout" element={<CheckoutView />} />
             <Route path="/order-confirmation/:id" element={<OrderConfirmationView />} />
             <Route path="/orders" element={<MyOrdersView />} />
             <Route path="/auth" element={<AuthView />} />
-          </Routes>
+                  <Route path="/about-us" element={<AboutUsView />} />      </Routes>
           <Toaster richColors position="top-right" theme="light" />
         </div>
       </BrowserRouter>
@@ -123,4 +129,10 @@ export default App;
 
 
 
+
+
+
+
+
+import AboutUsView from "./views/AboutUsView";
 
