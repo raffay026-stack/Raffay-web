@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -47,8 +47,8 @@ export default function HomeView() {
     return () => observer.disconnect();
   }, []);
 
-  const featuredOuds = products.filter(p => p.isRoyalOud || p.category === "Graphic Tees").slice(0, 4);
-  const bestsellers = products.filter(p => p.isBestseller).slice(0, 4);
+  const featuredOuds = products.filter(p => p.isRoyalOud || p.category === "Graphic Tees").slice( 0, 8 );
+  const bestsellers = products.filter(p => p.isBestseller).slice( 0, 8 );
 
   const displayedPerfumes = activeTab === "summer" ? featuredOuds : bestsellers;
 
@@ -68,16 +68,21 @@ export default function HomeView() {
       {/* Hero Section */}
       <section className="FK Decore-cinematic-hero relative overflow-hidden min-h-[640px] flex items-center border-b border-[#6E1F35]/20">
 
-        <video
-          className="FK Decore-hero-video absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src="/WhatsApp%20Video%202026-09-21%20at%2010.34.19%20PM.mp4" type="video/mp4" />
-        </video>
+                <div className="Decore-hero-slider absolute inset-0">
+          <div className="Decore-desktop-slides">
+            <img src="/hero-desktop1.jpg" alt="FK Decore" />
+            <img src="/hero-desktop2.jpg" alt="FK Decore" />
+            <img src="/hero-desktop3.jpg" alt="FK Decore" />
+            <img src="/hero-desktop4.jpg" alt="FK Decore" />
+          </div>
+
+          <div className="Decore-mobile-slides">
+            <img src="/hero-mobile1.jpg" alt="FK Decore" />
+            <img src="/hero-mobile2.jpg" alt="FK Decore" />
+            <img src="/hero-mobile3.jpg" alt="FK Decore" />
+            <img src="/hero-mobile4.jpg" alt="FK Decore" />
+          </div>
+        </div>
 
         <div className="FK Decore-hero-video-overlay absolute inset-0 pointer-events-none" />
         {/* Background glow effects */}
@@ -95,38 +100,21 @@ export default function HomeView() {
       {/* Featured Showcase Tabs */}
             <nav className="fk-breadcrumb" aria-label="Main navigation">
         <a href="/sale-products">Sale Products</a>
-        <span>�</span>
+        <span>›</span>
         <a href="/categories">Categories</a>
-        <span>�</span>
+        <span>›</span>
         <a href="/new-arrivals">New Arrivals</a>
-        <span>�</span>
+        <span>›</span>
         <a href="/about-us">About Us</a>
-        <span>�</span>
+        <span>›</span>
         <a href="/hot-articles">Hot Articles</a>
       </nav>
 
       <section className="luxury-reveal py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-[#E5D8D0] pb-6">
           <div>
-            <span className="text-xs text-[#6E1F35] uppercase tracking-widest font-serif">Curated Masterpieces</span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#43111F] mt-1">Exclusive Selections</h2>
-          </div>
-
-          <div className="flex gap-2 mt-4 md:mt-0">
-            <button
-              onClick={() => setActiveTab("royal")}
-              className={`px-5 py-2 rounded font-serif text-xs uppercase tracking-widest transition-all ${activeTab === 'royal' ? 'bg-[#6E1F35] text-[#FFFDF8] font-bold shadow-lg' : 'bg-[#FFFDF8] text-[#7C6E72] border border-[#6E1F35]/30 hover:border-[#6E1F35]'}`}
-              data-testid={HOME.royalOudTab}
-            >
-              Summer Collection Series
-            </button>
-            <button
-              onClick={() => setActiveTab("bestseller")}
-              className={`px-5 py-2 rounded font-serif text-xs uppercase tracking-widest transition-all ${activeTab === 'bestseller' ? 'bg-[#6E1F35] text-[#FFFDF8] font-bold shadow-lg' : 'bg-[#FFFDF8] text-[#7C6E72] border border-[#6E1F35]/30 hover:border-[#6E1F35]'}`}
-              data-testid={HOME.bestsellersTab}
-            >
-              Connoisseur Bestsellers
-            </button>
+            <span className="text-xs text-[#6E1F35] uppercase tracking-widest font-serif">Sale's Products</span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#43111F] mt-1">Sale's Products</h2>
           </div>
         </div>
 
@@ -209,75 +197,402 @@ export default function HomeView() {
             );
           })}
         </div>
-
-        <div className="text-center mt-12">
-          <button
-            onClick={() => navigate('/catalog')}
-            className="px-8 py-3.5 bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#43111F] text-[#FFFDF8] font-serif text-xs font-bold uppercase tracking-widest rounded shadow-2xl hover:opacity-95 transition-all inline-flex items-center gap-2 group"
-          >
-            <span>Explore Full Catalog of 100 Perfumes</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
       </section>
 
-      {/* Brand Heritage Banner */}
-      <section className="luxury-reveal py-24 border-y border-[#6E1F35]/30 bg-gradient-to-r from-[#FFFDF8] via-[#F3E8E1] to-[#FFFDF8] my-12 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 text-[#6E1F35] font-serif text-xs tracking-widest uppercase">
-                <Sparkles className="w-4 h-4" />
-                <span>The Art of Extrait de Perfume</span>
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#43111F] leading-tight">
-                Handcrafted in Grasse & Aged in French Oak Casks
-              </h2>
-              <p className="text-sm sm:text-base text-[#5D5054] font-serif leading-relaxed">
-                Every flacon of 𝓢𝓬𝓮𝓷𝓽𝓸𝓻𝓪 undergoes a meticulous 6-month maceration process. Our master Perfumers blend rare essential oils with pristine botanical alcohol, creating an opulent sillage that develops exquisitely on the skin over 24 hours.
-              </p>
-              <div className="grid grid-cols-3 gap-6 pt-4 border-t border-[#E5D8D0] font-serif">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-[#6E1F35]">100</div>
-                  <div className="text-xs text-[#7C6E72] mt-1 uppercase tracking-wider">Curated Flacons</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-[#6E1F35]">25+</div>
-                  <div className="text-xs text-[#7C6E72] mt-1 uppercase tracking-wider">Years Aged Oud</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-[#6E1F35]">100%</div>
-                  <div className="text-xs text-[#7C6E72] mt-1 uppercase tracking-wider">Authentic Noses</div>
-                </div>
-              </div>
-            </div>
+      {/* Categories Section */}
+      <section className="py-16 sm:py-20 bg-[#F7F1EC] border-y border-[#6E1F35]/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-lg overflow-hidden border border-[#6E1F35]/40 shadow-2xl relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1000&q=80" 
-                  alt="Luxury Perfume Atelier" 
-                  className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF8]/60 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] text-[#6E1F35] uppercase tracking-widest font-serif block">Private Reserve</span>
-                  <h4 className="font-serif text-lg font-bold text-white">The Connoisseur's Vault</h4>
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
+              Explore
+            </p>
+
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
+              Categories
+            </h2>
+
+            <p className="mt-3 text-gray-600">
+              Explore decor categories
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+
+            {[
+              ["Oud & Woody", "oud-woody", "/hero-desktop1.jpg"],
+              ["Oriental Spice", "oriental-spice", "/hero-desktop2.jpg"],
+              ["Floral", "floral", "/hero-desktop3.jpg"],
+              ["Citrus Fresh", "citrus-fresh", "/hero-desktop4.jpg"],
+              ["Fresh Spicy", "fresh-spicy", "/hero-desktop1.jpg"],
+              ["Sensual Floral", "sensual-floral", "/hero-desktop2.jpg"],
+              ["Gourmand Amber", "gourmand-amber", "/hero-desktop3.jpg"],
+              ["Aquatic & Fresh", "aquatic-fresh", "/hero-desktop4.jpg"]
+            ].map(([name, slug, image]) => (
+              <button
+                key={slug}
+                onClick={() => navigate(`/category/${slug}`)}
+                className="group text-left bg-[#FFFDF8] border border-[#6E1F35]/15 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              >
+
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={image}
+                    alt={name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-              </div>
-            </div>
+
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-serif text-lg sm:text-xl text-[#43111F]">
+                    {name}
+                  </h3>
+
+                  <p className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35]">
+                    Explore Collection →
+                  </p>
+                </div>
+
+              </button>
+            ))}
 
           </div>
         </div>
       </section>
+      {/* All Products Section */}
+      <section className="py-14 sm:py-20 bg-[#FFFDF8] border-b border-[#6E1F35]/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+          <div className="text-center mb-8 sm:mb-10">
+            <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
+              Complete Collection
+            </p>
+
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
+              All Products
+            </h2>
+
+            <p className="mt-3 text-gray-600">
+              Discover all products in decoration collection
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate("/catalog")}
+            className="group block w-full max-w-5xl mx-auto bg-[#F7F1EC] border border-[#6E1F35]/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 text-left"
+          >
+
+            <div className="grid md:grid-cols-2">
+
+              <div className="aspect-[16/9] md:aspect-auto overflow-hidden">
+                <img
+                  src="/hero-desktop4.jpg"
+                  alt="All Products"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center items-center text-center p-7 sm:p-10 md:p-14">
+
+                <p className="uppercase tracking-[0.25em] text-sm text-[#6E1F35] mb-3">
+                  FK Decore
+                </p>
+
+                <h3 className="font-serif text-3xl sm:text-4xl text-[#43111F] mb-4">
+                  All Products
+                </h3>
+
+                <p className="text-gray-600 leading-7 max-w-md mb-7">
+                  Tap here to view all products
+                </p>
+
+                <span className="inline-flex items-center px-7 py-3.5 bg-[#43111F] text-white rounded-lg group-hover:bg-[#6E1F35] transition">
+                  View All Products →
+                </span>
+
+              </div>
+
+            </div>
+
+          </button>
+
+        </div>
+      </section>
+      {/* Hot Arrivals Section */}
+      <section id="hot-arrivals" className="py-16 sm:py-20 bg-[#FFFDF8] border-y border-[#6E1F35]/10">
+
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
+
+          <div className="text-center mb-10 sm:mb-14">
+
+            <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
+              ✦ HOT ARRIVALS ✦
+            </p>
+
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
+              Most Demanding Products
+            </h2>
+
+            <div className="w-28 h-px bg-[#6E1F35] mx-auto mt-5 mb-5"></div>
+
+            <p className="text-gray-600 text-base sm:text-lg">
+              Be the first to get these hot articles
+            </p>
+
+          </div>
+
+
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-3 sm:gap-4">
+
+            {products.slice(0, 8).map((product) => (
+
+              <div
+                key={product.id}
+                className="group bg-[#F7F1EC] border border-[#6E1F35]/15 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              >
+
+                <div
+                  className="relative aspect-[3/4] overflow-hidden cursor-pointer"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  <span className="absolute top-3 left-3 bg-[#FFFDF8] text-[#6E1F35] text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-md border border-[#6E1F35]/15">
+                    NEW
+                  </span>
+
+                  <button
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/95 flex items-center justify-center text-[#6E1F35] shadow-sm hover:bg-[#6E1F35] hover:text-white transition"
+                    aria-label="Add to wishlist"
+                  >
+                    ♡
+                  </button>
+
+                </div>
+
+
+                <div className="p-3 sm:p-4">
+
+                  <div className="flex items-center justify-between gap-2">
+
+                    <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#6E1F35] font-semibold truncate">
+                      {product.brand || "FK DECORE"}
+                    </p>
+
+                    <span className="text-xs text-[#6E1F35] whitespace-nowrap">
+                      ★ {product.rating || "4.9"}
+                    </span>
+
+                  </div>
+
+
+                  <h3
+                    className="font-serif text-base sm:text-lg text-[#43111F] mt-2 cursor-pointer line-clamp-1"
+                    onClick={() => navigate(`/product/${product.id}`)}
+                  >
+                    {product.name}
+                  </h3>
+
+
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2 line-clamp-2 min-h-[32px]">
+                    {product.description || "A refined fragrance crafted for an unforgettable impression."}
+                  </p>
+
+
+                  <div className="border-t border-[#6E1F35]/10 mt-4 pt-3 flex items-end justify-between gap-2">
+
+                    <div>
+                      <p className="uppercase text-[9px] tracking-widest text-gray-500">
+                        Price
+                      </p>
+
+                      <p className="font-serif text-base sm:text-lg font-semibold text-[#6E1F35]">
+                        ${product.price}
+                      </p>
+                    </div>
+
+
+                    <button
+                      onClick={() => navigate(`/product/${product.id}`)}
+                      className="px-3 sm:px-4 py-2 bg-[#43111F] text-white rounded-md text-xs sm:text-sm font-semibold hover:bg-[#6E1F35] transition"
+                    >
+                      🛍 ADD
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+
+          <div className="text-center mt-10 sm:mt-12">
+
+            <button
+              onClick={() => navigate("/catalog")}
+              className="px-7 sm:px-10 py-3.5 bg-[#43111F] text-white rounded-lg font-semibold tracking-wider hover:bg-[#6E1F35] transition"
+            >
+              VIEW ALL HOT ARRIVALS →
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
 
       <Footer />
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      {/* FK Decore Contact Footer */}
+      <footer className="bg-[#43111F] text-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
+
+            <div>
+              <h3 className="font-serif text-2xl mb-3">
+                FK Decore
+              </h3>
+
+              <p className="text-white/70 text-sm leading-6">
+                Discover beautiful decor and premium collections.
+              </p>
+            </div>
+
+
+            {/* Social Swipe Cards */}
+            <div>
+              <h4 className="uppercase tracking-[0.2em] text-sm mb-5">
+                Follow Us
+              </h4>
+
+              <div className="flex justify-center gap-3">
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/fk_decore/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-swipe-card group"
+                >
+                  <div className="social-swipe-logo instagram-logo">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="w-7 h-7"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="5"/>
+                      <circle cx="12" cy="12" r="4"/>
+                      <circle cx="17.5" cy="6.5" r="1"/>
+                    </svg>
+
+                  </div>
+
+                  <div className="social-swipe-info">
+                    <span>Instagram</span>
+                    <small>@fk_decore</small>
+                  </div>
+                </a>
+
+
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/FKDecorCollection/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-swipe-card group"
+                >
+                  <div className="social-swipe-logo facebook-logo">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-7 h-7"
+                    >
+                      <path d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v3H6v4h3v8h4v-8h3.2l.8-4H13V9c0-.7.3-1 1-1Z"/>
+                    </svg>
+
+                  </div>
+
+                  <div className="social-swipe-info">
+                    <span>Facebook</span>
+                    <small>FK Decor Collection</small>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
+
+            <div>
+              <h4 className="uppercase tracking-[0.2em] text-sm mb-5">
+                Contact Us
+              </h4>
+
+              <a
+  href="https://wa.me/923356066069"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="social-swipe-card group mx-auto"
+>
+  <div className="social-swipe-logo whatsapp-logo">
+
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-7 h-7"
+    >
+      <path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.46 0 .1 5.35.1 11.94c0 2.1.55 4.15 1.6 5.96L0 24l6.25-1.64a11.9 11.9 0 0 0 5.78 1.48h.01c6.58 0 11.94-5.36 11.94-11.94 0-3.19-1.24-6.18-3.48-8.4ZM12.04 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.71.97.99-3.62-.23-.37a9.86 9.86 0 1 1 8.35 4.61Zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+    </svg>
+
+  </div>
+
+  <div className="social-swipe-info">
+    <span>WhatsApp</span>
+    <small>0335 6066069</small>
+  </div>
+</a>
+            </div>
+
+          </div>
+
+          <div className="border-t border-white/15 mt-10 pt-6 text-center">
+            <p className="text-white/50 text-xs sm:text-sm">
+              © {new Date().getFullYear()} FK Decore. All Rights Reserved.
+            </p>
+          </div>
+
+        </div>
+      </footer>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

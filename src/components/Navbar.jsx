@@ -31,7 +31,7 @@ export default function Navbar({ onOpenCart }) {
       {/* Top announcement bar */}
       <div className="bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#43111F] text-white text-xs py-1.5 px-4 text-center tracking-widest uppercase font-serif flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-white" />
-        <span>Complimentary 24K Gold Gift Wrapped Delivery on Orders Exceeding $300</span>
+        <span>We deal in all type of Interior & Exterior Decor</span>
         <Sparkles className="w-3.5 h-3.5 text-white" />
       </div>
 
@@ -65,7 +65,7 @@ export default function Navbar({ onOpenCart }) {
             >
               Collection (100)
             </Link>
-            <Link to="/new-arrivals" className={`transition-colors hover:text-[#6E1F35] ${isActive('/new-arrivals') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}>New Arrivals</Link>
+            <Link to="/#hot-arrivals" className={`transition-colors hover:text-[#6E1F35] ${isActive('/new-arrivals') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}>New Arrivals</Link>
             <Link 
               to="/orders" 
               className={`transition-colors hover:text-[#6E1F35] ${isActive('/orders') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}
@@ -167,7 +167,7 @@ export default function Navbar({ onOpenCart }) {
           >
             Collection (100)
           </Link>
-          <Link to="/new-arrivals" onClick={() => setMobileMenuOpen(false)} className="block text-[#2D2326] hover:text-[#43111F] font-serif py-2 border-b border-[#E5D8D0]">New Arrivals</Link>
+          <Link to="/#hot-arrivals" onClick={() => setMobileMenuOpen(false)} className="block text-[#2D2326] hover:text-[#43111F] font-serif py-2 border-b border-[#E5D8D0]">New Arrivals</Link>
           <Link 
             to="/orders" 
             onClick={() => setMobileMenuOpen(false)}
@@ -197,6 +197,10 @@ export default function Navbar({ onOpenCart }) {
     </header>
   );
 }
+
+
+
+
 
 
 

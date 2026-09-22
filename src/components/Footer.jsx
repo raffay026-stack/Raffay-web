@@ -1,4 +1,4 @@
-import { Crown } from "lucide-react";
+﻿import { Crown } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ShieldCheck, Truck, RefreshCw, Heart } from "lucide-react";
@@ -55,7 +55,7 @@ export default function Footer() {
               An uncompromising sanctuary for high-end Perfumery connoisseurs. We curate rare elixirs, legendary vintage formulas, and contemporary avant-garde masterpieces.
             </p>
             <div className="pt-2 text-xs text-[#43111F] font-serif tracking-widest">
-              PARIS • LONDON • MILAN • NEW YORK • TOKYO
+              PARIS â€¢ LONDON â€¢ MILAN â€¢ NEW YORK â€¢ TOKYO
             </div>
           </div>
 
@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>� 2026 FK Decore. All rights reserved.</p>
+          <p>© 2026 FK Decore. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <span className="hover:text-[#43111F] cursor-pointer">Privacy Policy</span>
             <span className="hover:text-[#43111F] cursor-pointer">Terms of Salon</span>
@@ -114,6 +114,7 @@ export default function Footer() {
     </footer>
   );
 }
+
 
 
 
