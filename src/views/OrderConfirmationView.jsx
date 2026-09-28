@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -19,30 +19,39 @@ import { ORDERS } from "../constants/testIds";
 
 export default function OrderConfirmationView() {
   const { id } = useParams();
-  const { orders } = useApp();
+  const { orders, ordersLoading, refreshOrders } = useApp();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);  const order = orders.find(o => o.id === id) || null;
 
-  const order = orders.find(o => o.id === id) || orders[0] || {
-    id: id || "ORD-98421",
-    date: new Date().toISOString().split("T")[0],
-    status: "Processing",
-    items: [],
-    subtotal: 395,
-    shipping: 0,
-    tax: 31.60,
-    discount: 0,
-    grandTotal: 426.60,
-    shippingAddress: {
-      fullName: "Alexander Wright",
-      address: "742 Evergreen Terrace, Suite 400",
-      city: "New York",
-      postalCode: "10021",
-      country: "United States"
-    },
-    paymentMethod: "Credit Card (•••• 4242)"
-  };
+  useEffect(() => {
+    refreshOrders().catch((error) => console.error("Unable to load order confirmation:", error));
+  }, [id]);
+
+  if (!order && ordersLoading) {
+    return <div className="min-h-screen bg-[#FFFDF8] px-4 py-24 text-center text-sm text-[#7C6E72]">Loading order...</div>;
+  }
+
+  if (!order) {
+    return (
+      <div className="min-h-screen bg-[#FFFDF8] text-[#2D2326] font-serif flex items-center justify-center px-4">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-[#6E1F35]">
+            Order Not Found
+          </h1>
+          <p className="mt-2 text-sm text-[#7C6E72]">
+            No order details are available for this confirmation.
+          </p>
+          <button
+            onClick={() => navigate("/")}
+            className="mt-5 px-5 py-2.5 bg-[#6E1F35] text-white rounded"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FFFDF8] text-[#2D2326] font-serif selection:bg-[#43111F] selection:text-[#FFFDF8]">
@@ -52,17 +61,15 @@ export default function OrderConfirmationView() {
         
         {/* Success header */}
         <div className="text-center space-y-4 mb-12">
-          <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-[#43111F] to-[#87344D] flex items-center justify-center text-[#FFFDF8] shadow-2xl animate-in zoom-in duration-300">
-            <img src={Logo} alt="FK Decore" className="w-14 h-14 object-contain FK Decore-logo-badge" />
-          </div>
+          <div className="w-20 h-20 mx-auto rounded-full from-[#43111F] to-[#87344D] flex items-center justify-center text-[#FFFDF8] shadow-2xl animate-in zoom-in duration-300"> <img src={Logo} alt="FK Decore" className="w-14 h-14 object-contain FK Decore-logo-badge" /> </div>
 
           <div className="space-y-1">
             <span className="text-xs text-[#43111F] uppercase tracking-[0.25em]">Welcome to Our Private Salon</span>
-            <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#F3EFE6]">
+            <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#6E1F35]">
               Order Successfully Placed
             </h1>
             <p className="text-xs text-[#7C6E72] max-w-md mx-auto">
-              Your order <span className="text-[#43111F] font-bold">#{order.id}</span> has been received and is currently being prepared by our master bottlers.
+              Your order <span className="text-[#43111F] font-bold">#{order.orderNumber || order.id}</span> has been received. Current status: <strong>{order.status}</strong>.
             </p>
           </div>
         </div>
@@ -76,7 +83,7 @@ export default function OrderConfirmationView() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 border-b border-[#E5D8D0] gap-4">
             <div>
               <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Order Identifier</span>
-              <span className="text-lg font-bold text-[#43111F]">#{order.id}</span>
+              <span className="text-lg font-bold text-[#43111F]">#{order.orderNumber || order.id}</span>
             </div>
             <div>
               <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Date Placed</span>
@@ -113,56 +120,37 @@ export default function OrderConfirmationView() {
               </span>
               <div className="text-[#5D5054] space-y-0.5">
                 <div className="font-bold text-[#2D2326]">{order.paymentMethod}</div>
-                <div className="text-green-400">Status: Verified & Secured</div>
+                
               </div>
             </div>
           </div>
 
           {/* Items Table */}
-          <div className="space-y-4">
-            <h4 className="text-xs text-[#43111F] uppercase tracking-wider font-bold">Flacons Included in Order</h4>
-            <div className="space-y-3">
-              {order.items?.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 rounded bg-[#FFFDF8] border border-[#43111F]/20">
-                  <div className="flex items-center gap-3">
-                    <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded border border-[#43111F]/30" />
-                    <div>
-                      <div className="text-[10px] text-[#43111F] uppercase tracking-wider">{item.brand}</div>
-                      <div className="font-serif text-xs font-medium text-[#2D2326]">{item.name}</div>
-                      <div className="text-[11px] text-[#7C6E72]">Size: {item.selectedSize} | Qty: {item.quantity}</div>
-                    </div>
-                  </div>
-                  <div className="font-serif text-sm font-bold text-[#43111F]">
-                    ${item.price * item.quantity}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          
 
           {/* Totals Summary */}
           <div className="space-y-2 text-xs font-serif text-[#7C6E72] pt-4 border-t border-[#E5D8D0]">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span className="text-[#2D2326]">${order.subtotal?.toFixed(2)}</span>
+              <span className="text-[#2D2326]">PKR {order.subtotal?.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span>Insured Shipping</span>
-              <span className="text-[#2D2326]">{order.shipping === 0 ? "FREE" : `$${order.shipping?.toFixed(2)}`}</span>
+              <span className="text-[#2D2326]">{order.shipping === 0 ? "FREE" : `PKR ${order.shipping?.toFixed(2)}`}</span>
             </div>
             <div className="flex justify-between">
               <span>Tax (8%)</span>
-              <span className="text-[#2D2326]">${order.tax?.toFixed(2)}</span>
+              <span className="text-[#2D2326]">PKR {order.tax?.toFixed(2)}</span>
             </div>
             {order.discount > 0 && (
               <div className="flex justify-between text-[#43111F]">
                 <span>Privilege Discount</span>
-                <span>-${order.discount?.toFixed(2)}</span>
+                <span>-PKR {order.discount?.toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between text-base font-bold text-[#43111F] pt-3 border-t border-[#E5D8D0]">
               <span>Grand Total</span>
-              <span>${order.grandTotal?.toFixed(2)}</span>
+              <span>PKR {order.grandTotal?.toFixed(2)}</span>
             </div>
           </div>
 

@@ -17,7 +17,7 @@ import {
 import { ORDERS } from "../constants/testIds";
 
 export default function MyOrdersView() {
-  const { orders } = useApp();
+  const { orders, ordersLoading } = useApp();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function MyOrdersView() {
 
   const filteredOrders = orders.filter(o => {
     if (selectedStatus === "all") return true;
-    return o.status.toLowerCase() === selectedStatus.toLowerCase();
+    return String(o.status || "Pending").toLowerCase() === selectedStatus.toLowerCase();
   });
 
   return (
@@ -59,14 +59,16 @@ export default function MyOrdersView() {
           </div>
         </div>
 
-        {filteredOrders.length === 0 ? (
+        {ordersLoading ? (
+          <div className="py-20 text-center text-sm text-[#7C6E72]">Loading your orders...</div>
+        ) : filteredOrders.length === 0 ? (
           <div className="text-center py-24 bg-[#FFFFFF] border border-[#43111F]/20 rounded-lg space-y-4">
             <div className="w-16 h-16 mx-auto rounded-full bg-[#F7F1EC] border border-[#43111F]/30 flex items-center justify-center text-[#43111F]">
               <Package className="w-8 h-8 opacity-60" />
             </div>
             <h4 className="font-serif text-lg text-[#5D5054]">No Orders Found</h4>
             <p className="text-xs text-[#8A7A80] max-w-xs mx-auto font-serif">
-              You have no orders matching this status. Explore our 100 luxury Perfumes to make your first acquisition.
+              You have no orders matching this status. Browse the FK Decore collection to place an order.
             </p>
             <button
               onClick={() => navigate("/catalog")}
@@ -87,7 +89,7 @@ export default function MyOrdersView() {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b border-[#E5D8D0] gap-4">
                   <div className="space-y-1">
                     <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest">Order Identifier</span>
-                    <h3 className="text-lg font-bold text-[#43111F]">#{order.id}</h3>
+                    <h3 className="text-lg font-bold text-[#43111F]">#{order.orderNumber || order.id}</h3>
                     <div className="text-xs text-[#7C6E72]">Placed on {order.date}</div>
                   </div>
 
@@ -121,7 +123,7 @@ export default function MyOrdersView() {
                         <div className="font-serif text-xs font-medium text-[#2D2326] line-clamp-1">{item.name}</div>
                         <div className="text-[10px] text-[#7C6E72]">Size: {item.selectedSize} × {item.quantity}</div>
                       </div>
-                      <div className="font-serif text-xs font-bold text-[#43111F]">${item.price * item.quantity}</div>
+                      <div className="font-serif text-xs font-bold text-[#43111F]">PKR {item.price * item.quantity}</div>
                     </div>
                   ))}
                 </div>
@@ -132,7 +134,7 @@ export default function MyOrdersView() {
                     Shipping to: <span className="text-[#2D2326]">{order.shippingAddress?.fullName}, {order.shippingAddress?.city}</span>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-[#7C6E72]">Grand Total: <strong className="text-[#43111F] text-sm">${order.grandTotal?.toFixed(2)}</strong></span>
+                    <span className="text-[#7C6E72]">Grand Total: <strong className="text-[#43111F] text-sm">PKR {order.grandTotal?.toFixed(2)}</strong></span>
                   </div>
                 </div>
 

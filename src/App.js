@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
@@ -14,6 +14,13 @@ import CheckoutView from "./views/CheckoutView";
 import OrderConfirmationView from "./views/OrderConfirmationView";
 import MyOrdersView from "./views/MyOrdersView";
 import AuthView from "./views/AuthView";
+import AdminLoginView from "./views/AdminLoginView";
+import AdminDashboardView from "./views/AdminDashboardView";
+import AdminProductsView from "./views/AdminProductsView";
+import AdminOrdersView from "./views/AdminOrdersView";
+import AdminCustomersView from "./views/AdminCustomersView";
+import AdminSettingsView from "./views/AdminSettingsView";
+import AdminLayout from "./components/AdminLayout";
 
 function App() {
 
@@ -99,6 +106,14 @@ function App() {
             <Route path="/order-confirmation/:id" element={<OrderConfirmationView />} />
             <Route path="/orders" element={<MyOrdersView />} />
             <Route path="/auth" element={<AuthView />} />
+            <Route path="/admin" element={<AdminLoginView />} />
+            <Route element={<AdminLayout />}>
+              <Route path="/admin/dashboard" element={<AdminDashboardView />} />
+              <Route path="/admin/products" element={<AdminProductsView />} />
+              <Route path="/admin/orders" element={<AdminOrdersView />} />
+              <Route path="/admin/customers" element={<AdminCustomersView />} />
+              <Route path="/admin/settings" element={<AdminSettingsView />} />
+            </Route>
                   <Route path="/about-us" element={<AboutUsView />} />      </Routes>
           <Toaster richColors position="top-right" theme="light" />
         </div>

@@ -62,7 +62,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                 </div>
                 <h4 className="font-serif text-lg text-[#5D5054]">Your Cart is Empty</h4>
                 <p className="text-xs text-[#8A7A80] max-w-xs mx-auto font-serif">
-                  Explore our 100 luxury Perfumes to discover your signature style.
+                  Explore our beautiful decoration collection to discover the perfect pieces for your space.
                 </p>
                 <button
                   onClick={() => { onClose(); navigate("/catalog"); }}
@@ -86,7 +86,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <span className="text-[10px] text-[#43111F] uppercase tracking-widest font-serif">{item.brand}</span>
-                      <h5 className="font-serif text-sm font-medium text-[#2D2326] line-clamp-1">{item.name}</h5>
+                      <h5 className="font-serif text-sm font-medium text-[#6E1F35] line-clamp-1">{item.name}</h5>
                       <div className="text-xs text-[#7C6E72] mt-0.5 font-serif">Size: <span className="text-[#43111F]">{item.selectedSize}</span></div>
                     </div>
                     
@@ -110,7 +110,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                       </div>
 
                       <span className="font-serif text-sm font-semibold text-[#43111F]">
-                        ${item.price * item.quantity}
+                        PKR {item.price * item.quantity}
                       </span>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ export default function CartDrawer({ isOpen, onClose }) {
 
           {/* Footer & Checkout calculation summary */}
           {cart.length > 0 && (
-            <div className="p-6 border-t border-[#43111F]/20 bg-[#120F0A] space-y-4">
+            <div className="p-6 border-t border-[#43111F]/20 bg-[#FFFDF8] space-y-4">
               
               {/* Promo input */}
               <div className="flex gap-2">
@@ -144,7 +144,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                 />
                 <button 
                   onClick={() => applyPromoCode(localPromo)}
-                  className="px-4 py-2 bg-[#6E1F35] border border-[#6E1F35]/50 text-[#6E1F35] font-serif text-xs uppercase rounded hover:bg-[#6E1F35] hover:text-[#6E1F35] transition-all"
+                  className="px-4 py-2 bg-[#6E1F35] border border-[#6E1F35] text-white font-serif text-xs uppercase rounded hover:bg-[#43111F] hover:text-white transition-all"
                   data-testid={CART.applyPromo}
                 >
                   Apply
@@ -154,38 +154,38 @@ export default function CartDrawer({ isOpen, onClose }) {
               <div className="space-y-1.5 text-xs font-serif text-[#7C6E72] pt-2 border-t border-[#E5D8D0]">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="text-[#2D2326]">${subtotal.toFixed(2)}</span>
+                  <span className="text-[#2D2326]">PKR {subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Insured Courier Shipping {subtotal > 300 && "(Free over $300)"}</span>
-                  <span className="text-[#2D2326]">{shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</span>
+                  <span>Insured Courier Shipping {subtotal > 300 && "(Free over PKR 300)"}</span>
+                  <span className="text-[#2D2326]">{shipping === 0 ? "FREE" : `PKR ${shipping.toFixed(2)}`}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Estimated Tax (8%)</span>
-                  <span className="text-[#2D2326]">${tax.toFixed(2)}</span>
+                  <span className="text-[#2D2326]">PKR {tax.toFixed(2)}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-[#43111F]">
                     <span>Privilege Discount ({promoCode})</span>
-                    <span>-${discountAmount.toFixed(2)}</span>
+                    <span>-PKR {discountAmount.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-base font-bold text-[#43111F] pt-2 border-t border-[#E5D8D0]">
                   <span>Grand Total</span>
-                  <span>${grandTotal.toFixed(2)}</span>
+                  <span>PKR {grandTotal.toFixed(2)}</span>
                 </div>
               </div>
 
               <button 
                 onClick={() => { onClose(); navigate("/checkout"); }}
-                className="w-full py-3 bg-gradient-to-r from-[#6E1F35] to-[#6E1F35] text-[#6E1F35] font-serif text-xs font-bold uppercase tracking-widest rounded shadow-xl hover:opacity-95 transition-all flex items-center justify-center gap-2 group"
+                className="w-full py-3 bg-gradient-to-r from-[#43111F] to-[#6E1F35] text-white font-serif text-xs font-bold uppercase tracking-widest rounded shadow-xl hover:opacity-95 transition-all flex items-center justify-center gap-2 group"
                 data-testid={CART.checkoutBtn}
               >
                 <span>Proceed to Secure Checkout</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[10px] text-[#8A7A80] font-serif pt-1">
+              <div className="flex items-center justify-center gap-2 text-[10px] text-[#7C6E72] font-serif pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#43111F]" />
                 <span>256-Bit Encrypted High-End Checkout</span>
               </div>
@@ -197,6 +197,8 @@ export default function CartDrawer({ isOpen, onClose }) {
     </div>
   );
 }
+
+
 
 
 

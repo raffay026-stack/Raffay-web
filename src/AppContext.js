@@ -7,7 +7,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("lixir_user");
-    return saved ? JSON.parse(saved) : { name: "Alexander Wright", email: "alexander@lixirnoir.com", role: "Connoisseur VIP" };
+    return saved ? JSON.parse(saved) : { name: "", email: "alexander@lixirnoir.com", role: "Connoisseur VIP" };
   });
 
   const [products, setProducts] = useState(INITIAL_PERFUMES);

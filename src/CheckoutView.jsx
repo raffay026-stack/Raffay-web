@@ -43,12 +43,14 @@ const CheckoutView = () => {
     city: savedCustomer.city || "",
     postalCode: savedCustomer.postalCode || savedCustomer.zip || "",
     country: savedCustomer.country || "",
-    paymentMethod: appContext.defaultPaymentMethod || "card",
+    paymentMethod: appContext.defaultPaymentMethod || "cash",
     notes: "",
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+  const [paymentScreenshot, setPaymentScreenshot] = useState(null);
 
   const formatPrice = (value) => {
     const amount = Number(value);
@@ -99,6 +101,14 @@ const CheckoutView = () => {
     if (!formFields.paymentMethod.trim()) {
       nextErrors.paymentMethod = "Select a payment method.";
     }
+
+    if (
+      (formFields.paymentMethod === "jazzcash" ||
+        formFields.paymentMethod === "easypaisa") &&
+      !transactionId.trim()
+    ) {
+      nextErrors.transactionId = "Transaction ID is required.";
+    }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -124,6 +134,18 @@ const CheckoutView = () => {
         country: formFields.country,
       },
       paymentMethod: formFields.paymentMethod,
+      transactionId:
+        formFields.paymentMethod === "jazzcash" ||
+        formFields.paymentMethod === "easypaisa"
+          ? transactionId
+          : "",
+      paymentScreenshot:
+        formFields.paymentMethod === "jazzcash" ||
+        formFields.paymentMethod === "easypaisa"
+          ? paymentScreenshot?.name || ""
+          : "",
+      paymentStatus:
+        formFields.paymentMethod === "cash" ? "pending" : "verification_pending",
       notes: formFields.notes,
       items: cartItems,
       totals: {
@@ -165,14 +187,19 @@ const CheckoutView = () => {
 
   const paymentOptions = [
     {
-      id: "card",
-      label: "Credit / Debit card",
-      description: "Secure payment with encrypted card authorization.",
+      id: "jazzcash",
+      label: "JazzCash",
+      description: "Pay through JazzCash and submit your transaction details.",
+    },
+    {
+      id: "easypaisa",
+      label: "Easypaisa",
+      description: "Pay through Easypaisa and submit your transaction details.",
     },
     {
       id: "cash",
       label: "Cash on Delivery",
-      description: "Pay when your fragrance arrives at your door.",
+      description: "Pay when your order arrives at your door.",
     },
   ];
 
@@ -184,10 +211,10 @@ const CheckoutView = () => {
             Luxury Checkout
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-slate-100 sm:text-4xl">
-            Secure your signature fragrance
+            Complete your order
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base">
-            Review your order details and submit with confidence. Every detail is curated for a premium Perfume experience.
+            Review your order details and submit with confidence. Every detail is curated for a premium home decor experience.
           </p>
         </div>
 
@@ -431,7 +458,7 @@ const CheckoutView = () => {
                     onChange={handleChange("notes")}
                     rows={4}
                     className="mt-3 w-full rounded-3xl border border-slate-700/90 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition duration-200 placeholder:text-slate-500 focus:border-[#2FB59A]/80 focus:ring-2 focus:ring-[#2FB59A]/20"
-                    placeholder="Special delivery instructions or fragrance preferences"
+                    placeholder="Special delivery instructions or special product preferences"
                   />
                 </label>
               </div>
@@ -557,6 +584,7 @@ const CheckoutView = () => {
 };
 
 export default CheckoutView;
+
 
 
 

@@ -119,7 +119,7 @@ export default function StyleQuizModal({ isOpen, onClose }) {
                   <img src={product.image} alt={product.name} className="w-full h-28 object-cover rounded mb-2 border border-[#080809]/20" />
                   <span className="text-[9px] text-[#080809] uppercase tracking-wider font-serif">{product.brand}</span>
                   <h5 className="font-serif text-xs font-medium text-neutral-200 line-clamp-1 group-hover:text-[#080809]">{product.name}</h5>
-                  <div className="text-xs font-bold text-[#080809] mt-1">${product.price}</div>
+                  <div className="text-xs font-bold text-[#080809] mt-1">PKR {product.price}</div>
                 </div>
               ))}
             </div>

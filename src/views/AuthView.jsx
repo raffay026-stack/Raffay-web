@@ -17,7 +17,7 @@ export default function AuthView() {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [email, setEmail] = useState("alexander@lixirnoir.com");
   const [password, setPassword] = useState("••••••••");
-  const [name, setName] = useState("Alexander Wright");
+  const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {

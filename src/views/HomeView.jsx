@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -16,11 +16,11 @@ import {
   Search
 } from "lucide-react";
 import { HOME, CATALOG } from "../constants/testIds";
+import { PRODUCT_CATEGORIES, normalizeProductCategory } from "../constants/productCategories";
 
 export default function HomeView() {
   const { products, addToCart, wishlist, toggleWishlist } = useApp();
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("summer");
   const [quickSearch, setQuickSearch] = useState("");
   const navigate = useNavigate();
 
@@ -47,10 +47,10 @@ export default function HomeView() {
     return () => observer.disconnect();
   }, []);
 
-  const featuredOuds = products.filter(p => p.isRoyalOud || p.category === "Graphic Tees").slice( 0, 8 );
-  const bestsellers = products.filter(p => p.isBestseller).slice( 0, 8 );
-
-  const displayedPerfumes = activeTab === "summer" ? featuredOuds : bestsellers;
+  const saleProducts = products.filter((product) => product.isSale);
+  const displayedSaleProducts = saleProducts.slice(0, 8);
+  const hotArticles = products.filter((product) => product.isHotArticle);
+  const displayedHotArticles = hotArticles.slice(0, 8);
 
   const handleQuickSearchSubmit = (e) => {
     e.preventDefault();
@@ -101,13 +101,13 @@ export default function HomeView() {
             <nav className="fk-breadcrumb" aria-label="Main navigation">
         <a href="/sale-products">Sale Products</a>
         <span>›</span>
-        <a href="/categories">Categories</a>
+        <a href="/#categories">Categories</a>
         <span>›</span>
         <a href="/new-arrivals">New Arrivals</a>
         <span>›</span>
         <a href="/about-us">About Us</a>
         <span>›</span>
-        <a href="/hot-articles">Hot Articles</a>
+        <a href="/#hot-arrivals">Hot Articles</a>
       </nav>
 
       <section className="luxury-reveal py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,12 +115,13 @@ export default function HomeView() {
           <div>
             <span className="text-xs text-[#6E1F35] uppercase tracking-widest font-serif">Sale's Products</span>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#43111F] mt-1">Sale's Products</h2>
+            <p className="mt-2 text-sm text-[#7C6E72]">{saleProducts.length} products on sale</p>
           </div>
         </div>
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {displayedPerfumes.map((product) => {
+          {displayedSaleProducts.map((product) => {
             const isWishlisted = wishlist.includes(product.id);
             return (
               <div 
@@ -134,9 +135,6 @@ export default function HomeView() {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                   />
-                  <div className="absolute top-3 left-3 bg-[#FFFDF8]/80 border border-[#6E1F35]/40 px-2.5 py-1 rounded text-[10px] text-[#6E1F35] font-serif uppercase tracking-widest">
-                    {product.category}
-                  </div>
                   
                   <button 
                     onClick={() => toggleWishlist(product.id)}
@@ -180,7 +178,7 @@ export default function HomeView() {
                   <div className="flex items-center justify-between pt-3 border-t border-[#E5D8D0]">
                     <div>
                       <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Price</span>
-                      <span className="font-serif text-base font-bold text-[#6E1F35]">${product.price}</span>
+                      <span className="font-serif text-base font-bold text-[#6E1F35]">PKR {product.price}</span>
                     </div>
 
                     <button
@@ -200,7 +198,7 @@ export default function HomeView() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 sm:py-20 bg-[#F7F1EC] border-y border-[#6E1F35]/10">
+      <section id="categories" className="py-16 sm:py-20 bg-[#F7F1EC] border-y border-[#6E1F35]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
           <div className="text-center mb-10 sm:mb-14">
@@ -219,16 +217,7 @@ export default function HomeView() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
 
-            {[
-              ["Oud & Woody", "oud-woody", "/hero-desktop1.jpg"],
-              ["Oriental Spice", "oriental-spice", "/hero-desktop2.jpg"],
-              ["Floral", "floral", "/hero-desktop3.jpg"],
-              ["Citrus Fresh", "citrus-fresh", "/hero-desktop4.jpg"],
-              ["Fresh Spicy", "fresh-spicy", "/hero-desktop1.jpg"],
-              ["Sensual Floral", "sensual-floral", "/hero-desktop2.jpg"],
-              ["Gourmand Amber", "gourmand-amber", "/hero-desktop3.jpg"],
-              ["Aquatic & Fresh", "aquatic-fresh", "/hero-desktop4.jpg"]
-            ].map(([name, slug, image]) => (
+            {PRODUCT_CATEGORIES.map(({ name, slug, image, imagePosition }) => (
               <button
                 key={slug}
                 onClick={() => navigate(`/category/${slug}`)}
@@ -239,6 +228,7 @@ export default function HomeView() {
                   <img
                     src={image}
                     alt={name}
+                    style={{ objectPosition: imagePosition || "center" }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -247,6 +237,10 @@ export default function HomeView() {
                   <h3 className="font-serif text-lg sm:text-xl text-[#43111F]">
                     {name}
                   </h3>
+
+                  <p className="mt-2 text-xs text-[#7C6E72]">
+                    {products.filter((product) => normalizeProductCategory(product.category) === name).length} products
+                  </p>
 
                   <p className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35]">
                     Explore Collection →
@@ -338,13 +332,14 @@ export default function HomeView() {
             <p className="text-gray-600 text-base sm:text-lg">
               Be the first to get these hot articles
             </p>
+            <p className="mt-2 text-sm text-[#7C6E72]">{hotArticles.length} hot articles</p>
 
           </div>
 
 
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-3 sm:gap-4">
 
-            {products.slice(0, 8).map((product) => (
+            {displayedHotArticles.map((product) => (
 
               <div
                 key={product.id}
@@ -413,7 +408,7 @@ export default function HomeView() {
                       </p>
 
                       <p className="font-serif text-base sm:text-lg font-semibold text-[#6E1F35]">
-                        ${product.price}
+                        PKR {product.price}
                       </p>
                     </div>
 
@@ -422,7 +417,7 @@ export default function HomeView() {
                       onClick={() => navigate(`/product/${product.id}`)}
                       className="px-3 sm:px-4 py-2 bg-[#43111F] text-white rounded-md text-xs sm:text-sm font-semibold hover:bg-[#6E1F35] transition"
                     >
-                      🛍 ADD
+                      ðŸ› ADD
                     </button>
 
                   </div>
@@ -582,6 +577,9 @@ export default function HomeView() {
     </div>
   );
 }
+
+
+
 
 
 

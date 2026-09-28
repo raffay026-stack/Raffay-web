@@ -1154,6 +1154,176 @@ section:not(.FK Decore-cinematic-hero) .group:hover img {
   }
 }
 
+/* =========================================================
+   PREMIUM MOTION SYSTEM
+   ========================================================= */
+
+:root {
+  --luxury-ease: cubic-bezier(.22, 1, .36, 1);
+  --luxury-duration: 560ms;
+}
+
+header {
+  animation: luxury-header-in 700ms var(--luxury-ease) both;
+}
+
+header > div:first-child {
+  animation: luxury-announcement-in 800ms var(--luxury-ease) both;
+}
+
+header [data-testid="navbar-brand-logo"] {
+  animation: luxury-brand-in 800ms var(--luxury-ease) 80ms both;
+}
+
+header nav a,
+header nav button,
+header > div > div > div:last-child > button {
+  animation: luxury-control-in 600ms var(--luxury-ease) both;
+}
+
+header nav a:nth-child(2) { animation-delay: 70ms; }
+header nav a:nth-child(3) { animation-delay: 140ms; }
+header nav a:nth-child(4) { animation-delay: 210ms; }
+
+main,
+.luxury-detail-page {
+  animation: luxury-page-in 700ms var(--luxury-ease) both;
+}
+
+.luxury-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: none;
+  transition:
+    opacity 700ms var(--luxury-ease),
+    transform 700ms var(--luxury-ease);
+}
+
+.luxury-reveal.luxury-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.luxury-product-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: none;
+  transition:
+    opacity 560ms var(--luxury-ease),
+    transform 560ms var(--luxury-ease),
+    box-shadow 350ms var(--luxury-ease),
+    border-color 350ms ease;
+}
+
+.luxury-product-reveal.luxury-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.luxury-reveal.luxury-visible article:hover,
+.luxury-reveal.luxury-visible .group:hover,
+article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(67, 17, 31, .13) !important;
+}
+
+.luxury-reveal button,
+.luxury-reveal a,
+.luxury-detail-page button,
+header button,
+header a {
+  transition:
+    transform 350ms var(--luxury-ease),
+    box-shadow 350ms var(--luxury-ease),
+    background-color 350ms ease,
+    border-color 350ms ease,
+    color 350ms ease,
+    opacity 350ms ease;
+}
+
+.luxury-reveal button:hover,
+.luxury-reveal a:hover,
+.luxury-detail-page button:hover,
+header button:hover,
+header a:hover {
+  transform: translateY(-2px);
+}
+
+.luxury-detail-media {
+  animation: luxury-media-in 850ms var(--luxury-ease) 120ms both;
+}
+
+.luxury-detail-content {
+  animation: luxury-content-in 700ms var(--luxury-ease) 220ms both;
+}
+
+.luxury-detail-content > div,
+.luxury-detail-content > p,
+.luxury-detail-content > button {
+  transition: opacity 400ms ease, transform 400ms var(--luxury-ease);
+}
+
+@keyframes luxury-header-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes luxury-announcement-in {
+  from { opacity: 0; letter-spacing: .28em; }
+  to { opacity: 1; letter-spacing: inherit; }
+}
+
+@keyframes luxury-brand-in {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes luxury-control-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes luxury-page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes luxury-media-in {
+  from { opacity: 0; transform: translateY(18px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes luxury-content-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header,
+  header > div:first-child,
+  header [data-testid="navbar-brand-logo"],
+  header nav a,
+  header nav button,
+  header > div > div > div:last-child > button,
+  main,
+  .luxury-detail-page,
+  .luxury-detail-media,
+  .luxury-detail-content {
+    animation: none !important;
+  }
+
+  .luxury-reveal,
+  .luxury-product-reveal,
+  .luxury-reveal.luxury-visible article:hover,
+  .luxury-reveal.luxury-visible .group:hover,
+  article:hover {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
 
 
 /* =========================================================
@@ -1486,6 +1656,75 @@ header img.FK.Decore-logo-badge {
 
   object-fit: contain !important;
 
+}
+
+/* Final motion tuning: keep reveals elegant and low-distraction. */
+.luxury-reveal,
+.luxury-product-reveal,
+.catalog-luxury-product {
+  filter: none !important;
+  perspective: none !important;
+  rotate: none !important;
+  will-change: opacity, transform;
+}
+
+.luxury-reveal {
+  overflow: visible;
+}
+
+.luxury-reveal::after,
+.luxury-reveal::before {
+  animation: none !important;
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+.luxury-product-reveal,
+.catalog-luxury-product {
+  transform: translateY(18px) !important;
+  transition:
+    opacity 600ms var(--luxury-ease),
+    transform 600ms var(--luxury-ease),
+    box-shadow 350ms var(--luxury-ease),
+    border-color 350ms ease !important;
+}
+
+.luxury-product-reveal.luxury-visible,
+.catalog-luxury-product.catalog-luxury-visible {
+  transform: translateY(0) !important;
+}
+
+.luxury-product-reveal.luxury-visible:hover,
+.catalog-luxury-product.catalog-luxury-visible:hover,
+.luxury-reveal.luxury-visible article:hover,
+.luxury-reveal.luxury-visible .group:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 44px rgba(67, 17, 31, .14) !important;
+}
+
+.luxury-product-reveal img,
+.catalog-luxury-product img {
+  transition: transform 500ms var(--luxury-ease), filter 400ms ease !important;
+}
+
+.luxury-product-reveal.luxury-visible:hover img,
+.catalog-luxury-product.catalog-luxury-visible:hover img {
+  transform: scale(1.025) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .luxury-product-reveal,
+  .catalog-luxury-product,
+  .luxury-product-reveal.luxury-visible:hover,
+  .catalog-luxury-product.catalog-luxury-visible:hover,
+  .luxury-reveal.luxury-visible article:hover,
+  .luxury-reveal.luxury-visible .group:hover,
+  .luxury-product-reveal.luxury-visible:hover img,
+  .catalog-luxury-product.catalog-luxury-visible:hover img {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 
@@ -2769,216 +3008,117 @@ body {
     aspect-ratio: 4 / 5 !important;
   }
 }
-/* FK DECORE RESPONSIVE HERO IMAGE SLIDER */
-
-.Decore-hero-slider {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #000;
-}
-
-.Decore-desktop-slides,
-.Decore-mobile-slides {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.Decore-desktop-slides img,
-.Decore-mobile-slides img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  animation: FKDecoreHeroFade 16s infinite;
-}
-
-.Decore-desktop-slides img:nth-child(1),
-.Decore-mobile-slides img:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.Decore-desktop-slides img:nth-child(2),
-.Decore-mobile-slides img:nth-child(2) {
-  animation-delay: 4s;
-}
-
-.Decore-desktop-slides img:nth-child(3),
-.Decore-mobile-slides img:nth-child(3) {
-  animation-delay: 8s;
-}
-
-.Decore-desktop-slides img:nth-child(4),
-.Decore-mobile-slides img:nth-child(4) {
-  animation-delay: 12s;
-}
-
-@keyframes FKDecoreHeroFade {
-  0%, 20% {
-    opacity: 1;
-  }
-
-  25%, 100% {
-    opacity: 0;
-  }
-}
-
-/* DESKTOP / LAPTOP */
-@media (min-width: 769px) {
-  .Decore-cinematic-hero {
-    aspect-ratio: 3 / 1 !important;
-    min-height: 0 !important;
-    height: auto !important;
-  }
-
-  .Decore-desktop-slides {
-    display: block;
-  }
-
-  .Decore-mobile-slides {
-    display: none;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .Decore-cinematic-hero {
-    aspect-ratio: 4 / 5 !important;
-    min-height: 0 !important;
-    height: auto !important;
-    overflow: hidden !important;
-  }
-
-  .Decore-desktop-slides {
-    display: none;
-  }
-
-  .Decore-mobile-slides {
-    display: block;
-  }
-
-  .Decore-mobile-slides img {
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-/* SMALL PHONES */
-@media (max-width: 390px) {
-  .Decore-cinematic-hero {
-    aspect-ratio: 4 / 5 !important;
-  }
-}
-
-/* ===== DECORE HERO IMAGE SLIDER ===== */
+/* ===== FK DECORE HERO SLIDER - CLEAN ===== */
 
 .Decore-hero-slider {
   position: absolute !important;
   inset: 0 !important;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
   z-index: 0 !important;
-  overflow: hidden;
-  background: #000;
+  background: transparent !important;
 }
 
 .Decore-desktop-slides,
 .Decore-mobile-slides {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
 }
 
 .Decore-desktop-slides img,
 .Decore-mobile-slides img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  animation: DecoreHeroFade 16s infinite;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  z-index: 1 !important;
+  animation: FKDecoreCleanSlide 16s infinite ease-in-out !important;
 }
 
+/* 4 pictures */
 .Decore-desktop-slides img:nth-child(1),
 .Decore-mobile-slides img:nth-child(1) {
-  animation-delay: 0s;
+  animation-delay: -12s !important;
 }
 
 .Decore-desktop-slides img:nth-child(2),
 .Decore-mobile-slides img:nth-child(2) {
-  animation-delay: 4s;
+  animation-delay: -8s !important;
 }
 
 .Decore-desktop-slides img:nth-child(3),
 .Decore-mobile-slides img:nth-child(3) {
-  animation-delay: 8s;
+  animation-delay: -4s !important;
 }
 
 .Decore-desktop-slides img:nth-child(4),
 .Decore-mobile-slides img:nth-child(4) {
-  animation-delay: 12s;
+  animation-delay: 0s !important;
 }
 
-@keyframes DecoreHeroFade {
-  0%,
-  25% {
-    opacity: 1;
+/* Smooth horizontal slide */
+@keyframes FKDecoreCleanSlide {
+
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
   }
 
-  30%,
+  5% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  22% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  27% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
   100% {
     opacity: 0;
+    transform: translateX(-100%);
   }
 }
 
-.Decore-mobile-slides {
-  display: none;
-}
-
+/* Keep overlay transparent so pictures remain visible */
 .Decore-hero-slider + .FK.Decore-hero-video-overlay {
-  z-index: 1 !important;
+  background: transparent !important;
+  z-index: 0 !important;
 }
 
-@media (max-width: 768px) {
+/* Desktop */
+@media (min-width: 769px) {
   .Decore-desktop-slides {
-    display: none;
+    display: block !important;
   }
 
   .Decore-mobile-slides {
-    display: block;
-  }
-
-  .FK.Decore-cinematic-hero {
-    min-height: 620px !important;
-  }
-
-  .Decore-desktop-slides img,
-  .Decore-mobile-slides img {
-    object-position: center;
+    display: none !important;
   }
 }
 
-@media (min-width: 769px) {
+/* Mobile */
+@media (max-width: 768px) {
   .Decore-desktop-slides {
-    display: block;
+    display: none !important;
   }
 
-  .FK.Decore-cinematic-hero {
-    min-height: 640px !important;
+  .Decore-mobile-slides {
+    display: block !important;
   }
 }
-
-
 /* ===== HOT ARRIVALS ===== */
 
 #hot-arrivals {
@@ -3108,4 +3248,8 @@ body {
     height: 62px;
   }
 }
+
+
+/* FK DECOR HERO - SLIDE ANIMATION */
+
 

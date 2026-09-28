@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -14,8 +14,7 @@ import {
   Truck, 
   ArrowLeft, 
   Plus, 
-  Minus,
-  CheckCircle2
+  Minus
 } from "lucide-react";
 import { PRODUCT_DETAIL } from "../constants/testIds";
 
@@ -30,7 +29,6 @@ export default function ProductDetailView() {
   const product = products.find(p => p.id === id) || products[0];
   const [selectedSize, setSelectedSize] = useState(product.sizes[1] || product.sizes[0] || "L");
   const [quantity, setQuantity] = useState(1);
-  const [activeNotesTab, setActiveNotesTab] = useState("pyramid");
 
   const isWishlisted = wishlist.includes(product.id);
 
@@ -45,7 +43,7 @@ export default function ProductDetailView() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFDF8] text-[#2D2326] font-serif selection:bg-[#43111F] selection:text-[#FFFDF8]">
+    <div className="luxury-detail-page min-h-screen bg-[#FFFDF8] text-[#2D2326] font-serif selection:bg-[#43111F] selection:text-[#FFFDF8]">
       <Navbar onOpenCart={() => setIsCartOpen(true)} onOpenQuiz={() => setIsQuizOpen(true)} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -63,11 +61,11 @@ export default function ProductDetailView() {
           
           {/* Product Image */}
           <div className="space-y-4 sticky top-28">
-            <div className="aspect-square rounded-lg overflow-hidden border border-[#43111F]/40 bg-[#FFFFFF] shadow-2xl relative">
+            <div className="luxury-detail-media aspect-square rounded-lg overflow-hidden border border-[#43111F]/40 bg-[#FFFFFF] shadow-2xl relative">
               <img 
                 src={product.image} 
                 alt={product.name}
-                className="w-full h-full object-cover opacity-95"
+                className="w-full h-full object-contain opacity-95"
               />
               <div className="absolute top-4 left-4 bg-[#FFFDF8]/90 border border-[#43111F]/40 px-3 py-1 rounded text-xs text-[#6E1F35] font-serif uppercase tracking-widest">
                 {product.category}
@@ -97,7 +95,7 @@ export default function ProductDetailView() {
           </div>
 
           {/* Product Details info */}
-          <div className="space-y-6">
+          <div className="luxury-detail-content space-y-6">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-[#6E1F35] font-serif uppercase tracking-[0.2em]">{product.brand}</span>
@@ -108,36 +106,20 @@ export default function ProductDetailView() {
                 </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#F3EFE6] mt-1">
+              <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#6E1F35] mt-1">
                 {product.name}
               </h1>
 
               <div className="text-2xl font-serif font-bold text-[#6E1F35] mt-3">
-                ${product.price} <span className="text-xs text-[#8A7A80] font-normal">USD (Tax Included)</span>
+                PKR {product.price} <span className="text-xs text-[#8A7A80] font-normal">PKR (Tax Included)</span>
               </div>
+                <div className="mt-2 text-sm font-semibold text-[#6E1F35]">                   Delivery Charges: PKR {Number(product.deliveryCharge || 0).toFixed(2)}                 </div>
             </div>
 
             <p className="text-sm text-[#5D5054] font-serif leading-relaxed">
               {product.description}
             </p>
 
-            {/* Size Selector */}
-            <div className="space-y-3 pt-2">
-              <label className="text-xs text-[#6E1F35] uppercase tracking-wider font-serif block">
-                Select Flacon Size: <span className="text-[#2D2326] font-bold">{selectedSize}</span>
-              </label>
-              <div className="flex gap-3" data-testid={PRODUCT_DETAIL.sizeSelector}>
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`flex-1 py-3 px-4 rounded font-serif text-xs uppercase tracking-widest border transition-all ${selectedSize === size ? 'bg-[#43111F] text-[#FFFDF8] font-bold border-[#43111F] shadow-lg' : 'bg-[#FFFFFF] text-[#5D5054] border-[#43111F]/30 hover:border-[#43111F]'}`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* Quantity Selector */}
             <div className="space-y-3 pt-2">
@@ -181,76 +163,6 @@ export default function ProductDetailView() {
               </button>
             </div>
 
-            {/* Fragrance Notes Breakdown Accordion / Tabs */}
-            <div className="pt-6 border-t border-[#E5D8D0] space-y-4">
-              <div className="flex items-center gap-4 border-b border-[#E5D8D0] pb-2">
-                <button 
-                  onClick={() => setActiveNotesTab("pyramid")}
-                  className={`font-serif text-xs uppercase tracking-wider pb-2 border-b-2 transition-all ${activeNotesTab === 'pyramid' ? 'text-[#6E1F35] border-[#43111F]' : 'text-[#8A7A80] border-transparent'}`}
-                  data-testid={PRODUCT_DETAIL.notesTab}
-                >
-                  Fragrance Notes Pyramid
-                </button>
-                <button 
-                  onClick={() => setActiveNotesTab("delivery")}
-                  className={`font-serif text-xs uppercase tracking-wider pb-2 border-b-2 transition-all ${activeNotesTab === 'delivery' ? 'text-[#6E1F35] border-[#43111F]' : 'text-[#8A7A80] border-transparent'}`}
-                >
-                  Authenticity & Delivery
-                </button>
-              </div>
-
-              {activeNotesTab === "pyramid" ? (
-                <div className="space-y-4 bg-[#FFFFFF] p-5 rounded border border-[#43111F]/20 font-serif text-xs">
-                  <div>
-                    <span className="text-[#6E1F35] font-bold uppercase tracking-widest block mb-1">Top Notes (First 15 Minutes)</span>
-                    <div className="flex flex-wrap gap-2">
-                      {product.topNotes.map(note => (
-                        <span key={note} className="px-2.5 py-1 rounded bg-[#F7F1EC] border border-[#43111F]/30 text-[#5D5054]">
-                          {note}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-[#6E1F35] font-bold uppercase tracking-widest block mb-1">Middle / Heart Notes (2 - 6 Hours)</span>
-                    <div className="flex flex-wrap gap-2">
-                      {product.middleNotes.map(note => (
-                        <span key={note} className="px-2.5 py-1 rounded bg-[#F7F1EC] border border-[#43111F]/30 text-[#5D5054]">
-                          {note}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="text-[#6E1F35] font-bold uppercase tracking-widest block mb-1">Base Notes (6 - 24 Hours)</span>
-                    <div className="flex flex-wrap gap-2">
-                      {product.baseNotes.map(note => (
-                        <span key={note} className="px-2.5 py-1 rounded bg-[#F7F1EC] border border-[#43111F]/30 text-[#5D5054]">
-                          {note}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3 bg-[#FFFFFF] p-5 rounded border border-[#43111F]/20 font-serif text-xs text-[#5D5054]">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#6E1F35] shrink-0 mt-0.5" />
-                    <span>Each flacon is individually numbered and sealed with a tamper-proof hologram.</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#6E1F35] shrink-0 mt-0.5" />
-                    <span>Shipped via insured white-glove courier in temperature-controlled packaging.</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#6E1F35] shrink-0 mt-0.5" />
-                    <span>Includes a complimentary 2ml sample vial so you can test without opening the main flacon.</span>
-                  </div>
-                </div>
-              )}
-            </div>
 
           </div>
 

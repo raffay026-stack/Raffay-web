@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+﻿import React, { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { PERFUME_BRANDS, PERFUME_CATEGORIES } from "../mock";
@@ -31,7 +31,8 @@ export default function CatalogView() {
   const categoryFilter = searchParams.get("category") || "all";
   const brandFilter = searchParams.get("brand") || "all";
   const sortBy = searchParams.get("sort") || "featured";
-  const maxPrice = Number(searchParams.get("maxPrice")) || 900;
+  const maxPriceParam = searchParams.get("maxPrice");
+  const maxPrice = maxPriceParam ? Number(maxPriceParam) : Infinity;
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -110,6 +111,10 @@ export default function CatalogView() {
   const currentItems = filteredPerfumes.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       const cards = document.querySelectorAll(".catalog-luxury-product");
 
@@ -149,114 +154,28 @@ export default function CatalogView() {
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 text-[#43111F] text-xs uppercase tracking-[0.2em] font-serif">
             <Crown className="w-4 h-4" />
-            <span>Summer Drop • 100 Curated Perfumes</span>
+            <span>FK Decore â€¢ {products.length} Products</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#F3EFE6]">
-            Summer Men's Perfume Catalog
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#43111F]">
+            Premium Decoration Collection
           </h1>
           <p className="text-xs sm:text-sm text-[#7C6E72] max-w-xl mx-auto font-serif">
-            Filter through our exhaustive collection of 100 masterpieces spanning rare ouds, rich orientals, and crystalline fresh waters.
+            Explore our curated collection of elegant decoration pieces for home, office, lobby and outdoor spaces.
           </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Sidebar Filters */}
-          <div className="space-y-6 bg-[#FFFDF8] border border-[#43111F]/30 p-6 rounded-lg h-fit">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E5D8D0]">
-              <div className="flex items-center gap-2 text-[#43111F] font-serif text-sm font-bold tracking-wider">
-                <Filter className="w-4 h-4" />
-                <span>Refine Collection</span>
-              </div>
-              <button 
-                onClick={handleResetFilters}
-                className="text-[11px] text-[#7C6E72] hover:text-[#43111F] flex items-center gap-1 font-serif underline"
-              >
-                <RotateCcw className="w-3 h-3" />
-                <span>Reset</span>
-              </button>
-            </div>
+        <div className="grid grid-cols-1 gap-8">
 
-            {/* Search Input */}
-            <div className="space-y-2">
-              <label className="text-xs text-[#43111F] uppercase tracking-wider font-serif">Search Style or Note</label>
-              <div className="relative">
-                <input 
-                  type="text"
-                  placeholder="e.g. Oud, Saffron, StreetForm..."
-                  value={searchQuery}
-                  onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full bg-[#FFFDF8] border border-[#43111F]/30 px-3 py-2 text-xs text-[#2D2326] focus:outline-none focus:border-[#43111F] rounded font-serif pl-8"
-                  data-testid={CATALOG.searchInput}
-                />
-                <Search className="w-3.5 h-3.5 text-[#8A7A80] absolute left-2.5 top-2.5" />
-              </div>
-            </div>
-
-            {/* Category Filter */}
-            <div className="space-y-2">
-              <label className="text-xs text-[#43111F] uppercase tracking-wider font-serif">Fragrance Family</label>
-              <select 
-                value={categoryFilter}
-                onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-[#FFFDF8] border border-[#43111F]/30 px-3 py-2 text-xs text-[#2D2326] focus:outline-none focus:border-[#43111F] rounded font-serif"
-                data-testid={CATALOG.categoryFilter}
-              >
-                <option value="all">All Families ({products.length})</option>
-                {PERFUME_CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Brand Filter */}
-            <div className="space-y-2">
-              <label className="text-xs text-[#43111F] uppercase tracking-wider font-serif">Perfume House</label>
-              <select 
-                value={brandFilter}
-                onChange={(e) => handleBrandChange(e.target.value)}
-                className="w-full bg-[#FFFDF8] border border-[#43111F]/30 px-3 py-2 text-xs text-[#2D2326] focus:outline-none focus:border-[#43111F] rounded font-serif"
-                data-testid={CATALOG.brandFilter}
-              >
-                <option value="all">All Luxury Houses</option>
-                {PERFUME_BRANDS.map((brand) => (
-                  <option key={brand} value={brand}>{brand}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Max Price Slider */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-xs text-[#5D5054] font-serif">
-                <span className="text-[#43111F] uppercase tracking-wider">Max Price</span>
-                <span className="text-[#43111F] font-bold">${maxPrice}</span>
-              </div>
-              <input 
-                type="range"
-                min="200"
-                max="900"
-                step="25"
-                value={maxPrice}
-                onChange={(e) => handlePriceChange(Number(e.target.value))}
-                className="w-full accent-[#43111F] cursor-pointer"
-              />
-              <div className="flex justify-between text-[10px] text-[#8A7A80] font-serif">
-                <span>$200</span>
-                <span>$900+</span>
-              </div>
-            </div>
-
-          </div>
 
           {/* Main Grid Area */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="w-full space-y-6">
             
             {/* Top Toolbar */}
             <div className="flex flex-col sm:flex-row items-center justify-between bg-[#FFFDF8] border border-[#43111F]/30 p-4 rounded-lg gap-4">
               <div className="text-xs font-serif text-[#5D5054]">
-                Showing <span className="text-[#43111F] font-bold">{filteredPerfumes.length}</span> luxury Perfumes
+                <span className="text-[#43111F] font-bold">{filteredPerfumes.length}</span> matching products Â· {products.length} total products
               </div>
 
               <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -285,9 +204,9 @@ export default function CatalogView() {
                 <div className="w-16 h-16 mx-auto rounded-full bg-[#F7F1EC] border border-[#43111F]/30 flex items-center justify-center text-[#43111F]">
                   <Search className="w-8 h-8 opacity-60" />
                 </div>
-                <h4 className="font-serif text-lg text-[#5D5054]">No Fragrance Found</h4>
+                <h4 className="font-serif text-lg text-[#5D5054]">No Decoration Piece Found</h4>
                 <p className="text-xs text-[#8A7A80] max-w-xs mx-auto font-serif">
-                  No luxury Perfumes match your current filters or search terms. Try resetting your search parameters.
+                  No premium decoration pieces match your current filters or search terms. Try resetting your search parameters.
                 </p>
                 <button
                   onClick={handleResetFilters}
@@ -310,11 +229,8 @@ export default function CatalogView() {
                         <img 
                           src={product.image} 
                           alt={product.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                          className="w-full h-full object-contain transition-transform duration-500 opacity-90"
                         />
-                        <div className="absolute top-3 left-3 bg-[#FFFDF8]/80 border border-[#43111F]/40 px-2.5 py-1 rounded text-[10px] text-[#43111F] font-serif uppercase tracking-widest">
-                          {product.category}
-                        </div>
                         
                         <button 
                           onClick={() => toggleWishlist(product.id)}
@@ -358,7 +274,7 @@ export default function CatalogView() {
                         <div className="flex items-center justify-between pt-3 border-t border-[#E5D8D0]">
                           <div>
                             <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Price</span>
-                            <span className="font-serif text-base font-bold text-[#43111F]">${product.price}</span>
+                            <span className="font-serif text-base font-bold text-[#43111F]">PKR {product.price}</span>
                           </div>
 
                           <button
@@ -403,6 +319,9 @@ export default function CatalogView() {
     </div>
   );
 }
+
+
+
 
 
 

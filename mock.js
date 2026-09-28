@@ -20,253 +20,74 @@ export const PERFUME_CATEGORIES = [
   "Extrait de Parfum"
 ];
 
-export const INITIAL_PERFUMES = [
-  {
-    id: "perfume-1",
-    name: "Oud Wood Impérial",
-    brand: "Tom Ford",
-    category: "Oud & Woody",
-    price: 395,
-    rating: 4.9,
-    reviewsCount: 342,
-    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",
-    description: "Rare oud wood, rose wood and cardamom give way to a smoky blend of rare oud wood, sandalwood and vetiver. Tonka bean and amber add warmth and sensuality.",
-    topNotes: ["Cardamom", "Rosewood", "Chinese Pepper"],
-    middleNotes: ["Oud Wood", "Sandalwood", "Vetiver"],
-    baseNotes: ["Tonka Bean", "Amber", "Vanilla"],
-    sizes: ["30ml", "50ml", "100ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: true,
-    featured: true
-  },
-  {
-    id: "perfume-2",
-    name: "Aventus Royal Extrait",
-    brand: "Creed",
-    category: "Fresh Citrus",
-    price: 495,
-    rating: 5.0,
-    reviewsCount: 890,
-    image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80",
-    description: "The legendary fragrance celebrating strength, power and success. Sensational notes of Calabrian bergamot and French apple fused with royal jasmine and rich ambergris.",
-    topNotes: ["Lemon", "Pink Pepper", "Italian Apple", "Bergamot"],
-    middleNotes: ["Pineapple", "Jasmine", "Indonesian Patchouli"],
-    baseNotes: ["Birch", "Ambergris", "Cedarwood", "Musk"],
-    sizes: ["50ml", "100ml", "250ml Flacon"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: false,
-    featured: true
-  },
-  {
-    id: "perfume-3",
-    name: "Gypsy Water Elixir",
-    brand: "Byredo",
-    category: "Sensual Floral",
-    price: 320,
-    rating: 4.8,
-    reviewsCount: 215,
-    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
-    description: "An ode to the beauty of gypsy culture, its unique custom, vibrant beliefs and distinguished way of living. A woody scent born of a picnic in the pine forests of faraway lands.",
-    topNotes: ["Bergamot", "Lemon", "Pepper", "Juniper Berries"],
-    middleNotes: ["Incense", "Pine Needle", "Orris"],
-    baseNotes: ["Amber", "Vanilla", "Sandalwood"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: false,
-    isRoyalOud: false,
-    featured: true
-  },
-  {
-    id: "perfume-4",
-    name: "Apex Roja Sultan",
-    brand: "Roja Parfums",
-    category: "Oriental Spice",
-    price: 550,
-    rating: 4.9,
-    reviewsCount: 140,
-    image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=800&q=80",
-    description: "Crafted for the ultimate connoisseur. A breathtaking symphony of Taif rose, saffron, and aged Indian oud aged for over 25 years in oak casks.",
-    topNotes: ["Mandarin", "Bergamot", "Lemon", "Grapefruit"],
-    middleNotes: ["Cistus", "Jasmine de Grasse", "Taif Rose"],
-    baseNotes: ["Sandalwood", "Aged Oud", "Leather", "Ambergris", "Musk"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: true,
-    featured: true
-  },
-  {
-    id: "perfume-5",
-    name: "Baccarat Rouge 540 Extrait",
-    brand: "Maison Francis Kurkdjian",
-    category: "Gourmand Amber",
-    price: 435,
-    rating: 4.9,
-    reviewsCount: 1250,
-    image: "https://images.unsplash.com/photo-1583445013765-46c20c4a6772?auto=format&fit=crop&w=800&q=80",
-    description: "Luminous and sophisticated, Baccarat Rouge 540 lays on the skin like an amber, floral and woody breeze. A poetic alchemy where the aerial notes of jasmine and the radiance of saffron carry facet-rich ambergris.",
-    topNotes: ["Grandiflorum Jasmine from Egypt", "Saffron"],
-    middleNotes: ["Bitter Almond from Morocco", "Cedarwood"],
-    baseNotes: ["Woody Musk", "Ambergrisaccord"],
-    sizes: ["35ml", "70ml", "200ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: false,
-    featured: true
-  },
-  {
-    id: "perfume-6",
-    name: "No. 1 Imperial Majesty",
-    brand: "Clive Christian",
-    category: "Extrait de Parfum",
-    price: 850,
-    rating: 5.0,
-    reviewsCount: 88,
-    image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=800&q=80",
-    description: "Recognized as the world's most expensive perfume. Encased in hand-cut crystal with an 18-carat gold collar and brilliant-cut white diamond.",
-    topNotes: ["Lime", "Mandarin", "Sicilian Bergamot", "Cardamom"],
-    middleNotes: ["Ylang Ylang", "Orris", "Lily of the Valley", "Rose"],
-    baseNotes: ["Indian Sandalwood", "Cedarwood", "Tahitian Vanilla", "Amber"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: false,
-    isRoyalOud: false,
-    featured: false
-  },
-  {
-    id: "perfume-7",
-    name: "Naxos 1861",
-    brand: "Xerjoff",
-    category: "Oriental Spice",
-    price: 340,
-    rating: 4.8,
-    reviewsCount: 412,
-    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-    description: "An intoxicating homage to Sicily. A rich gourmand explosion of honey, tobacco, and divine cashmeran enveloped in zesty Mediterranean citrus.",
-    topNotes: ["Bergamot", "Lemon", "Lavender"],
-    middleNotes: ["Jasmine Sambac", "Cinnamon", "Honey", "Cashmere"],
-    baseNotes: ["Tobacco Leaf", "Tonka Bean", "Vanilla"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: false,
-    featured: false
-  },
-  {
-    id: "perfume-8",
-    name: "Herod Royal Essence",
-    brand: "Parfums de Marly",
-    category: "Oud & Woody",
-    price: 360,
-    rating: 4.9,
-    reviewsCount: 520,
-    image: "https://images.unsplash.com/photo-1582211594533-268f4f1edcb9?auto=format&fit=crop&w=800&q=80",
-    description: "A sophisticated tobacco fragrance with a warm heart of osmanthus and frankincense, wrapped in rich vanilla and cedar.",
-    topNotes: ["Cinnamon", "Pepper"],
-    middleNotes: ["Tobacco Leaf", "Incense", "Cistus", "Osmanthus"],
-    baseNotes: ["Vanilla", "Musk", "Cedarwood", "Vetiver"],
-    sizes: ["75ml", "125ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: false,
-    featured: false
-  },
-  {
-    id: "perfume-9",
-    name: "Interlude Royal Man",
-    brand: "Amouage",
-    category: "Oud & Woody",
-    price: 420,
-    rating: 4.7,
-    reviewsCount: 310,
-    image: "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=800&q=80",
-    description: "An opulent spicy woody fragrance that inspires an aura of eternal order amidst chaos. Rich incense, oregano and pimento berry oil.",
-    topNotes: ["Bergamot", "Oregano", "Pimento Berry Oil"],
-    middleNotes: ["Amber", "Frankincense", "Cistus", "Opoponax"],
-    baseNotes: ["Leather", "Agarwood Smoke", "Patchouli", "Sandalwood"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: false,
-    isRoyalOud: true,
-    featured: false
-  },
-  {
-    id: "perfume-10",
-    name: "Angels' Share Cognac",
-    brand: "Kilian Paris",
-    category: "Gourmand Amber",
-    price: 395,
-    rating: 4.9,
-    reviewsCount: 780,
-    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
-    description: "Contains the essence of cognac derived from the liquor to lend it a natural caramel color. Opening with cognac oil upon a blend of oak absolute, cinnamon essence and long-lasting tonka bean.",
-    topNotes: ["Cognac"],
-    middleNotes: ["Cinnamon Bark", "Oak Absolute", "Tonka Bean"],
-    baseNotes: ["Sandalwood", "Praline", "Vanilla"],
-    sizes: ["50ml", "100ml"],
-    inStock: true,
-    isBestseller: true,
-    isRoyalOud: false,
-    featured: true
-  }
-];
-
-// Generate additional 90 realistic luxury perfumes to reach 100 items
-const brandsList = PERFUME_BRANDS;
-const categoriesList = PERFUME_CATEGORIES;
-const adjectives = ["Royal", "Imperial", "Grand", "Noir", "Gilded", "Velvet", "Sovereign", "Opulent", "Mystic", "Divine", "Celestial", "Ethereal"];
-const nounWords = ["Oud", "Santal", "Amber", "Rose", "Musk", "Iris", "Vanilla", "Tabac", "Neroli", "Jasmine", "Vetiver", "Cashmere"];
-
-for (let i = 11; i <= 100; i++) {
-  const brand = brandsList[i % brandsList.length];
-  const category = categoriesList[i % categoriesList.length];
-  const adj = adjectives[i % adjectives.length];
-  const noun = nounWords[(i * 3) % nounWords.length];
-  const name = `${adj} ${noun} No. ${i}`;
-  const price = 250 + ((i * 37) % 350);
-  const rating = Number((4.5 + ((i % 5) * 0.1)).toFixed(1));
-  const reviewsCount = 20 + ((i * 13) % 450);
-  const isRoyalOud = category === "Oud & Woody" || (i % 4 === 0);
-
-  INITIAL_PERFUMES.push({
-    id: `perfume-${i}`,
-    name,
-    brand,
-    category,
-    price,
-    rating,
-    reviewsCount,
-    image: `https://images.unsplash.com/photo-${1500000000000 + (i * 9876543) % 999999}?auto=format&fit=crop&w=800&q=80`,
-    description: `An exquisite masterpiece from ${brand}. Combining rare botanical essences with centuries-old perfumery traditions for an unforgettable olfactory signature.`,
-    topNotes: ["Italian Bergamot", "Pink Peppercorn", "Saffron"],
-    middleNotes: [category.includes("Oud") ? "Aged Cambodian Oud" : "Damask Rose", "Orris Butter", "Cedar"],
-    baseNotes: ["Golden Amber", "White Musk", "Madagascar Vanilla"],
-    sizes: ["30ml", "50ml", "100ml"],
-    inStock: true,
-    isBestseller: i % 5 === 0,
-    isRoyalOud,
-    featured: i <= 15
-  });
-}
-
-// Fix image URLs for reliable high-end perfume photos
-const fallbackImages = [
-  "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1583445013765-46c20c4a6772?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1582211594533-268f4f1edcb9?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?auto=format&fit=crop&w=800&q=80"
-];
-
-INITIAL_PERFUMES.forEach((p, index) => {
-  p.image = fallbackImages[index % fallbackImages.length];
+const makeDecorProduct = (id, name, image) => ({
+  id,
+  name,
+  brand: "",
+  category: "",
+  price: 0,
+  rating: 0,
+  reviewsCount: 0,
+  image,
+  description: "",
+  topNotes: [],
+  middleNotes: [],
+  baseNotes: [],
+  sizes: [],
+  inStock: true,
+  isBestseller: false,
+  isRoyalOud: false,
+  featured: false
 });
+
+export const INITIAL_PERFUMES = [
+  makeDecorProduct("fk-decore-001", "3 pcs Metal stands", "/product%20images/3%20pcs%20Metal%20stands.jpeg"),
+  makeDecorProduct("fk-decore-002", "3 rass in sparrows on log", "/product%20images/3%20rassin%20sparrows%20on%20log.jpeg"),
+  makeDecorProduct("fk-decore-003", "Abstronaut Moot Sculpture", "/product%20images/Abstronaut%20Moot%20Sculpture.jpeg"),
+  makeDecorProduct("fk-decore-004", "beer double plate holder", "/product%20images/beer%20double%20plate%20holder.jpeg"),
+  makeDecorProduct("fk-decore-005", "beer standing dish holder", "/product%20images/beer%20standing%20dish%20holder.jpeg"),
+  makeDecorProduct("fk-decore-006", "Black & Gold tic tac toe", "/product%20images/Black%20%26%20Gold%20tic%20tac%20toe.jpeg"),
+  makeDecorProduct("fk-decore-007", "Black & Golden Abstract Ring Decor Set", "/product%20images/Black%20%26%20Golden%20Abstract%20Ring%20Decor%20Set.jpeg"),
+  makeDecorProduct("fk-decore-008", "Black Eifel Tower Table Clock", "/product%20images/Black%20Eifel%20Tower%20Table%20Clock.jpeg"),
+  makeDecorProduct("fk-decore-009", "Black metal table", "/product%20images/Black%20metal%20table.jpeg"),
+  makeDecorProduct("fk-decore-010", "Black sparrow key holder", "/product%20images/Black%20sparrow%20key%20holder.jpeg"),
+  makeDecorProduct("fk-decore-011", "Buffet Dishesjpeg", "/product%20images/Buffet%20Dishesjpeg.jpeg"),
+  makeDecorProduct("fk-decore-012", "Butterfly round mirror", "/product%20images/Butterfly%20round%20mirror.jpeg"),
+  makeDecorProduct("fk-decore-013", "Emeral owl family", "/product%20images/Emeral%20owl%20family.jpeg"),
+  makeDecorProduct("fk-decore-014", "GOLD WHITE LUXUARY CAKE STANDS", "/product%20images/GOLD%20WHITE%20LUXUARY%20CAKE%20STANDS.jpeg"),
+  makeDecorProduct("fk-decore-015", "Golden big swan set", "/product%20images/Golden%20big%20swan%20set.jpeg"),
+  makeDecorProduct("fk-decore-016", "Golden crystal cut tissue box", "/product%20images/Golden%20crystal%20cut%20tissue%20box.jpeg"),
+  makeDecorProduct("fk-decore-017", "Golden Embrace Couple under glass", "/product%20images/Golden%20Embrace%20Couple%20under%20glass.jpeg"),
+  makeDecorProduct("fk-decore-018", "golden leaf plate", "/product%20images/golden%20leaf%20plate.jpeg"),
+  makeDecorProduct("fk-decore-019", "Golden metal apple with crystal", "/product%20images/Golden%20metal%20apple%20with%20crystal.jpeg"),
+  makeDecorProduct("fk-decore-020", "Golden metal with crystal Tissue Holder", "/product%20images/Golden%20metal%20with%20crystal%20Tissue%20Holder.jpeg"),
+  makeDecorProduct("fk-decore-021", "Golden mirror handle dish", "/product%20images/Golden%20mirror%20handle%20dish.jpeg"),
+  makeDecorProduct("fk-decore-022", "Golden Pear with Crystal", "/product%20images/Golden%20Pear%20with%20Crystal.jpeg"),
+  makeDecorProduct("fk-decore-023", "Golden Pineaple with crystal decor", "/product%20images/Golden%20Pineaple%20with%20crystal%20decor.jpeg"),
+  makeDecorProduct("fk-decore-024", "golden rasin 4 sparrows on log", "/product%20images/golden%20rasin%204%20sparrows%20on%20log.jpeg"),
+  makeDecorProduct("fk-decore-025", "Golden Rasin Peackock", "/product%20images/Golden%20Rasin%20Peackock.jpeg"),
+  makeDecorProduct("fk-decore-026", "Golden rectangular handle dish", "/product%20images/Golden%20rectangular%20handle%20dish.jpeg"),
+  makeDecorProduct("fk-decore-027", "golden resin sparrow on leaf", "/product%20images/golden%20resin%20sparrow%20on%20leaf.jpeg"),
+  makeDecorProduct("fk-decore-028", "Golden sparrow log tray", "/product%20images/Golden%20sparrow%20log%20tray.jpeg"),
+  makeDecorProduct("fk-decore-029", "heart golden glow led table lamp", "/product%20images/heart%20golden%20glow%20led%20table%20lamp.jpeg"),
+  makeDecorProduct("fk-decore-030", "Metal plate stands", "/product%20images/Metal%20plate%20stands.jpeg"),
+  makeDecorProduct("fk-decore-031", "metal silver serving dishes", "/product%20images/metal%20silver%20serving%20dishes.jpeg"),
+  makeDecorProduct("fk-decore-032", "Royal Golden Antelope Sculpture", "/product%20images/Royal%20Golden%20Antelope%20Sculpture.jpeg"),
+  makeDecorProduct("fk-decore-033", "Royal Whirling Dervish set", "/product%20images/Royal%20Whirling%20Dervish%20set.jpeg"),
+  makeDecorProduct("fk-decore-034", "Sitting beer pastry plate holder", "/product%20images/Sitting%20beer%20pastry%20plate%20holder.jpeg"),
+  makeDecorProduct("fk-decore-035", "Sparrow key hanging golden", "/product%20images/Sparrow%20key%20hanging%20golden.jpeg"),
+  makeDecorProduct("fk-decore-036", "square crystal tissue box", "/product%20images/square%20crystal%20tissue%20box.jpeg"),
+  makeDecorProduct("fk-decore-037", "square Glow led table lamp", "/product%20images/square%20Glow%20led%20table%20lamp.jpeg"),
+  makeDecorProduct("fk-decore-038", "Vintage Abstract Human Trio Sculpture", "/product%20images/Vintage%20Abstract%20Human%20Trio%20Sculpture.jpeg"),
+  makeDecorProduct("fk-decore-039", "Vintage Sparrow On Log Tray", "/product%20images/Vintage%20Sparrow%20On%20Log%20Tray.jpeg"),
+  makeDecorProduct("fk-decore-040", "white & silver swan set", "/product%20images/white%20%26%20silver%20swan%20set.jpeg"),
+  makeDecorProduct("fk-decore-041", "white and gold bowl stand", "/product%20images/white%20and%20gold%20bowl%20stand.jpeg"),
+  makeDecorProduct("fk-decore-042", "White and Golden Leaf Crescent Decor Set", "/product%20images/White%20and%20Golden%20Leaf%20Crescent%20Decor%20Set.jpeg"),
+  makeDecorProduct("fk-decore-043", "White and Golden Teardrop decor set", "/product%20images/White%20and%20Golden%20Teardrop%20decor%20set.jpeg"),
+  makeDecorProduct("fk-decore-044", "WHITE BOWL STAND SET", "/product%20images/WHITE%20BOWL%20STAND%20SET.jpeg"),
+  makeDecorProduct("fk-decore-045", "white gold plate cake stand", "/product%20images/white%20gold%20plate%20cake%20stand.jpeg"),
+  makeDecorProduct("fk-decore-046", "white royal whirling dervish set", "/product%20images/white%20royal%20whirling%20dervish%20set.jpeg")
+];
 
 export const INITIAL_ORDERS = [
   {
@@ -345,5 +166,3 @@ export const SCENT_QUIZ_QUESTIONS = [
     ]
   }
 ];
-
-

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { 
@@ -17,6 +17,10 @@ import { useState } from "react";
 import { CART, HOME } from "../constants/testIds";
 
 export default function Navbar({ onOpenCart }) {
+  const { products: navbarProducts } = useApp();
+  const collectionCount = Array.isArray(navbarProducts)
+    ? navbarProducts.length
+    : 0;
   const { user, cart, wishlist, logoutUser } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -63,9 +67,9 @@ export default function Navbar({ onOpenCart }) {
               className={`transition-colors hover:text-[#6E1F35] ${isActive('/catalog') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}
               data-testid="nav-link-catalog"
             >
-              Collection (100)
+              Collection ({collectionCount})
             </Link>
-            <Link to="/#hot-arrivals" className={`transition-colors hover:text-[#6E1F35] ${isActive('/new-arrivals') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}>New Arrivals</Link>
+            <Link to="/new-arrivals" className={`transition-colors hover:text-[#6E1F35] ${isActive('/new-arrivals') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}>New Arrivals</Link>
             <Link 
               to="/orders" 
               className={`transition-colors hover:text-[#6E1F35] ${isActive('/orders') ? 'text-[#6E1F35] border-b border-[#6E1F35] pb-1' : 'text-[#5D5054]'}`}
@@ -165,7 +169,7 @@ export default function Navbar({ onOpenCart }) {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#2D2326] hover:text-[#43111F] font-serif py-2 border-b border-[#E5D8D0]"
           >
-            Collection (100)
+            Collection ({collectionCount})
           </Link>
           <Link to="/#hot-arrivals" onClick={() => setMobileMenuOpen(false)} className="block text-[#2D2326] hover:text-[#43111F] font-serif py-2 border-b border-[#E5D8D0]">New Arrivals</Link>
           <Link 
@@ -197,6 +201,9 @@ export default function Navbar({ onOpenCart }) {
     </header>
   );
 }
+
+
+
 
 
 
