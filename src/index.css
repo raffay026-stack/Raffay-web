@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -3039,7 +3039,7 @@ body {
   object-position: center !important;
   display: block !important;
   z-index: 1 !important;
-  animation: FKDecoreCleanSlide 16s infinite ease-in-out !important;
+  animation: FKDecoreCleanSlide 12s infinite ease-in-out !important;
 }
 
 /* 4 pictures */
@@ -3251,5 +3251,6 @@ body {
 
 
 /* FK DECOR HERO - SLIDE ANIMATION */
+
 
 
