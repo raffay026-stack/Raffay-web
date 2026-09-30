@@ -3039,18 +3039,18 @@ body {
   object-position: center !important;
   display: block !important;
   z-index: 1 !important;
-  animation: FKDecoreCleanSlide 12s infinite ease-in-out !important;
+  animation: FKDecoreCleanSlide 8s infinite linear !important;
 }
 
 /* 4 pictures */
 .Decore-desktop-slides img:nth-child(1),
 .Decore-mobile-slides img:nth-child(1) {
-  animation-delay: -12s !important;
+  animation-delay: 0s !important;
 }
 
 .Decore-desktop-slides img:nth-child(2),
 .Decore-mobile-slides img:nth-child(2) {
-  animation-delay: -8s !important;
+  animation-delay: -2s !important;
 }
 
 .Decore-desktop-slides img:nth-child(3),
@@ -3060,15 +3060,15 @@ body {
 
 .Decore-desktop-slides img:nth-child(4),
 .Decore-mobile-slides img:nth-child(4) {
-  animation-delay: 0s !important;
+  animation-delay: -6s !important;
 }
 
 /* Smooth horizontal slide */
 @keyframes FKDecoreCleanSlide {
 
   0% {
-    opacity: 0;
-    transform: translateX(100%);
+    opacity: 1;
+    transform: translateX(8%);
   }
 
   5% {
@@ -3076,22 +3076,21 @@ body {
     transform: translateX(0);
   }
 
-  22% {
+  20% {
     opacity: 1;
     transform: translateX(0);
   }
 
-  27% {
+  25% {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-8%);
   }
 
   100% {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-8%);
   }
 }
-
 /* Keep overlay transparent so pictures remain visible */
 .Decore-hero-slider + .FK.Decore-hero-video-overlay {
   background: transparent !important;
@@ -3251,6 +3250,9 @@ body {
 
 
 /* FK DECOR HERO - SLIDE ANIMATION */
+
+
+
 
 
 
