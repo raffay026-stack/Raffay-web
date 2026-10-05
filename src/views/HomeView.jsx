@@ -85,6 +85,25 @@ export default function HomeView() {
         </div>
 
         <div className="FK Decore-hero-video-overlay absolute inset-0 pointer-events-none" />
+        <div className="fk-hero-content-wrap absolute inset-0 z-10 flex items-center">
+          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="fk-hero-content max-w-2xl">
+              <span className="fk-eyebrow"><Sparkles className="w-4 h-4" /> Premium Home & Interior Decor</span>
+              <h1>Elevate Your Space.<br /><span>Define Your Style.</span></h1>
+              <p>Discover statement pieces, elegant accents and timeless decor designed to make every space feel extraordinary.</p>
+              <div className="flex flex-wrap gap-3 mt-7">
+                <button type="button" onClick={() => navigate('/catalog')} className="fk-hero-primary">Explore Collection <ArrowRight className="w-4 h-4" /></button>
+                <button type="button" onClick={() => navigate('/new-arrivals')} className="fk-hero-secondary">New Arrivals</button>
+              </div>
+              <form onSubmit={handleQuickSearchSubmit} className="fk-hero-search mt-7">
+                <Search className="w-5 h-5 shrink-0" />
+                <input value={quickSearch} onChange={(e) => setQuickSearch(e.target.value)} placeholder="Search decor pieces, categories or styles..." aria-label="Search decor" />
+                <button type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
         {/* Background glow effects */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#6E1F35]/10 blur-[140px] rounded-full pointer-events-none" />
         
@@ -109,6 +128,13 @@ export default function HomeView() {
         <span>›</span>
         <a href="/#hot-arrivals">Hot Articles</a>
       </nav>
+
+      <section className="fk-trust-strip" aria-label="FK DECORE benefits">
+        <div><ShieldCheck className="w-5 h-5" /><span><strong>Premium Quality</strong><small>Curated decor pieces</small></span></div>
+        <div><ShoppingBag className="w-5 h-5" /><span><strong>Easy Shopping</strong><small>Simple cart & checkout</small></span></div>
+        <div><Sparkles className="w-5 h-5" /><span><strong>Elegant Design</strong><small>Made for modern spaces</small></span></div>
+        <div><Heart className="w-5 h-5" /><span><strong>Customer First</strong><small>Support when you need it</small></span></div>
+      </section>
 
       <section className="luxury-reveal py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-[#E5D8D0] pb-6">
@@ -348,7 +374,7 @@ export default function HomeView() {
 
                 <div
                   className="relative aspect-[3/4] overflow-hidden cursor-pointer"
-                  onClick={() => navigate(`/product/${product.id}`)}
+                  onClick={() => navigate(`/Perfume/${product.id}`)}
                 >
 
                   <img
@@ -389,7 +415,7 @@ export default function HomeView() {
 
                   <h3
                     className="font-serif text-base sm:text-lg text-[#43111F] mt-2 cursor-pointer line-clamp-1"
-                    onClick={() => navigate(`/product/${product.id}`)}
+                    onClick={() => navigate(`/Perfume/${product.id}`)}
                   >
                     {product.name}
                   </h3>
@@ -414,7 +440,7 @@ export default function HomeView() {
 
 
                     <button
-                      onClick={() => navigate(`/product/${product.id}`)}
+                      onClick={() => navigate(`/Perfume/${product.id}`)}
                       className="px-3 sm:px-4 py-2 bg-[#43111F] text-white rounded-md text-xs sm:text-sm font-semibold hover:bg-[#6E1F35] transition"
                     >
                       ðŸ› ADD
