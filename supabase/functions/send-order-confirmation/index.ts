@@ -1,4 +1,4 @@
-﻿import "@supabase/functions-js/edge-runtime.d.ts";
+import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
 
 const corsHeaders = {
@@ -57,7 +57,7 @@ const statusContent = {
 
 export default {
   fetch: withSupabase(
-    { auth: ["publishable"] },
+    { auth: ["user"] },
     async (req, ctx) => {
       if (req.method === "OPTIONS") {
         return new Response("ok", { headers: corsHeaders });
