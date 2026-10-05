@@ -309,6 +309,11 @@ export const AppProvider = ({ children }) => {
       throw new Error("Supabase is not configured.");
     }
 
+    const currentOrder = orders.find((order) => order.id === orderId);
+    const shouldSendStatusEmail =
+      currentOrder &&
+      currentOrder.status !== status;
+
     const { error } = await supabase
       .from("orders")
       .update({ status })
@@ -318,13 +323,35 @@ export const AppProvider = ({ children }) => {
       throw error;
     }
 
+    const updatedOrder = currentOrder
+      ? { ...currentOrder, status }
+      : null;
+
     const nextOrders = orders.map((order) =>
       order.id === orderId ? { ...order, status } : order
     );
+
     setOrders(nextOrders);
     localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
     localStorage.setItem("lixir_orders", JSON.stringify(nextOrders));
     dispatchAdminDataEvent({ orders: nextOrders });
+
+    if (shouldSendStatusEmail && updatedOrder) {
+      const { error: emailError } = await supabase.functions.invoke(
+        "send-order-confirmation",
+        {
+          body: {
+            order: updatedOrder,
+          },
+        }
+      );
+
+      if (emailError) {
+        throw new Error(
+          `Order status was updated to ${status}, but the customer email could not be sent: ${emailError.message}`
+        );
+      }
+    }
   };
 
   const refreshOrders = useCallback(async () => {
