@@ -3605,3 +3605,525 @@ footer a:hover { color: #F4D9C9 !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
 }
+
+/* =========================================================
+   FK DECORE — EXTREME LUXURY UI/UX
+   Additive styling only — existing pages/routes/categories
+   and functionality are preserved.
+   ========================================================= */
+
+:root {
+  --fk-luxury: #6E1F35;
+  --fk-luxury-dark: #43111F;
+  --fk-luxury-deep: #250812;
+  --fk-cream: #FFFDF8;
+  --fk-ivory: #F7F1EC;
+  --fk-gold: #D8C3A5;
+  --fk-text: #2D2326;
+  --fk-muted: #7C6E72;
+  --fk-border: rgba(110,31,53,.14);
+  --fk-shadow: 0 18px 55px rgba(67,17,31,.10);
+  --fk-shadow-hover: 0 30px 85px rgba(67,17,31,.18);
+  --fk-ease: cubic-bezier(.22,1,.36,1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(216,195,165,.14), transparent 25%),
+    var(--fk-cream);
+}
+
+body::-webkit-scrollbar {
+  width: 9px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1e9e3;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,var(--fk-luxury),var(--fk-luxury-dark));
+  border-radius: 999px;
+}
+
+/* GLOBAL */
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  transition:
+    transform .28s var(--fk-ease),
+    box-shadow .28s ease,
+    background .28s ease,
+    border-color .28s ease,
+    color .28s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--fk-gold);
+  outline-offset: 3px;
+}
+
+/* NAVBAR */
+
+header.sticky {
+  box-shadow: 0 2px 18px rgba(67,17,31,.06);
+  backdrop-filter: blur(16px);
+  transition:
+    box-shadow .35s ease,
+    background .35s ease,
+    border-color .35s ease;
+}
+
+header.sticky:hover {
+  box-shadow: 0 12px 40px rgba(67,17,31,.11);
+}
+
+header nav a {
+  position: relative;
+  padding: 9px 3px;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--fk-luxury),
+    var(--fk-gold)
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .35s var(--fk-ease);
+}
+
+header nav a:hover {
+  color: var(--fk-luxury);
+  transform: translateY(-1px);
+}
+
+header nav a:hover::after {
+  transform: scaleX(1);
+}
+
+header button {
+  border-radius: 999px;
+}
+
+header button:hover {
+  transform: translateY(-2px);
+}
+
+header [class*="cart"],
+header [class*="Cart"] {
+  box-shadow: 0 8px 24px rgba(67,17,31,.14);
+}
+
+/* HERO */
+
+.FK.Decore-cinematic-hero {
+  min-height: clamp(650px,82vh,880px) !important;
+  isolation: isolate;
+  background: var(--fk-luxury-deep) !important;
+}
+
+.FK.Decore-cinematic-hero .Decore-hero-slider {
+  transform: scale(1.015);
+  transition: transform 1.5s var(--fk-ease);
+}
+
+.FK.Decore-cinematic-hero:hover .Decore-hero-slider {
+  transform: scale(1.035);
+}
+
+.FK.Decore-cinematic-hero::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20,4,10,.88) 0%,
+      rgba(35,8,17,.63) 38%,
+      rgba(20,4,10,.22) 72%,
+      rgba(20,4,10,.58) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.02),
+      rgba(20,4,10,.52)
+    ) !important;
+}
+
+/* HERO TEXT */
+
+.FK.Decore-cinematic-hero h1 {
+  font-size: clamp(3.2rem,7vw,7rem) !important;
+  line-height: .92 !important;
+  letter-spacing: -.045em !important;
+  text-shadow: 0 15px 50px rgba(0,0,0,.34);
+  animation: fkHeroText .9s var(--fk-ease) both;
+}
+
+.FK.Decore-cinematic-hero p {
+  max-width: 650px;
+  line-height: 1.8 !important;
+  color: rgba(255,249,244,.90) !important;
+  animation: fkHeroText 1s .12s var(--fk-ease) both;
+}
+
+.FK.Decore-cinematic-hero .inline-flex {
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 35px rgba(0,0,0,.17);
+}
+
+@keyframes fkHeroText {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* HERO BUTTONS */
+
+.FK.Decore-cinematic-hero a,
+.FK.Decore-cinematic-hero button {
+  border-radius: 999px !important;
+  min-height: 50px;
+}
+
+.FK.Decore-cinematic-hero a:hover,
+.FK.Decore-cinematic-hero button:hover {
+  transform: translateY(-4px) scale(1.025) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,.23);
+}
+
+/* HERO SEARCH */
+
+.FK.Decore-cinematic-hero form {
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(20,5,10,.48);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 55px rgba(0,0,0,.22);
+  transition: .35s ease;
+}
+
+.FK.Decore-cinematic-hero form:focus-within {
+  border-color: rgba(216,195,165,.72);
+  box-shadow:
+    0 0 0 4px rgba(216,195,165,.10),
+    0 20px 60px rgba(0,0,0,.25);
+}
+
+/* BREADCRUMB / QUICK NAV */
+
+.fk-breadcrumb {
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  background: rgba(255,253,248,.94);
+  border-bottom: 1px solid var(--fk-border);
+  box-shadow: 0 8px 28px rgba(67,17,31,.055);
+}
+
+.fk-breadcrumb a {
+  border-radius: 999px;
+  padding: .55rem .8rem;
+}
+
+.fk-breadcrumb a:hover {
+  color: white !important;
+  background: var(--fk-luxury);
+  transform: translateY(-2px);
+}
+
+/* SECTION HEADINGS */
+
+main section h2 {
+  letter-spacing: -.035em;
+}
+
+main section h2::after {
+  content: "";
+  display: block;
+  width: 55px;
+  height: 2px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--fk-luxury),
+    var(--fk-gold)
+  );
+}
+
+/* PRODUCT CARDS */
+
+main article,
+main .catalog-luxury-product,
+main .group.bg-gradient-to-b {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px !important;
+  border-color: var(--fk-border) !important;
+  box-shadow: var(--fk-shadow) !important;
+  transition:
+    transform .42s var(--fk-ease),
+    box-shadow .42s ease,
+    border-color .35s ease !important;
+}
+
+main article:hover,
+main .catalog-luxury-product:hover,
+main .group.bg-gradient-to-b:hover {
+  transform: translateY(-10px);
+  border-color: rgba(110,31,53,.30) !important;
+  box-shadow: var(--fk-shadow-hover) !important;
+}
+
+main article img,
+main .catalog-luxury-product img,
+main .group.bg-gradient-to-b img {
+  transition:
+    transform .7s var(--fk-ease),
+    filter .4s ease;
+}
+
+main article:hover img,
+main .catalog-luxury-product:hover img,
+main .group.bg-gradient-to-b:hover img {
+  transform: scale(1.065);
+  filter: saturate(1.06) contrast(1.02);
+}
+
+/* PRODUCT CARD SHINE */
+
+main article::after,
+main .catalog-luxury-product::after,
+main .group.bg-gradient-to-b::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255,255,255,.38),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left .8s var(--fk-ease);
+}
+
+main article:hover::after,
+main .catalog-luxury-product:hover::after,
+main .group.bg-gradient-to-b:hover::after {
+  left: 150%;
+}
+
+/* CATEGORY CARDS */
+
+#categories button {
+  overflow: hidden;
+  border-radius: 22px !important;
+  border: 1px solid var(--fk-border) !important;
+  box-shadow: var(--fk-shadow) !important;
+  transition:
+    transform .42s var(--fk-ease),
+    box-shadow .42s ease,
+    border-color .3s ease !important;
+}
+
+#categories button:hover {
+  transform: translateY(-9px) scale(1.012);
+  border-color: rgba(110,31,53,.28) !important;
+  box-shadow: var(--fk-shadow-hover) !important;
+}
+
+#categories button img {
+  transition: transform .7s var(--fk-ease);
+}
+
+#categories button:hover img {
+  transform: scale(1.09);
+}
+
+/* INPUTS */
+
+main input,
+main select,
+main textarea {
+  border-radius: 12px !important;
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+main input:focus,
+main select:focus,
+main textarea:focus {
+  border-color: rgba(110,31,53,.52) !important;
+  box-shadow:
+    0 0 0 4px rgba(110,31,53,.07),
+    0 8px 25px rgba(67,17,31,.06) !important;
+}
+
+/* CATALOG */
+
+.catalog-luxury-product {
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #F7F1EC
+    ) !important;
+}
+
+/* BUTTONS */
+
+main button:not([aria-label]),
+main a[class*="bg-"] {
+  transition:
+    transform .28s var(--fk-ease),
+    box-shadow .28s ease,
+    filter .28s ease;
+}
+
+main button:hover,
+main a[class*="bg-"]:hover {
+  filter: brightness(1.015);
+}
+
+/* CART / MODALS */
+
+[role="dialog"] {
+  backdrop-filter: blur(8px);
+}
+
+[role="dialog"] > div {
+  box-shadow: 0 30px 90px rgba(35,5,13,.20);
+}
+
+[role="dialog"] button {
+  border-radius: 12px;
+}
+
+/* CHECKOUT */
+
+main form button[type="submit"] {
+  min-height: 52px;
+  border-radius: 14px !important;
+  box-shadow: 0 14px 32px rgba(67,17,31,.15);
+}
+
+main form button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(67,17,31,.20);
+}
+
+/* FOOTER */
+
+footer {
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  right: -230px;
+  top: -260px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(216,195,165,.14),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+footer a:hover {
+  color: #F4D9C9 !important;
+  transform: translateX(3px);
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+  .FK.Decore-cinematic-hero {
+    min-height: 680px !important;
+  }
+
+  .FK.Decore-cinematic-hero h1 {
+    font-size: clamp(2.65rem,12vw,4rem) !important;
+    line-height: .95 !important;
+  }
+
+  .FK.Decore-cinematic-hero p {
+    font-size: .9rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .fk-breadcrumb {
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .fk-breadcrumb::-webkit-scrollbar {
+    display: none;
+  }
+
+  main article:hover,
+  main .catalog-luxury-product:hover,
+  main .group.bg-gradient-to-b:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
