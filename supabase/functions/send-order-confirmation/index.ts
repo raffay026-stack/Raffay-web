@@ -76,14 +76,12 @@ export default {
           );
         }
 
-        const { data: adminUser, error: adminError } =
-          await ctx.supabaseAdmin
-            .from("admin_users")
-            .select("id, email")
-            .eq("id", user.id)
-            .maybeSingle();
+        const { data: isAdmin, error: adminCheckError } =
+          await ctx.supabase.rpc("is_store_admin");
 
-        if (adminError || !adminUser) {
+        if (adminCheckError || isAdmin !== true) {
+          console.error("Store admin check failed:", adminCheckError);
+
           return Response.json(
             { error: "Only store admins can send order emails." },
             { status: 403, headers: corsHeaders },
