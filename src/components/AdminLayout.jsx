@@ -15,26 +15,78 @@ export default function AdminLayout() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [authorized, setAuthorized] = useState(false);
   const [checking, setChecking] = useState(true);
+  const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
+
+  const checkAuthorization = async () => {
+    setChecking(true);
+    setAuthError("");
+    try {
+      const result = await isAuthorizedAdmin();
+      setAuthorized(result);
+    } catch (error) {
+      console.error("Unable to verify the admin session:", error);
+      setAuthError("Your admin session could not be checked because Supabase is temporarily unavailable.");
+    } finally {
+      setChecking(false);
+    }
+  };
 
   useEffect(() => {
     let active = true;
-    isAuthorizedAdmin().then((result) => {
-      if (!active) return;
-      setAuthorized(result);
-      setChecking(false);
-    }).catch(() => {
-      if (active) setChecking(false);
-    });
+    const checkInitialAuthorization = async () => {
+      try {
+        const result = await isAuthorizedAdmin();
+        if (active) setAuthorized(result);
+      } catch (error) {
+        console.error("Unable to verify the admin session:", error);
+        if (active) {
+          setAuthError("Your admin session could not be checked because Supabase is temporarily unavailable.");
+        }
+      } finally {
+        if (active) setChecking(false);
+      }
+    };
+
+    checkInitialAuthorization();
     return () => { active = false; };
   }, []);
 
-  if (checking) return null;
+  if (checking) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#F7F1EC] px-4">
+        <p role="status" className="text-sm text-[#7C6E72]">Checking admin session…</p>
+      </main>
+    );
+  }
+  if (authError) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#F7F1EC] px-4 py-10">
+        <section className="w-full max-w-lg rounded-xl border border-[#43111F]/15 bg-[#FFFDF8] p-8 text-center shadow-xl">
+          <h1 className="font-serif text-2xl font-bold text-[#43111F]">Admin session unavailable</h1>
+          <p role="alert" className="mt-3 text-sm leading-6 text-[#7C6E72]">{authError}</p>
+          <button
+            type="button"
+            onClick={checkAuthorization}
+            className="mt-6 rounded-md bg-[#6E1F35] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#43111F]"
+          >
+            Retry
+          </button>
+        </section>
+      </main>
+    );
+  }
   if (!authorized || !isSupabaseConfigured) return <Navigate to="/admin" replace />;
 
   const logout = async () => {
-    await requireSupabase().auth.signOut();
-    navigate("/admin", { replace: true });
+    try {
+      const { error } = await requireSupabase().auth.signOut();
+      if (error) throw error;
+      navigate("/admin", { replace: true });
+    } catch (error) {
+      console.error("Admin sign out failed:", error);
+      setAuthError(error.message || "Unable to end the admin session. Please try again.");
+    }
   };
 
   const sidebar = (

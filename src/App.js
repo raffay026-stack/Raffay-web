@@ -21,6 +21,7 @@ import AdminOrdersView from "./views/AdminOrdersView";
 import AdminCustomersView from "./views/AdminCustomersView";
 import AdminSettingsView from "./views/AdminSettingsView";
 import AdminLayout from "./components/AdminLayout";
+import AdminErrorBoundary from "./components/AdminErrorBoundary";
 
 function PageTitle() {
   const location = useLocation();
@@ -154,7 +155,7 @@ function App() {
             <Route path="/orders" element={<MyOrdersView />} />
             <Route path="/auth" element={<AuthView />} />
             <Route path="/admin" element={<AdminLoginView />} />
-            <Route element={<AdminLayout />}>
+            <Route element={<AdminErrorBoundary><AdminLayout /></AdminErrorBoundary>}>
               <Route path="/admin/dashboard" element={<AdminDashboardView />} />
               <Route path="/admin/products" element={<AdminProductsView />} />
               <Route path="/admin/orders" element={<AdminOrdersView />} />
@@ -197,5 +198,4 @@ export default App;
 
 
 import AboutUsView from "./views/AboutUsView";
-
 

@@ -34,9 +34,8 @@ export const isAuthorizedAdmin = async () => {
 
   if (error) {
     console.error("Admin session check failed:", error);
-    return false;
+    throw error;
   }
 
   return Boolean(data?.session);
 };
-

@@ -5,7 +5,11 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
+
+const jsonResponse = (body, status = 200) =>
+  Response.json(body, { status, headers: corsHeaders });
 
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -60,35 +64,49 @@ export default {
     { auth: ["user"] },
     async (req, ctx) => {
       if (req.method === "OPTIONS") {
-        return new Response("ok", { headers: corsHeaders });
+        return new Response("ok", { status: 200, headers: corsHeaders });
       }
 
       try {
+        if (req.method !== "POST") {
+          return jsonResponse({ error: "Method not allowed." }, 405);
+        }
+
         const {
           data: { user },
           error: userError,
         } = await ctx.supabase.auth.getUser();
 
         if (userError || !user) {
-          return Response.json(
-            { error: "Unauthorized" },
-            { status: 401, headers: corsHeaders },
-          );
+          return jsonResponse({ error: "Unauthorized." }, 401);
         }
 
         const { data: isAdmin, error: adminCheckError } =
           await ctx.supabase.rpc("is_store_admin");
 
-        if (adminCheckError || isAdmin !== true) {
+        if (adminCheckError) {
           console.error("Store admin check failed:", adminCheckError);
-
-          return Response.json(
-            { error: "Only store admins can send order emails." },
-            { status: 403, headers: corsHeaders },
+          return jsonResponse(
+            { error: "Unable to verify store administrator access." },
+            500,
           );
         }
 
-        const { order } = await req.json();
+        if (isAdmin !== true) {
+          return jsonResponse(
+            { error: "Only store admins can send order emails." },
+            403,
+          );
+        }
+
+        let requestBody;
+        try {
+          requestBody = await req.json();
+        } catch {
+          return jsonResponse({ error: "Request body must be valid JSON." }, 400);
+        }
+
+        const order = requestBody?.order;
 
         const allowedStatuses = [
           "Pending",
@@ -99,11 +117,15 @@ export default {
           "Cancelled",
         ];
 
-        if (!order || !allowedStatuses.includes(order.status)) {
-          return Response.json(
-            { error: "A valid order status is required." },
-            { status: 400, headers: corsHeaders },
+        if (!order || typeof order !== "object" || !allowedStatuses.includes(order.status)) {
+          return jsonResponse(
+            { error: "A valid order and order status are required." },
+            400,
           );
+        }
+
+        if (!Array.isArray(order.items)) {
+          return jsonResponse({ error: "Order items must be an array." }, 400);
         }
 
         const customer = order.customer || {};
@@ -111,15 +133,22 @@ export default {
         const customerName = String(customer.fullName || "Customer").trim();
 
         if (!customerEmail) {
-          return Response.json(
-            { error: "Customer email address is missing." },
-            { status: 400, headers: corsHeaders },
+          return jsonResponse(
+            { error: "Customer email address is missing from the order payload." },
+            400,
+          );
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+          return jsonResponse(
+            { error: "Customer email address is invalid." },
+            400,
           );
         }
 
         const status = order.status;
         const content = statusContent[status];
-        const items = Array.isArray(order.items) ? order.items : [];
+        const items = order.items;
 
         const itemRows = items
           .map((item) => {
@@ -148,9 +177,7 @@ export default {
           })
           .join("");
 
-        const orderNumber = escapeHtml(
-          order.orderNumber || order.id || "N/A",
-        );
+        const orderNumber = escapeHtml(order.orderNumber || order.id || "N/A");
 
         const customerAddress = escapeHtml(
           customer.address ||
@@ -164,6 +191,11 @@ export default {
             order.shippingAddress?.city ||
             "",
         );
+        const customerPhone = escapeHtml(customer.phone || order.customerPhone || "");
+        const totals = order.totals && typeof order.totals === "object"
+          ? order.totals
+          : order;
+        const grandTotal = totals.grandTotal ?? order.grandTotal;
 
         const htmlContent = `
           <!DOCTYPE html>
@@ -209,7 +241,7 @@ export default {
                 </table>
 
                 <div style="text-align:right;margin-top:20px;font-size:18px;">
-                  <strong>Grand Total: ${formatPKR(order.grandTotal)}</strong>
+                  <strong>Grand Total: ${formatPKR(grandTotal)}</strong>
                 </div>
 
                 ${
@@ -218,7 +250,7 @@ export default {
                     <div style="margin-top:28px;padding:18px;background:#fafafa;border-radius:8px;">
                       <strong>Delivery Address</strong>
                       <p style="margin:8px 0 0;line-height:1.5;">
-                        ${customerAddress}${city ? `<br>${city}` : ""}
+                        ${customerAddress}${city ? `<br>${city}` : ""}${customerPhone ? `<br>Phone: ${customerPhone}` : ""}
                       </p>
                     </div>
                     `
@@ -245,12 +277,17 @@ export default {
           Deno.env.get("BREVO_SENDER_NAME") || "FK DECORE";
 
         if (!brevoApiKey || !senderEmail) {
-          throw new Error("Brevo configuration is missing.");
+          throw new Error(
+            `Brevo configuration is missing: ${[
+              !brevoApiKey && "BREVO_API_KEY",
+              !senderEmail && "BREVO_SENDER_EMAIL",
+            ].filter(Boolean).join(", ")}.`,
+          );
         }
 
-        const brevoResponse = await fetch(
-          "https://api.brevo.com/v3/smtp/email",
-          {
+        let brevoResponse;
+        try {
+          brevoResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
             method: "POST",
             headers: {
               accept: "application/json",
@@ -271,43 +308,58 @@ export default {
               subject: `FK DECORE — Order ${orderNumber} ${status}`,
               htmlContent,
             }),
-          },
-        );
+          });
+        } catch (error) {
+          console.error("Brevo request failed:", error);
+          return jsonResponse(
+            {
+              error: "Unable to connect to Brevo.",
+              details: error instanceof Error ? error.message : String(error),
+            },
+            502,
+          );
+        }
 
-        const brevoResult = await brevoResponse.json();
+        const brevoResponseText = await brevoResponse.text();
+        let brevoResult;
+        try {
+          brevoResult = brevoResponseText ? JSON.parse(brevoResponseText) : {};
+        } catch {
+          brevoResult = { message: brevoResponseText || "Brevo returned an empty response." };
+        }
 
         if (!brevoResponse.ok) {
           console.error("Brevo error:", brevoResult);
 
-          return Response.json(
+          return jsonResponse(
             {
               error: "Brevo failed to send the email.",
               details: brevoResult,
+              upstreamStatus: brevoResponse.status,
             },
-            { status: 502, headers: corsHeaders },
+            502,
           );
         }
 
-        return Response.json(
+        return jsonResponse(
           {
             success: true,
             messageId: brevoResult.messageId || null,
             recipient: customerEmail,
             status,
-          },
-          { headers: corsHeaders },
+          }
         );
       } catch (error) {
         console.error("Order email error:", error);
 
-        return Response.json(
+        return jsonResponse(
           {
             error:
               error instanceof Error
                 ? error.message
                 : "Unexpected server error.",
           },
-          { status: 500, headers: corsHeaders },
+          500,
         );
       }
     },

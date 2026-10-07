@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { toast } from "sonner";
 import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
@@ -56,60 +56,72 @@ const orderToRow = (order) => {
   const shippingAddress = order.shippingAddress || customer;
 
   return {
-    id: order.id,
-    order_number: order.orderNumber || order.id,
-    date: order.date || new Date().toISOString().split("T")[0],
-    status: order.status || "Processing",
-    items: Array.isArray(order.items) ? order.items : [],
-    subtotal: Number(order.subtotal) || 0,
-    shipping: Number(order.shipping) || 0,
-    tax: Number(order.tax) || 0,
-    discount: Number(order.discount) || 0,
-    grand_total: Number(order.grandTotal) || 0,
+    order_number: order.orderNumber || `ORD-${Date.now()}`,
     customer,
-    shipping_address: shippingAddress,
-    customer_name: customer.fullName || "",
-    customer_email: customer.email || "",
-    customer_phone: customer.phone || "",
-    customer_address: [
-      customer.address,
-      customer.city,
-      customer.postalCode,
-      customer.country
-    ].filter(Boolean).join(", "),
+    items: Array.isArray(order.items) ? order.items : [],
     payment_method: order.paymentMethod || "",
-    notes: order.notes || ""
+    notes: order.notes || "",
+    totals: {
+      subtotal: Number(order.subtotal) || 0,
+      shipping: Number(order.shipping) || 0,
+      tax: Number(order.tax) || 0,
+      discount: Number(order.discount) || 0,
+      grandTotal: Number(order.grandTotal) || 0
+    },
+    status: "Pending",
+    access_token_hash: order.accessTokenHash
   };
 };
 
-const rowToOrder = (row) => ({
-  id: row.id,
-  orderNumber: row.order_number || row.id,
-  date: row.date,
-  status: row.status || "Processing",
-  items: row.items || [],
-  subtotal: Number(row.subtotal) || 0,
-  shipping: Number(row.shipping) || 0,
-  tax: Number(row.tax) || 0,
-  discount: Number(row.discount) || 0,
-  grandTotal: Number(row.grand_total) || 0,
-  customer: {
-    ...(row.shipping_address || {}),
-    ...(row.customer || {}),
-    fullName: row.customer?.fullName || row.customer_name || row.shipping_address?.fullName || "",
-    email: row.customer?.email || row.customer_email || row.shipping_address?.email || "",
-    phone: row.customer?.phone || row.customer_phone || row.shipping_address?.phone || "",
-    address: row.customer?.address || row.shipping_address?.address || row.customer_address || ""
-  },
-  shippingAddress: row.shipping_address || row.customer || {},
-  customerName: row.customer_name || "",
-  customerEmail: row.customer_email || "",
-  customerPhone: row.customer_phone || "",
-  customerAddress: row.customer_address || "",
-  paymentMethod: row.payment_method || "",
-  notes: row.notes || "",
-  createdAt: row.created_at
-});
+const rowToOrder = (row) => {
+  row = row && typeof row === "object" ? row : {};
+  const customer = row.customer && typeof row.customer === "object" && !Array.isArray(row.customer)
+    ? row.customer
+    : {};
+  const shippingAddress =
+    row.shipping_address && typeof row.shipping_address === "object" && !Array.isArray(row.shipping_address)
+      ? row.shipping_address
+      : customer;
+  const totals = row.totals && typeof row.totals === "object" && !Array.isArray(row.totals)
+    ? row.totals
+    : {};
+
+  return {
+    id: row.id,
+    orderNumber: row.order_number || row.id,
+    date: row.date || row.created_at,
+    status: row.status || "Processing",
+    items: Array.isArray(row.items) ? row.items : [],
+    subtotal: Number(totals.subtotal ?? row.subtotal) || 0,
+    shipping: Number(totals.shipping ?? row.shipping) || 0,
+    tax: Number(totals.tax ?? row.tax) || 0,
+    discount: Number(totals.discount ?? row.discount) || 0,
+    grandTotal: Number(totals.grandTotal ?? row.grand_total) || 0,
+    totals: {
+      subtotal: Number(totals.subtotal ?? row.subtotal) || 0,
+      shipping: Number(totals.shipping ?? row.shipping) || 0,
+      tax: Number(totals.tax ?? row.tax) || 0,
+      discount: Number(totals.discount ?? row.discount) || 0,
+      grandTotal: Number(totals.grandTotal ?? row.grand_total) || 0
+    },
+    customer: {
+      ...shippingAddress,
+      ...customer,
+      fullName: customer.fullName || row.customer_name || shippingAddress.fullName || "",
+      email: customer.email || row.customer_email || shippingAddress.email || "",
+      phone: customer.phone || row.customer_phone || shippingAddress.phone || "",
+      address: customer.address || shippingAddress.address || row.customer_address || ""
+    },
+    shippingAddress,
+    customerName: row.customer_name || "",
+    customerEmail: row.customer_email || "",
+    customerPhone: row.customer_phone || "",
+    customerAddress: row.customer_address || "",
+    paymentMethod: row.payment_method || "",
+    notes: row.notes || "",
+    createdAt: row.created_at
+  };
+};
 
 const AppContext = createContext();
 const ADMIN_PRODUCTS_KEY = "fk_decore_admin_products";
@@ -119,6 +131,40 @@ const dispatchAdminDataEvent = (detail) => {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent("fk-decore-admin-data", { detail }));
   }
+};
+
+const getFunctionErrorMessage = async (error) => {
+  const response = error?.context;
+  let responseBody;
+
+  if (response && typeof response.clone === "function") {
+    try {
+      responseBody = await response.clone().json();
+    } catch {
+      try {
+        responseBody = await response.clone().text();
+      } catch {
+        responseBody = null;
+      }
+    }
+  }
+
+  if (responseBody && typeof responseBody === "object") {
+    const message = responseBody.error || responseBody.message;
+    const details = responseBody.details;
+    const detailMessage =
+      typeof details === "string"
+        ? details
+        : details?.message || (details ? JSON.stringify(details) : "");
+
+    if (message) {
+      return `${message}${detailMessage ? ` (${detailMessage})` : ""}`;
+    }
+  } else if (typeof responseBody === "string" && responseBody.trim()) {
+    return responseBody.trim();
+  }
+
+  return error?.message || "The email service returned an unknown error.";
 };
 
 export const AppProvider = ({ children }) => {
@@ -134,6 +180,7 @@ export const AppProvider = ({ children }) => {
   });
 
   const [orders, setOrders] = useState([]);
+  const ordersRefreshInFlight = useRef(null);
 
   const [wishlist, setWishlist] = useState([]);
   const [promoCode, setPromoCode] = useState("");
@@ -178,21 +225,22 @@ export const AppProvider = ({ children }) => {
         }
       } catch (error) {
         console.error("Supabase products load failed:", error);
-        if (mounted) {
-          setproducts([]);
-          localStorage.setItem(ADMIN_PRODUCTS_KEY, JSON.stringify([]));
-        }
       }
     };
 
     loadProductsFromSupabase();
 
+    let productReloadTimer;
     const authListener = isSupabaseConfigured && supabase
-      ? supabase.auth.onAuthStateChange(() => window.setTimeout(loadProductsFromSupabase, 0)).data.subscription
+      ? supabase.auth.onAuthStateChange(() => {
+        window.clearTimeout(productReloadTimer);
+        productReloadTimer = window.setTimeout(loadProductsFromSupabase, 0);
+      }).data.subscription
       : null;
 
     return () => {
       mounted = false;
+      window.clearTimeout(productReloadTimer);
       authListener?.unsubscribe();
     };
   }, []);
@@ -240,13 +288,35 @@ export const AppProvider = ({ children }) => {
   const addProduct = async (product) => {
     const nextProduct = {
       ...product,
-      id: product.id || `fk-admin-${Date.now()}`
+      id: product.id || `fk-admin-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
     };
 
     const { data: sessionData } = await supabase.auth.getSession();
 
     if (!sessionData?.session) {
       throw new Error("Admin authentication is required before adding products.");
+    }
+
+    const { data: existingProduct, error: existingError } = await supabase
+      .from("products")
+      .select("*")
+      .eq("name", nextProduct.name)
+      .eq("image", nextProduct.image)
+      .limit(1)
+      .maybeSingle();
+
+    if (existingError) {
+      throw existingError;
+    }
+
+    if (existingProduct) {
+      const existing = rowToProduct(existingProduct);
+      saveProducts(
+        products.some((product) => product.id === existing.id)
+          ? products
+          : [...products, existing]
+      );
+      return existing;
     }
 
     const { data, error } = await supabase
@@ -261,7 +331,11 @@ export const AppProvider = ({ children }) => {
 
     const createdProduct = rowToProduct(data);
 
-    saveProducts([...products, createdProduct]);
+    saveProducts(
+      products.some((product) => product.id === createdProduct.id)
+        ? products
+        : [...products, createdProduct]
+    );
 
     return createdProduct;
   };
@@ -337,45 +411,82 @@ export const AppProvider = ({ children }) => {
     dispatchAdminDataEvent({ orders: nextOrders });
 
     if (shouldSendStatusEmail && updatedOrder) {
+      const customer = updatedOrder.customer || {};
+      const totals = updatedOrder.totals || {
+        subtotal: updatedOrder.subtotal,
+        shipping: updatedOrder.shipping,
+        tax: updatedOrder.tax,
+        discount: updatedOrder.discount,
+        grandTotal: updatedOrder.grandTotal
+      };
       const { error: emailError } = await supabase.functions.invoke(
         "send-order-confirmation",
         {
           body: {
-            order: updatedOrder,
+            order: {
+              ...updatedOrder,
+              orderNumber: updatedOrder.orderNumber || updatedOrder.id,
+              customer: {
+                ...customer,
+                fullName: customer.fullName || updatedOrder.customerName || "",
+                email: customer.email || updatedOrder.customerEmail || "",
+                phone: customer.phone || updatedOrder.customerPhone || "",
+                address: customer.address || updatedOrder.customerAddress || "",
+                city: customer.city || updatedOrder.shippingAddress?.city || ""
+              },
+              items: Array.isArray(updatedOrder.items) ? updatedOrder.items : [],
+              totals,
+              status
+            }
           },
         }
       );
 
       if (emailError) {
+        const emailReason = await getFunctionErrorMessage(emailError);
         throw new Error(
-          `Order status was updated to ${status}, but the customer email could not be sent: ${emailError.message}`
+          `Order status was updated to ${status}, but the customer email could not be sent: ${emailReason}`
         );
       }
     }
   };
 
-  const refreshOrders = useCallback(async () => {
-    if (!isSupabaseConfigured || !supabase) {
-      throw new Error("Supabase is not configured.");
+  const refreshOrders = useCallback(() => {
+    if (ordersRefreshInFlight.current) {
+      return ordersRefreshInFlight.current;
     }
 
-    const { data, error } = await supabase
-      .from("orders")
-      .select("*")
-      .order("created_at", { ascending: false });
+    const request = (async () => {
+      if (!isSupabaseConfigured || !supabase) {
+        throw new Error("Supabase is not configured.");
+      }
 
-    if (error) throw error;
+      const { data, error } = await supabase
+        .from("orders")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-    if (Array.isArray(data)) {
+      if (error) throw error;
+      if (!Array.isArray(data)) {
+        throw new Error("Supabase returned an invalid orders response.");
+      }
+
       const loadedOrders = data.map(rowToOrder);
       setOrders(loadedOrders);
       localStorage.setItem("lixir_orders", JSON.stringify(loadedOrders));
       localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(loadedOrders));
       dispatchAdminDataEvent({ orders: loadedOrders });
       return loadedOrders;
-    }
+    })();
 
-    return orders;
+    ordersRefreshInFlight.current = request;
+    request.finally(() => {
+      if (ordersRefreshInFlight.current === request) {
+        ordersRefreshInFlight.current = null;
+      }
+    }).catch(() => {});
+
+    return request;
   }, []);
 
   const addToCart = (product, size = "M", qty = 1) => {
@@ -439,14 +550,31 @@ export const AppProvider = ({ children }) => {
   };
 
   const placeOrder = async (orderDetails) => {
-    const orderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
+    const orderNumber = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
     const customer = orderDetails.customer || {};
 
+    if (!isSupabaseConfigured || !supabase) {
+      throw new Error("Supabase is not configured.");
+    }
+
+    if (!cart.length) {
+      throw new Error("Your cart is empty.");
+    }
+
+    const accessToken = crypto.randomUUID() + crypto.randomUUID();
+    const accessTokenHashBuffer = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(accessToken)
+    );
+    const accessTokenHash = Array.from(new Uint8Array(accessTokenHashBuffer))
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+
     const newOrder = {
-      id: orderId,
-      orderNumber: orderId,
+      id: orderNumber,
+      orderNumber,
       date: new Date().toISOString().split("T")[0],
-      status: "Processing",
+      status: "Pending",
       items: [...cart],
       subtotal: Number(orderDetails.subtotal) || 0,
       shipping: Number(orderDetails.shipping) || 0,
@@ -458,14 +586,16 @@ export const AppProvider = ({ children }) => {
       customerName: customer.fullName || "",
       customerEmail: customer.email || "",
       customerPhone: customer.phone || "",
-      customerAddress: [customer.address, customer.city, customer.postalCode, customer.country].filter(Boolean).join(", "),
+      customerAddress: [
+        customer.address,
+        customer.city,
+        customer.postalCode,
+        customer.country
+      ].filter(Boolean).join(", "),
       paymentMethod: orderDetails.paymentMethod || "Online Payment",
-      notes: orderDetails.notes || ""
+      notes: orderDetails.notes || "",
+      accessTokenHash
     };
-
-    if (!isSupabaseConfigured || !supabase) {
-      throw new Error("Supabase is not configured.");
-    }
 
     const { error } = await supabase
       .from("orders")
@@ -476,7 +606,7 @@ export const AppProvider = ({ children }) => {
       throw error;
     }
 
-    setOrders(prev => {
+    setOrders((prev) => {
       const nextOrders = [newOrder, ...prev];
       localStorage.setItem("lixir_orders", JSON.stringify(nextOrders));
       localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
@@ -558,9 +688,6 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
-
-
-
 
 
 
