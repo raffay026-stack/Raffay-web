@@ -56,6 +56,7 @@ const orderToRow = (order) => {
   const shippingAddress = order.shippingAddress || customer;
 
   return {
+    id: order.id || order.orderNumber || `ORD-${Date.now()}`,
     order_number: order.orderNumber || `ORD-${Date.now()}`,
     customer,
     shipping_address: shippingAddress,
@@ -682,6 +683,7 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
 
 
 
