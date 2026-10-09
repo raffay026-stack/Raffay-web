@@ -127,6 +127,21 @@ const AppContext = createContext();
 const ADMIN_PRODUCTS_KEY = "fk_decore_admin_products";
 const ADMIN_ORDERS_KEY = "fk_decore_admin_orders";
 
+function safeSetLocalStorage(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch (error) {
+    console.warn(
+      "FK DECORE: browser storage is full; keeping server data and continuing.",
+      key,
+      error
+    );
+    return false;
+  }
+}
+
+
 const dispatchAdminDataEvent = (detail) => {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent("fk-decore-admin-data", { detail }));
@@ -195,8 +210,8 @@ export const AppProvider = ({ children }) => {
   }, [cart]);
 
   useEffect(() => {
-    localStorage.setItem("lixir_orders", JSON.stringify(orders));
-    localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(orders));
+    safeSetLocalStorage("lixir_orders", JSON.stringify(orders));
+    safeSetLocalStorage(ADMIN_ORDERS_KEY, JSON.stringify(orders));
   }, [orders]);
 
   useEffect(() => {
@@ -406,8 +421,8 @@ export const AppProvider = ({ children }) => {
     );
 
     setOrders(nextOrders);
-    localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
-    localStorage.setItem("lixir_orders", JSON.stringify(nextOrders));
+    safeSetLocalStorage(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
+    safeSetLocalStorage("lixir_orders", JSON.stringify(nextOrders));
     dispatchAdminDataEvent({ orders: nextOrders });
 
     if (shouldSendStatusEmail && updatedOrder) {
@@ -473,8 +488,8 @@ export const AppProvider = ({ children }) => {
 
       const loadedOrders = data.map(rowToOrder);
       setOrders(loadedOrders);
-      localStorage.setItem("lixir_orders", JSON.stringify(loadedOrders));
-      localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(loadedOrders));
+      safeSetLocalStorage("lixir_orders", JSON.stringify(loadedOrders));
+      safeSetLocalStorage(ADMIN_ORDERS_KEY, JSON.stringify(loadedOrders));
       dispatchAdminDataEvent({ orders: loadedOrders });
       return loadedOrders;
     })();
@@ -608,8 +623,8 @@ export const AppProvider = ({ children }) => {
 
     setOrders((prev) => {
       const nextOrders = [newOrder, ...prev];
-      localStorage.setItem("lixir_orders", JSON.stringify(nextOrders));
-      localStorage.setItem(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
+      safeSetLocalStorage("lixir_orders", JSON.stringify(nextOrders));
+      safeSetLocalStorage(ADMIN_ORDERS_KEY, JSON.stringify(nextOrders));
       dispatchAdminDataEvent({ orders: nextOrders });
       return nextOrders;
     });
