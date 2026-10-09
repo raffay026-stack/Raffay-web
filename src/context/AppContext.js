@@ -58,16 +58,15 @@ const orderToRow = (order) => {
   return {
     order_number: order.orderNumber || `ORD-${Date.now()}`,
     customer,
+    shipping_address: shippingAddress,
     items: Array.isArray(order.items) ? order.items : [],
     payment_method: order.paymentMethod || "",
     notes: order.notes || "",
-    totals: {
-      subtotal: Number(order.subtotal) || 0,
-      shipping: Number(order.shipping) || 0,
-      tax: Number(order.tax) || 0,
-      discount: Number(order.discount) || 0,
-      grandTotal: Number(order.grandTotal) || 0
-    },
+    subtotal: Number(order.subtotal) || 0,
+    shipping: Number(order.shipping) || 0,
+    tax: Number(order.tax) || 0,
+    discount: Number(order.discount) || 0,
+    grand_total: Number(order.grandTotal) || 0,
     status: "Pending",
     access_token_hash: order.accessTokenHash
   };
@@ -683,6 +682,7 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
 
 
 
