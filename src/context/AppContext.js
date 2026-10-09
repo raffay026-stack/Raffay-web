@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { toast } from "sonner";
 import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
@@ -312,27 +312,7 @@ export const AppProvider = ({ children }) => {
       throw new Error("Admin authentication is required before adding products.");
     }
 
-    const { data: existingProduct, error: existingError } = await supabase
-      .from("products")
-      .select("*")
-      .eq("name", nextProduct.name)
-      .eq("image", nextProduct.image)
-      .limit(1)
-      .maybeSingle();
 
-    if (existingError) {
-      throw existingError;
-    }
-
-    if (existingProduct) {
-      const existing = rowToProduct(existingProduct);
-      saveProducts(
-        products.some((product) => product.id === existing.id)
-          ? products
-          : [...products, existing]
-      );
-      return existing;
-    }
 
     const { data, error } = await supabase
       .from("products")
@@ -703,6 +683,7 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
 
 
 
