@@ -3,29 +3,57 @@
 @tailwind utilities;
 
 /* =========================================================
-   FK Decore CLEAN MASTER THEME
-   Ivory + Burgundy + Champagne
+   FK DECORE PREMIUM 3D LUXURY DESIGN SYSTEM
+   Warm Ivory + Deep Burgundy + Champagne Gold + 3D Depth
    ========================================================= */
 
 :root {
+  /* Background Colors - Warm Neutrals */
   --sc-bg: #FFFDF8;
   --sc-bg-soft: #F7F1EC;
   --sc-surface: #FFFFFF;
   --sc-surface-soft: #F3E8E1;
+  --sc-surface-elevated: #FFFEF9;
 
+  /* Primary Brand Colors - Rich Burgundy Palette */
   --sc-burgundy: #6E1F35;
   --sc-burgundy-dark: #43111F;
   --sc-burgundy-light: #9A4C63;
+  --sc-burgundy-accent: #87344D;
 
+  /* Accent Colors - Champagne & Gold */
   --sc-champagne: #D8C3A5;
   --sc-champagne-soft: #EFE5D8;
+  --sc-gold: #C9A961;
+  --sc-gold-light: #E5D1A0;
 
+  /* Text Colors - Refined Hierarchy */
   --sc-text: #2D2326;
   --sc-text-soft: #5D5054;
   --sc-muted: #7C6E72;
+  --sc-text-lighter: #8A7A80;
 
+  /* Border Colors - Subtle Separation */
   --sc-border: #E5D8D0;
   --sc-border-strong: #D2BCB0;
+  --sc-border-light: #F0E6DC;
+
+  /* 3D Depth System - Layered Shadows */
+  --shadow-sm: 0 1px 2px rgba(67, 17, 31, 0.06);
+  --shadow-md: 0 4px 8px rgba(67, 17, 31, 0.08), 0 1px 3px rgba(67, 17, 31, 0.06);
+  --shadow-lg: 0 10px 24px rgba(67, 17, 31, 0.12), 0 4px 8px rgba(67, 17, 31, 0.08);
+  --shadow-xl: 0 20px 40px rgba(67, 17, 31, 0.16), 0 8px 16px rgba(67, 17, 31, 0.1);
+  --shadow-2xl: 0 30px 60px rgba(67, 17, 31, 0.2), 0 12px 24px rgba(67, 17, 31, 0.12);
+
+  /* Premium Glass Effects */
+  --glass-bg: rgba(255, 253, 248, 0.85);
+  --glass-border: rgba(110, 31, 53, 0.15);
+
+  /* Smooth Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 500ms cubic-bezier(0.4, 0, 0.1, 1);
 }
 
 * {
@@ -114,7 +142,7 @@ header nav button:hover {
    Gold icon remains inside SVG
    ========================================================= */
 
-.FK Decore-logo-badge {
+.FK-Decore-logo-badge {
   background:
     radial-gradient(
       circle at 35% 30%,
@@ -141,7 +169,7 @@ main {
   color: var(--sc-text);
 }
 
-section:not(.FK Decore-cinematic-hero) {
+section:not(.FK-Decore-cinematic-hero) {
   background:
     linear-gradient(
       180deg,
@@ -268,7 +296,7 @@ footer a:hover {
    Keep generated perfume image + animation
    ========================================================= */
 
-.FK Decore-cinematic-hero {
+.FK-Decore-cinematic-hero {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -276,7 +304,7 @@ footer a:hover {
   background: #07110F;
 }
 
-.FK Decore-cinematic-hero::before {
+.FK-Decore-cinematic-hero::before {
   content: "";
   position: absolute;
   inset: -6%;
@@ -294,10 +322,10 @@ footer a:hover {
 
   background-size: cover;
   background-position: center;
-  animation: FK DecoreHeroMotion 18s ease-in-out infinite alternate;
+  animation: FKDecoreHeroMotion 18s ease-in-out infinite alternate;
 }
 
-.FK Decore-cinematic-hero::after {
+.FK-Decore-cinematic-hero::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -321,36 +349,36 @@ footer a:hover {
       rgba(18,5,10,.58)
     );
 
-  animation: FK DecoreMist 7s ease-in-out infinite alternate;
+  animation: FKDecoreMist 7s ease-in-out infinite alternate;
 }
 
-.FK Decore-cinematic-hero > * {
+.FK-Decore-cinematic-hero > * {
   position: relative;
   z-index: 2;
 }
 
-.FK Decore-cinematic-hero h1,
-.FK Decore-cinematic-hero h2,
-.FK Decore-cinematic-hero h3 {
+.FK-Decore-cinematic-hero h1,
+.FK-Decore-cinematic-hero h2,
+.FK-Decore-cinematic-hero h3 {
   color: #FFFDF8 !important;
   -webkit-text-fill-color: #FFFDF8 !important;
 }
 
-.FK Decore-cinematic-hero p {
+.FK-Decore-cinematic-hero p {
   color: #F5ECE7 !important;
 }
 
-.FK Decore-cinematic-hero input {
+.FK-Decore-cinematic-hero input {
   background: rgba(18,5,10,.72) !important;
   color: #FFFFFF !important;
   border-color: rgba(255,255,255,.25) !important;
 }
 
-.FK Decore-cinematic-hero input::placeholder {
+.FK-Decore-cinematic-hero input::placeholder {
   color: rgba(255,255,255,.62);
 }
 
-@keyframes FK DecoreHeroMotion {
+@keyframes FKDecoreHeroMotion {
   0% {
     transform: scale(1.04) translate3d(-1%,0,0);
   }
@@ -364,7 +392,7 @@ footer a:hover {
   }
 }
 
-@keyframes FK DecoreMist {
+@keyframes FKDecoreMist {
   from {
     opacity: .58;
     filter: blur(0);
@@ -443,8 +471,8 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
 
 /* ===== HERO SEARCH BUTTON FIX ===== */
 
-.FK Decore-cinematic-hero form button,
-.FK Decore-cinematic-hero button[type="submit"] {
+.FK-Decore-cinematic-hero form button,
+.FK-Decore-cinematic-hero button[type="submit"] {
   background:
     linear-gradient(
       135deg,
@@ -463,13 +491,13 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
     0 8px 22px rgba(67,17,31,.24) !important;
 }
 
-.FK Decore-cinematic-hero form button *,
-.FK Decore-cinematic-hero button[type="submit"] * {
+.FK-Decore-cinematic-hero form button *,
+.FK-Decore-cinematic-hero button[type="submit"] * {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
 }
 
-.FK Decore-cinematic-hero form button:hover {
+.FK-Decore-cinematic-hero form button:hover {
   background:
     linear-gradient(
       135deg,
@@ -481,7 +509,7 @@ header [data-testid="navbar-brand-logo"] span:last-of-type {
 
 /* ===== FK Decore LARGE LUXURY BRAND MARK ===== */
 
-header [data-testid="navbar-brand-logo"] img.FK Decore-logo-badge {
+header [data-testid="navbar-brand-logo"] img.FK-Decore-logo-badge {
   width: 64px !important;
   height: 64px !important;
   min-width: 64px !important;
@@ -505,12 +533,12 @@ header [data-testid="navbar-brand-logo"] img.FK Decore-logo-badge {
 }
 
 /* Generated-reference style hero alignment */
-.FK Decore-cinematic-hero .max-w-7xl {
+.FK-Decore-cinematic-hero .max-w-7xl {
   width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .FK Decore-cinematic-hero::before {
+  .FK-Decore-cinematic-hero::before {
     background-position: center right !important;
   }
 }
@@ -584,18 +612,18 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 /* ===== FK Decore HERO VIDEO ===== */
 
-.FK Decore-cinematic-hero::before,
-.FK Decore-cinematic-hero::after {
+.FK-Decore-cinematic-hero::before,
+.FK-Decore-cinematic-hero::after {
   display: none !important;
 }
 
-.FK Decore-hero-video {
+.FK-Decore-hero-video {
   z-index: 0 !important;
   object-fit: cover !important;
   object-position: center center !important;
 }
 
-.FK Decore-hero-video-overlay {
+.FK-Decore-hero-video-overlay {
   z-index: 1 !important;
 
   background:
@@ -613,14 +641,14 @@ main article .absolute.inset-x-0.bottom-0 button * {
     ) !important;
 }
 
-.FK Decore-cinematic-hero > .max-w-7xl {
+.FK-Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 2 !important;
 }
 
 /* Keep man more visible on right side */
 @media (min-width: 1024px) {
-  .FK Decore-hero-video {
+  .FK-Decore-hero-video {
     object-position: center center !important;
   }
 }
@@ -628,7 +656,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 /* ===== HERO VIDEO FULL-BLEED FIX ===== */
 
-.FK Decore-cinematic-hero {
+.FK-Decore-cinematic-hero {
   position: relative !important;
   min-height: 640px !important;
   overflow: hidden !important;
@@ -636,7 +664,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Video fills the ENTIRE hero */
-.FK Decore-cinematic-hero .FK Decore-hero-video {
+.FK-Decore-cinematic-hero .FK-Decore-hero-video {
   position: absolute !important;
   inset: 0 !important;
 
@@ -655,7 +683,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Overlay over complete video */
-.FK Decore-cinematic-hero .FK Decore-hero-video-overlay {
+.FK-Decore-cinematic-hero .FK-Decore-hero-video-overlay {
   position: absolute !important;
   inset: 0 !important;
   z-index: 1 !important;
@@ -671,14 +699,14 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Content above video */
-.FK Decore-cinematic-hero > .max-w-7xl {
+.FK-Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 2 !important;
   width: 100% !important;
 }
 
 /* Move hero content to RIGHT like your screenshot */
-.FK Decore-cinematic-hero > .max-w-7xl > div {
+.FK-Decore-cinematic-hero > .max-w-7xl > div {
   margin-left: auto !important;
   margin-right: 0 !important;
   max-width: 580px !important;
@@ -686,15 +714,15 @@ main article .absolute.inset-x-0.bottom-0 button * {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .FK Decore-cinematic-hero {
+  .FK-Decore-cinematic-hero {
     min-height: 620px !important;
   }
 
-  .FK Decore-cinematic-hero .FK Decore-hero-video {
+  .FK-Decore-cinematic-hero .FK-Decore-hero-video {
     object-position: 42% center !important;
   }
 
-  .FK Decore-cinematic-hero .FK Decore-hero-video-overlay {
+  .FK-Decore-cinematic-hero .FK-Decore-hero-video-overlay {
     background:
       linear-gradient(
         to bottom,
@@ -703,7 +731,7 @@ main article .absolute.inset-x-0.bottom-0 button * {
       ) !important;
   }
 
-  .FK Decore-cinematic-hero > .max-w-7xl > div {
+  .FK-Decore-cinematic-hero > .max-w-7xl > div {
     margin-left: 0 !important;
     max-width: 100% !important;
   }
@@ -715,11 +743,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
    ========================================================= */
 
 /* Hero content entrance */
-.FK Decore-cinematic-hero > .max-w-7xl > div {
-  animation: FK DecoreHeroContentIn 1.15s cubic-bezier(.22,.8,.25,1) both;
+.FK-Decore-cinematic-hero > .max-w-7xl > div {
+  animation: FKDecoreHeroContentIn 1.15s cubic-bezier(.22,.8,.25,1) both;
 }
 
-@keyframes FK DecoreHeroContentIn {
+@keyframes FKDecoreHeroContentIn {
   from {
     opacity: 0;
     transform: translateY(28px);
@@ -731,11 +759,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero badge floating */
-.FK Decore-cinematic-hero .inline-flex.rounded-full {
-  animation: FK DecoreBadgeFloat 4.5s ease-in-out infinite;
+.FK-Decore-cinematic-hero .inline-flex.rounded-full {
+  animation: FKDecoreBadgeFloat 4.5s ease-in-out infinite;
 }
 
-@keyframes FK DecoreBadgeFloat {
+@keyframes FKDecoreBadgeFloat {
   0%, 100% {
     transform: translateY(0);
   }
@@ -745,12 +773,12 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero heading subtle cinematic reveal */
-.FK Decore-cinematic-hero h1 {
-  animation: FK DecoreTitleReveal 1.3s ease-out both;
+.FK-Decore-cinematic-hero h1 {
+  animation: FKDecoreTitleReveal 1.3s ease-out both;
   transform-origin: left center;
 }
 
-@keyframes FK DecoreTitleReveal {
+@keyframes FKDecoreTitleReveal {
   from {
     opacity: 0;
     transform: translateY(22px) scale(.985);
@@ -764,11 +792,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Hero paragraph delayed reveal */
-.FK Decore-cinematic-hero p {
-  animation: FK DecoreFadeUp 1s .22s ease-out both;
+.FK-Decore-cinematic-hero p {
+  animation: FKDecoreFadeUp 1s .22s ease-out both;
 }
 
-@keyframes FK DecoreFadeUp {
+@keyframes FKDecoreFadeUp {
   from {
     opacity: 0;
     transform: translateY(16px);
@@ -780,11 +808,11 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Search bar soft breathing glow */
-.FK Decore-cinematic-hero form {
-  animation: FK DecoreSearchGlow 4s ease-in-out infinite;
+.FK-Decore-cinematic-hero form {
+  animation: FKDecoreSearchGlow 4s ease-in-out infinite;
 }
 
-@keyframes FK DecoreSearchGlow {
+@keyframes FKDecoreSearchGlow {
   0%, 100% {
     box-shadow: 0 10px 32px rgba(67,17,31,.14);
   }
@@ -796,8 +824,8 @@ main article .absolute.inset-x-0.bottom-0 button * {
 }
 
 /* Buttons premium hover */
-.FK Decore-cinematic-hero button,
-.FK Decore-cinematic-hero a {
+.FK-Decore-cinematic-hero button,
+.FK-Decore-cinematic-hero a {
   transition:
     transform .28s ease,
     box-shadow .28s ease,
@@ -805,18 +833,18 @@ main article .absolute.inset-x-0.bottom-0 button * {
     color .28s ease !important;
 }
 
-.FK Decore-cinematic-hero button:hover,
-.FK Decore-cinematic-hero a:hover {
+.FK-Decore-cinematic-hero button:hover,
+.FK-Decore-cinematic-hero a:hover {
   transform: translateY(-3px) scale(1.015);
   box-shadow: 0 14px 28px rgba(67,17,31,.22);
 }
 
 /* Home section headings */
-section:not(.FK Decore-cinematic-hero) h2 {
-  animation: FK DecoreSectionTitle 1s ease both;
+section:not(.FK-Decore-cinematic-hero) h2 {
+  animation: FKDecoreSectionTitle 1s ease both;
 }
 
-@keyframes FK DecoreSectionTitle {
+@keyframes FKDecoreSectionTitle {
   from {
     opacity: 0;
     transform: translateY(18px);
@@ -828,34 +856,34 @@ section:not(.FK Decore-cinematic-hero) h2 {
 }
 
 /* Product cards */
-section:not(.FK Decore-cinematic-hero) article,
-section:not(.FK Decore-cinematic-hero) .group {
+section:not(.FK-Decore-cinematic-hero) article,
+section:not(.FK-Decore-cinematic-hero) .group {
   transition:
     transform .35s cubic-bezier(.2,.8,.2,1),
     box-shadow .35s ease,
     border-color .35s ease !important;
 }
 
-section:not(.FK Decore-cinematic-hero) article:hover,
-section:not(.FK Decore-cinematic-hero) .group:hover {
+section:not(.FK-Decore-cinematic-hero) article:hover,
+section:not(.FK-Decore-cinematic-hero) .group:hover {
   transform: translateY(-8px);
   box-shadow:
     0 18px 42px rgba(67,17,31,.13) !important;
 }
 
 /* Product image zoom */
-section:not(.FK Decore-cinematic-hero) article img,
-section:not(.FK Decore-cinematic-hero) .group img {
+section:not(.FK-Decore-cinematic-hero) article img,
+section:not(.FK-Decore-cinematic-hero) .group img {
   transition: transform .55s cubic-bezier(.2,.8,.2,1) !important;
 }
 
-section:not(.FK Decore-cinematic-hero) article:hover img,
-section:not(.FK Decore-cinematic-hero) .group:hover img {
+section:not(.FK-Decore-cinematic-hero) article:hover img,
+section:not(.FK-Decore-cinematic-hero) .group:hover img {
   transform: scale(1.045);
 }
 
 /* Soft moving light over hero */
-.FK Decore-cinematic-hero::after {
+.FK-Decore-cinematic-hero::after {
   content: "";
   display: block !important;
   position: absolute;
@@ -873,10 +901,10 @@ section:not(.FK Decore-cinematic-hero) .group:hover img {
     );
 
   transform: translateX(-120%);
-  animation: FK DecoreHeroShimmer 9s ease-in-out infinite;
+  animation: FKDecoreHeroShimmer 9s ease-in-out infinite;
 }
 
-@keyframes FK DecoreHeroShimmer {
+@keyframes FKDecoreHeroShimmer {
   0%, 18% {
     transform: translateX(-120%);
   }
@@ -889,7 +917,7 @@ section:not(.FK Decore-cinematic-hero) .group:hover img {
 }
 
 /* Keep content above shimmer */
-.FK Decore-cinematic-hero > .max-w-7xl {
+.FK-Decore-cinematic-hero > .max-w-7xl {
   position: relative !important;
   z-index: 3 !important;
 }
@@ -1092,10 +1120,10 @@ section:not(.FK Decore-cinematic-hero) .group:hover img {
 }
 
 .luxury-reveal.luxury-visible::after {
-  animation: FK DecoreSectionSweep 1.8s cubic-bezier(.16,1,.3,1) .22s both;
+  animation: FKDecoreSectionSweep 1.8s cubic-bezier(.16,1,.3,1) .22s both;
 }
 
-@keyframes FK DecoreSectionSweep {
+@keyframes FKDecoreSectionSweep {
   0% {
     transform: translateX(-130%);
     opacity: 0;

@@ -6,17 +6,22 @@ import Logo from "../assets/fk-logo.jpeg";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#050505] border-t border-[#43111F]/30 text-[#7C6E72] pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-gradient-to-br from-[#0A0506] via-[#050505] to-[#0A0506] border-t border-[#43111F]/40 text-[#7C6E72] pt-16 pb-12 overflow-hidden">
+      {/* Premium ambient lighting effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#6E1F35]/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#87344D]/5 rounded-full blur-3xl"></div>
 
-        {/* Decor Benefits */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-[#E5D8D0] text-center md:text-left">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-          <div className="flex flex-col items-center md:items-start space-y-3">
-            <div className="p-3 bg-[#F7F1EC] border border-[#43111F]/30 rounded-full text-[#43111F]">
-              <Truck className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
+        {/* Premium Decor Benefits with 3D Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-[#E5D8D0]/20 text-center md:text-left">
+
+          <div className="flex flex-col items-center md:items-start space-y-3 group">
+            <div className="relative p-4 bg-gradient-to-br from-[#F7F1EC] to-[#EFE5D8] border border-[#43111F]/30 rounded-2xl text-[#43111F] shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6E1F35]/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <Truck className="relative w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
-            <h4 className="font-serif text-[#2D2326] font-medium">Fast Delivery</h4>
+            <h4 className="font-serif text-[#F3EFE6] font-semibold group-hover:text-[#D8C3A5] transition-colors">Fast Delivery</h4>
             <p className="text-xs text-[#8A7A80]">
               Safe and reliable delivery for your selected decor pieces.
             </p>

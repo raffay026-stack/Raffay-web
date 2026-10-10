@@ -4,13 +4,14 @@ import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartDrawer from "../components/CartDrawer";
-import { 
-  Crown, 
-  Sparkles, 
-  Star, 
-  ArrowRight, 
-  ShieldCheck, 
-  Heart, 
+import PremiumProductCard from "../components/PremiumProductCard";
+import {
+  Crown,
+  Sparkles,
+  Star,
+  ArrowRight,
+  ShieldCheck,
+  Heart,
   ShoppingBag,
   SlidersHorizontal,
   Search
@@ -121,137 +122,77 @@ export default function HomeView() {
           </div>
         </div>
 
-        {/* Product Grid */}
+        {/* Premium Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {displayedSaleProducts.map((product) => {
-            const isWishlisted = wishlist.includes(product.id);
-            return (
-              <div 
-                key={product.id}
-                className="group bg-gradient-to-b from-[#FFFDF8] to-[#F7F1EC] border border-[#6E1F35]/30 rounded-lg overflow-hidden hover:border-[#6E1F35] transition-all duration-300 shadow-xl flex flex-col justify-between"
-                data-testid={CATALOG.PerfumeCard}
-              >
-                <div className="relative overflow-hidden aspect-square bg-[#FFFDF8]">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-                  />
-                  
-                  <button 
-                    onClick={() => toggleWishlist(product.id)}
-                    className="absolute top-3 right-3 p-2 rounded-full bg-[#FFFDF8]/80 border border-[#6E1F35]/30 text-[#5D5054] hover:text-[#6E1F35] transition-colors"
-                    title="Save to favorites"
-                  >
-                    <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#6E1F35] text-[#6E1F35]' : ''}`} />
-                  </button>
-
-                  <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#FFFDF8] to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center">
-                    <button
-                      onClick={() => navigate(`/Perfume/${product.id}`)}
-                      className="w-full py-2 bg-[#6E1F35] text-[#FFFDF8] font-serif text-xs font-bold uppercase tracking-widest rounded shadow hover:bg-[#43111F] transition-colors"
-                      data-testid={CATALOG.quickViewBtn}
-                    >
-                      Quick View & Notes
-                    </button>
-                  </div>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between text-xs text-[#6E1F35] font-serif uppercase tracking-widest">
-                      <span>{product.brand}</span>
-                      <div className="flex items-center gap-1 text-[#6E1F35]">
-                        <Star className="w-3.5 h-3.5 fill-current" />
-                        <span>{product.rating}</span>
-                      </div>
-                    </div>
-                    <h3 
-                      onClick={() => navigate(`/Perfume/${product.id}`)}
-                      className="font-serif text-lg font-bold text-[#2D2326] mt-1 cursor-pointer hover:text-[#6E1F35] transition-colors line-clamp-1"
-                    >
-                      {product.name}
-                    </h3>
-                    <p className="text-xs text-[#7C6E72] font-serif line-clamp-2 mt-1">
-                      {product.description}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-3 border-t border-[#E5D8D0]">
-                    <div>
-                      <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Price</span>
-                      <span className="font-serif text-base font-bold text-[#6E1F35]">PKR {product.price}</span>
-                    </div>
-
-                    <button
-                      onClick={() => addToCart(product, product.sizes[1] || "L", 1)}
-                      className="px-4 py-2 bg-gradient-to-r from-[#6E1F35] to-[#43111F] text-[#FFFDF8] font-serif text-xs font-bold uppercase tracking-wider rounded hover:opacity-95 transition-all shadow-md flex items-center gap-1.5"
-                      data-testid={CATALOG.addToCartBtn}
-                    >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Add</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {displayedSaleProducts.map((product) => (
+            <PremiumProductCard
+              key={product.id}
+              product={product}
+              addToCart={addToCart}
+              wishlist={wishlist}
+              toggleWishlist={toggleWishlist}
+            />
+          ))}
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section id="categories" className="py-16 sm:py-20 bg-[#F7F1EC] border-y border-[#6E1F35]/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* Premium Categories Section with 3D Cards */}
+      <section id="categories" className="py-16 sm:py-20 bg-gradient-to-br from-[#F7F1EC] via-[#FFFDF8] to-[#F7F1EC] border-y border-[#6E1F35]/10 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-20 left-10 w-64 h-64 bg-[#6E1F35]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#87344D]/5 rounded-full blur-3xl"></div>
 
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
+            <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3 font-semibold">
               Explore
             </p>
-
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F] mb-4" style={{ textShadow: '0 2px 12px rgba(110, 31, 53, 0.08)' }}>
               Categories
             </h2>
-
-            <p className="mt-3 text-gray-600">
-              Explore decor categories
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#6E1F35] to-transparent mx-auto mb-4"></div>
+            <p className="mt-3 text-[#7C6E72] text-base">
+              Explore our curated decor categories
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-
             {PRODUCT_CATEGORIES.map(({ name, slug, image, imagePosition }) => (
               <button
                 key={slug}
                 onClick={() => navigate(`/category/${slug}`)}
-                className="group text-left bg-[#FFFDF8] border border-[#6E1F35]/15 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+                className="group relative text-left bg-gradient-to-br from-[#FFFFFF] to-[#FFFDF8] border border-[#6E1F35]/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:border-[#6E1F35] transition-all duration-500"
+                style={{
+                  boxShadow: '0 8px 24px rgba(110, 31, 53, 0.1), 0 2px 8px rgba(110, 31, 53, 0.05)'
+                }}
               >
+                {/* Subtle gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#6E1F35]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D2326]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   <img
                     src={image}
                     alt={name}
                     style={{ objectPosition: imagePosition || "center" }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 </div>
 
-                <div className="p-4 sm:p-5">
-                  <h3 className="font-serif text-lg sm:text-xl text-[#43111F]">
+                <div className="p-4 sm:p-5 relative">
+                  <h3 className="font-serif text-lg sm:text-xl text-[#43111F] group-hover:text-[#6E1F35] transition-colors duration-300">
                     {name}
                   </h3>
-
                   <p className="mt-2 text-xs text-[#7C6E72]">
                     {products.filter((product) => normalizeProductCategory(product.category) === name).length} products
                   </p>
-
-                  <p className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35]">
-                    Explore Collection
-                  </p>
+                  <div className="mt-3 flex items-center gap-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35] font-semibold">
+                    <span>Explore</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </div>
                 </div>
-
               </button>
             ))}
-
           </div>
         </div>
       </section>
