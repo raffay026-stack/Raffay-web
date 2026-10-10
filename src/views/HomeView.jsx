@@ -569,7 +569,7 @@ export default function HomeView() {
 
           <div className="border-t border-white/15 mt-10 pt-6 text-center">
             <p className="text-white/50 text-xs sm:text-sm">
-              ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© {new Date().getFullYear()} FK Decore. All Rights Reserved.
+              © {new Date().getFullYear()} FK Decore. All Rights Reserved.
             </p>
           </div>
 
