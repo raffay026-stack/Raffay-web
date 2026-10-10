@@ -76,7 +76,7 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 text-xs text-[#43111F] font-serif tracking-widest">
-              HOME â€¢ OFFICE â€¢ LOBBY â€¢ OUTDOOR
+              HOME • OFFICE • LOBBY • OUTDOOR
             </div>
           </div>
 
@@ -193,7 +193,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>Â© 2026 FK Decore. All rights reserved.</p>
+          <p>© 2026 FK Decore. All rights reserved.</p>
 
           <div className="mt-4 md:mt-0 text-center md:text-right">
             <a
@@ -209,6 +209,7 @@ export default function Footer() {
     </footer>
   );
 }
+
 
 
 
