@@ -101,13 +101,13 @@ export default function HomeView() {
       {/* Featured Showcase Tabs */}
             <nav className="fk-breadcrumb" aria-label="Main navigation">
         <a href="/sale-products">Sale Products</a>
-        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
+        <span>›</span>
         <a href="/#categories">Categories</a>
-        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
+        <span>›</span>
         <a href="/new-arrivals">New Arrivals</a>
-        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
+        <span>›</span>
         <a href="/about-us">About Us</a>
-        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
+        <span>›</span>
         <a href="/#hot-arrivals">Hot Articles</a>
       </nav>
 
@@ -245,7 +245,7 @@ export default function HomeView() {
                   </p>
 
                   <p className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35]">
-                    Explore Collection ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
+                    Explore Collection
                   </p>
                 </div>
 
@@ -303,7 +303,7 @@ export default function HomeView() {
                 </p>
 
                 <span className="inline-flex items-center px-7 py-3.5 bg-[#43111F] text-white rounded-lg group-hover:bg-[#6E1F35] transition">
-                  View All Products ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
+                  View All Products
                 </span>
 
               </div>
@@ -314,7 +314,7 @@ export default function HomeView() {
 
         </div>
       </section>
-      {/* Hot Arrivals Section */}
+      HOT ARRIVALS
       <section id="hot-arrivals" className="py-16 sm:py-20 bg-[#FFFDF8] border-y border-[#6E1F35]/10">
 
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
@@ -322,7 +322,7 @@ export default function HomeView() {
           <div className="text-center mb-10 sm:mb-14">
 
             <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
-              ÃƒÂ¢Ã…â€œÃ‚Â¦ HOT ARRIVALS ÃƒÂ¢Ã…â€œÃ‚Â¦
+              HOT ARRIVALS
             </p>
 
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
@@ -439,7 +439,7 @@ export default function HomeView() {
               onClick={() => navigate("/catalog")}
               className="px-7 sm:px-10 py-3.5 bg-[#43111F] text-white rounded-lg font-semibold tracking-wider hover:bg-[#6E1F35] transition"
             >
-              VIEW ALL HOT ARRIVALS ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
+              VIEW ALL HOT ARRIVALS
             </button>
 
           </div>
