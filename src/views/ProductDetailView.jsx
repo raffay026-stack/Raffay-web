@@ -26,7 +26,21 @@ export default function ProductDetailView() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
 
-  const product = products.find(p => p.id === id) || products[0];
+  const matchedProduct = products.find(p => p.id === id) || products[0] || null;
+  const product = matchedProduct || {
+    id: "",
+    name: "",
+    sizes: ["One Size"],
+    variations: { name: "", options: [] },
+    price: 0,
+    image: "",
+    deliveryCharge: 0,
+    brand: "FK Decore",
+    rating: 0,
+    reviewsCount: 0,
+    description: "",
+    category: ""
+  };
   const variationOptions = Array.isArray(product?.variations?.options)
     ? product.variations.options
     : [];
@@ -52,6 +66,25 @@ export default function ProductDetailView() {
   }, [id, product.id]);
 
   const isWishlisted = wishlist.includes(product.id);
+
+  if (!matchedProduct) {
+    return (
+      <main className="min-h-screen bg-[#FFFDF8] text-[#43111F] flex items-center justify-center p-8">
+        <div className="text-center">
+          <h1 className="font-serif text-2xl font-bold">Loading product...</h1>
+          <p className="mt-3 text-sm text-[#7C6E72]">
+            Please wait while the product information loads.
+          </p>
+          <button
+            onClick={() => navigate("/catalog")}
+            className="mt-5 rounded bg-[#6E1F35] px-5 py-3 text-white"
+          >
+            Return to collection
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   const handleAddToCart = () => {
     addToCart(product, selectedSize, quantity);
@@ -84,7 +117,7 @@ export default function ProductDetailView() {
           <div className="space-y-4 sticky top-28">
             <div className="luxury-detail-media aspect-square rounded-lg overflow-hidden border border-[#43111F]/40 bg-[#FFFFFF] shadow-2xl relative">
               <img 
-                src={product.image} 
+                src={selectedVariation?.image || product.image} 
                 alt={product.name}
                 className="w-full h-full object-contain opacity-95"
               />
@@ -153,13 +186,12 @@ export default function ProductDetailView() {
                   className="w-full rounded border border-[#43111F]/40 bg-white px-3 py-3 text-sm text-[#43111F]"
                 >
                   {variationOptions.map((option, index) => {
-                    const optionStock = Math.max(0, Number(option.stock) || 0);
                     const optionPrice = option.price !== undefined && option.price !== null && option.price !== ""
                       ? Number(option.price) || 0
                       : Number(product.price) || 0;
                     return (
-                      <option key={`${option.value}-${index}`} value={option.value} disabled={optionStock <= 0}>
-                        {option.value} — PKR {optionPrice.toFixed(2)} {optionStock <= 0 ? "(Out of stock)" : `(${optionStock} available)`}
+                      <option key={`${option.value}-${index}`} value={option.value}>
+                        {option.value} — PKR {optionPrice.toFixed(2)}
                       </option>
                     );
                   })}
@@ -236,6 +268,8 @@ export default function ProductDetailView() {
     </div>
   );
 }
+
+
 
 
 

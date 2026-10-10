@@ -500,24 +500,6 @@ export const AppProvider = ({ children }) => {
       ? String(selectedOption.value)
       : String(size || "M");
 
-    if (selectedOption) {
-      const stock = Math.max(0, Math.floor(Number(selectedOption.stock) || 0));
-      const currentItem = cart.find(
-        (item) => item.id === product.id && item.selectedSize === selectedValue
-      );
-      const currentQuantity = Number(currentItem?.quantity) || 0;
-
-      if (stock <= 0) {
-        toast.error(`${selectedValue} is out of stock.`);
-        return;
-      }
-
-      if (currentQuantity + qty > stock) {
-        toast.error(`Only ${stock} unit(s) available for ${selectedValue}.`);
-        return;
-      }
-    }
-
     const hasOptionPrice = selectedOption &&
       selectedOption.price !== undefined &&
       selectedOption.price !== null &&
@@ -526,12 +508,12 @@ export const AppProvider = ({ children }) => {
     const cartProduct = selectedOption
       ? {
           ...product,
+          image: selectedOption.image || product.image,
           price: hasOptionPrice
             ? Math.max(0, Number(selectedOption.price) || 0)
             : Number(product.price) || 0,
           selectedVariationName: variation?.name || "Option",
-          selectedVariationValue: selectedValue,
-          variationStock: Math.max(0, Math.floor(Number(selectedOption.stock) || 0))
+          selectedVariationValue: selectedValue
         }
       : product;
 
@@ -748,6 +730,7 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
 
 
 
