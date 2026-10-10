@@ -3259,7 +3259,7 @@ body {
 
 
 /* =========================================================
-   FK DECORE — PREMIUM UI/UX OVERHAUL
+   FK DECORE ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â PREMIUM UI/UX OVERHAUL
    Visual-only enhancement layer. Existing pages, routes,
    categories, products and functionality are preserved.
    ========================================================= */
@@ -3607,8 +3607,8 @@ footer a:hover { color: #F4D9C9 !important; }
 }
 
 /* =========================================================
-   FK DECORE — EXTREME LUXURY UI/UX
-   Additive styling only — existing pages/routes/categories
+   FK DECORE ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â EXTREME LUXURY UI/UX
+   Additive styling only ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â existing pages/routes/categories
    and functionality are preserved.
    ========================================================= */
 
@@ -4128,7 +4128,7 @@ footer a:hover {
 }
 
 
-/* FK DECORE — PREMIUM DEPTH & MOTION UPGRADE */
+/* FK DECORE ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â PREMIUM DEPTH & MOTION UPGRADE */
 :root {
   --fk-motion-ease: cubic-bezier(.2,.75,.25,1);
   --fk-motion-shadow: 0 24px 55px rgba(67,17,31,.14);
@@ -5750,3 +5750,94 @@ body, #root {
   color: #572033 !important;
 }
 
+/* FK DECORE: clear hero background overlay */
+.Decore-hero-video-overlay {
+  background: transparent !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.Decore-hero-slider {
+  background: transparent !important;
+}
+
+.Decore-desktop-slides img,
+.Decore-mobile-slides img {
+  filter: none !important;
+}
+
+/* FK DECORE: force clear hero imagery v2 */
+#root .Decore-cinematic-hero .Decore-hero-video-overlay {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  visibility: hidden !important;
+}
+
+#root .Decore-cinematic-hero::before,
+#root .Decore-cinematic-hero::after,
+#root .Decore-cinematic-hero .Decore-hero-slider::before,
+#root .Decore-cinematic-hero .Decore-hero-slider::after,
+#root .Decore-cinematic-hero .Decore-desktop-slides::before,
+#root .Decore-cinematic-hero .Decore-desktop-slides::after,
+#root .Decore-cinematic-hero .Decore-mobile-slides::before,
+#root .Decore-cinematic-hero .Decore-mobile-slides::after {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+}
+
+#root .Decore-cinematic-hero .Decore-desktop-slides img,
+#root .Decore-cinematic-hero .Decore-mobile-slides img {
+  filter: brightness(1.12) saturate(1.08) !important;
+}
+
+/* FK DECORE: hero image clarity final override */
+#root section.Decore-cinematic-hero {
+  background-color: transparent !important;
+}
+
+#root section.Decore-cinematic-hero > .Decore-hero-video-overlay,
+#root section.Decore-cinematic-hero .Decore-hero-video-overlay {
+  background: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+#root section.Decore-cinematic-hero::before,
+#root section.Decore-cinematic-hero::after,
+#root section.Decore-cinematic-hero .Decore-hero-slider::before,
+#root section.Decore-cinematic-hero .Decore-hero-slider::after {
+  background: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+}
+
+#root section.Decore-cinematic-hero .Decore-desktop-slides img,
+#root section.Decore-cinematic-hero .Decore-mobile-slides img {
+  filter: none !important;
+}
+
+/* FK DECORE product gallery slideshow */
+.product-gallery-slide {
+  animation: fk-product-gallery-slide-in 700ms ease both;
+}
+
+@keyframes fk-product-gallery-slide-in {
+  from {
+    opacity: 0.35;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

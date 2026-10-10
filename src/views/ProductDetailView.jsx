@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -25,6 +25,7 @@ export default function ProductDetailView() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
 
   const matchedProduct = products.find(p => p.id === id) || products[0] || null;
   const product = matchedProduct || {
@@ -65,6 +66,35 @@ export default function ProductDetailView() {
     setQuantity(1);
   }, [id, product.id]);
 
+  const extraGalleryImages = Array.isArray(product.galleryImages)
+    ? product.galleryImages
+    : [];
+
+  const productGallery = Array.from(new Set([
+    selectedVariation?.image,
+    product.image,
+    ...extraGalleryImages
+  ].filter((image) => typeof image === "string" && image.length > 0)));
+
+  const productGalleryKey = productGallery
+    .map((image) => `${image.length}:${image.slice(0, 48)}`)
+    .join("|");
+
+  const activeGalleryImage = productGallery[activeGalleryIndex] || product.image;
+
+  useEffect(() => {
+    setActiveGalleryIndex(0);
+
+    if (productGallery.length < 2) return undefined;
+
+    const slideshow = window.setInterval(() => {
+      setActiveGalleryIndex((current) =>
+        (current + 1) % productGallery.length
+      );
+    }, 3500);
+
+    return () => window.clearInterval(slideshow);
+  }, [id, product.id, selectedSize, productGallery.length, productGalleryKey]);
   const isWishlisted = wishlist.includes(product.id);
 
   if (!matchedProduct) {
@@ -117,9 +147,10 @@ export default function ProductDetailView() {
           <div className="space-y-4 sticky top-28">
             <div className="luxury-detail-media aspect-square rounded-lg overflow-hidden border border-[#43111F]/40 bg-[#FFFFFF] shadow-2xl relative">
               <img 
-                src={selectedVariation?.image || product.image} 
+                key={activeGalleryImage}
+                src={activeGalleryImage} 
                 alt={product.name}
-                className="w-full h-full object-contain opacity-95"
+                className="product-gallery-slide w-full h-full object-contain opacity-95"
               />
               <div className="absolute top-4 left-4 bg-[#FFFDF8]/90 border border-[#43111F]/40 px-3 py-1 rounded text-xs text-[#6E1F35] font-serif uppercase tracking-widest">
                 {product.category}
@@ -132,6 +163,26 @@ export default function ProductDetailView() {
               </button>
             </div>
             
+            {productGallery.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto py-2" aria-label="Product image gallery">
+                {productGallery.map((image, index) => (
+                  <button
+                    key={`${index}-${image.slice(0, 20)}`}
+                    type="button"
+                    onClick={() => setActiveGalleryIndex(index)}
+                    aria-label={`Show product image ${index + 1}`}
+                    aria-pressed={activeGalleryIndex === index}
+                    className={`h-16 w-16 shrink-0 overflow-hidden rounded border p-1 ${
+                      activeGalleryIndex === index
+                        ? "border-[#6E1F35]"
+                        : "border-[#D2BCB0]"
+                    }`}
+                  >
+                    <img src={image} alt="" className="h-full w-full object-contain" />
+                  </button>
+                ))}
+              </div>
+            )}
             <div className="grid grid-cols-3 gap-4 text-center text-xs text-[#7C6E72] font-serif">
               <div className="p-3 bg-[#FFFFFF] border border-[#43111F]/20 rounded">
                 <ShieldCheck className="w-4 h-4 text-[#6E1F35] mx-auto mb-1" />

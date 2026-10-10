@@ -85,26 +85,7 @@ export default function HomeView() {
         </div>
 
         <div className="FK Decore-hero-video-overlay absolute inset-0 pointer-events-none" />
-        <div className="fk-hero-content-wrap absolute inset-0 z-10 flex items-center">
-          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="fk-hero-content max-w-2xl">
-              <span className="fk-eyebrow"><Sparkles className="w-4 h-4" /> Premium Home & Interior Decor</span>
-              <h1>Elevate Your Space.<br /><span>Define Your Style.</span></h1>
-              <p>Discover statement pieces, elegant accents and timeless decor designed to make every space feel extraordinary.</p>
-              <div className="flex flex-wrap gap-3 mt-7">
-                <button type="button" onClick={() => navigate('/catalog')} className="fk-hero-primary">Explore Collection <ArrowRight className="w-4 h-4" /></button>
-                <button type="button" onClick={() => navigate('/new-arrivals')} className="fk-hero-secondary">New Arrivals</button>
-              </div>
-              <form onSubmit={handleQuickSearchSubmit} className="fk-hero-search mt-7">
-                <Search className="w-5 h-5 shrink-0" />
-                <input value={quickSearch} onChange={(e) => setQuickSearch(e.target.value)} placeholder="Search decor pieces, categories or styles..." aria-label="Search decor" />
-                <button type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* Background glow effects */}
+                {/* Background glow effects */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#6E1F35]/10 blur-[140px] rounded-full pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -116,25 +97,20 @@ export default function HomeView() {
         </div>
       </section>
 
+
       {/* Featured Showcase Tabs */}
             <nav className="fk-breadcrumb" aria-label="Main navigation">
         <a href="/sale-products">Sale Products</a>
-        <span>›</span>
+        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
         <a href="/#categories">Categories</a>
-        <span>›</span>
+        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
         <a href="/new-arrivals">New Arrivals</a>
-        <span>›</span>
+        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
         <a href="/about-us">About Us</a>
-        <span>›</span>
+        <span>ÃƒÂ¢Ã¢â€šÂ¬Ã‚Âº</span>
         <a href="/#hot-arrivals">Hot Articles</a>
       </nav>
 
-      <section className="fk-trust-strip" aria-label="FK DECORE benefits">
-        <div><ShieldCheck className="w-5 h-5" /><span><strong>Premium Quality</strong><small>Curated decor pieces</small></span></div>
-        <div><ShoppingBag className="w-5 h-5" /><span><strong>Easy Shopping</strong><small>Simple cart & checkout</small></span></div>
-        <div><Sparkles className="w-5 h-5" /><span><strong>Elegant Design</strong><small>Made for modern spaces</small></span></div>
-        <div><Heart className="w-5 h-5" /><span><strong>Customer First</strong><small>Support when you need it</small></span></div>
-      </section>
 
       <section className="luxury-reveal py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12 border-b border-[#E5D8D0] pb-6">
@@ -269,7 +245,7 @@ export default function HomeView() {
                   </p>
 
                   <p className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-[#6E1F35]">
-                    Explore Collection →
+                    Explore Collection ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
                   </p>
                 </div>
 
@@ -327,7 +303,7 @@ export default function HomeView() {
                 </p>
 
                 <span className="inline-flex items-center px-7 py-3.5 bg-[#43111F] text-white rounded-lg group-hover:bg-[#6E1F35] transition">
-                  View All Products →
+                  View All Products ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
                 </span>
 
               </div>
@@ -346,7 +322,7 @@ export default function HomeView() {
           <div className="text-center mb-10 sm:mb-14">
 
             <p className="uppercase tracking-[0.3em] text-sm text-[#6E1F35] mb-3">
-              ✦ HOT ARRIVALS ✦
+              ÃƒÂ¢Ã…â€œÃ‚Â¦ HOT ARRIVALS ÃƒÂ¢Ã…â€œÃ‚Â¦
             </p>
 
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#43111F]">
@@ -392,7 +368,7 @@ export default function HomeView() {
                     className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/95 flex items-center justify-center text-[#6E1F35] shadow-sm hover:bg-[#6E1F35] hover:text-white transition"
                     aria-label="Add to wishlist"
                   >
-                    ♡
+                    ÃƒÂ¢Ã¢â€žÂ¢Ã‚Â¡
                   </button>
 
                 </div>
@@ -407,7 +383,7 @@ export default function HomeView() {
                     </p>
 
                     <span className="text-xs text-[#6E1F35] whitespace-nowrap">
-                      ★ {product.rating || "4.9"}
+                      ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦ {product.rating || "4.9"}
                     </span>
 
                   </div>
@@ -443,7 +419,7 @@ export default function HomeView() {
                       onClick={() => navigate(`/Perfume/${product.id}`)}
                       className="px-3 sm:px-4 py-2 bg-[#43111F] text-white rounded-md text-xs sm:text-sm font-semibold hover:bg-[#6E1F35] transition"
                     >
-                      ðŸ› ADD
+                      ADD
                     </button>
 
                   </div>
@@ -463,7 +439,7 @@ export default function HomeView() {
               onClick={() => navigate("/catalog")}
               className="px-7 sm:px-10 py-3.5 bg-[#43111F] text-white rounded-lg font-semibold tracking-wider hover:bg-[#6E1F35] transition"
             >
-              VIEW ALL HOT ARRIVALS →
+              VIEW ALL HOT ARRIVALS ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢
             </button>
 
           </div>
@@ -473,7 +449,6 @@ export default function HomeView() {
       </section>
 
 
-      <Footer />
 
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       {/* FK Decore Contact Footer */}
@@ -594,7 +569,7 @@ export default function HomeView() {
 
           <div className="border-t border-white/15 mt-10 pt-6 text-center">
             <p className="text-white/50 text-xs sm:text-sm">
-              © {new Date().getFullYear()} FK Decore. All Rights Reserved.
+              ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© {new Date().getFullYear()} FK Decore. All Rights Reserved.
             </p>
           </div>
 
@@ -603,6 +578,10 @@ export default function HomeView() {
     </div>
   );
 }
+
+
+
+
 
 
 

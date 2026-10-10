@@ -1,11 +1,11 @@
-﻿import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Plus, Search, Pencil, Trash2, X, Save } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { PRODUCT_CATEGORY_NAMES } from "../constants/productCategories";
 
 const emptyProduct = () => ({
   name: "", price: 0, deliveryCharge: 0, description: "", category: "", image: "",
-  isSale: false, isNewArrival: false, isHotArticle: false
+  galleryImages: [], isSale: false, isNewArrival: false, isHotArticle: false
 });
 
 export default function AdminProductsView() {
@@ -108,6 +108,71 @@ export default function AdminProductsView() {
     reader.readAsDataURL(file);
   };
 
+  const handleGalleryImagesChange = async (event) => {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+
+    if ((editor.galleryImages || []).length + files.length > 5) {
+      setError("You can add up to 5 additional product images.");
+      event.target.value = "";
+      return;
+    }
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (files.some((file) =>
+      !allowedTypes.includes(file.type) || file.size > 5 * 1024 * 1024
+    )) {
+      setError("Choose JPG, PNG or WEBP images, each 5 MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
+    const readImage = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("Unable to read a gallery image."));
+
+      reader.onload = () => {
+        const image = new Image();
+        image.onerror = () => reject(new Error("Unable to process a gallery image."));
+
+        image.onload = () => {
+          const scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(image.width * scale));
+          canvas.height = Math.max(1, Math.round(image.height * scale));
+
+          const ctx = canvas.getContext("2d");
+          if (!ctx) {
+            reject(new Error("Unable to process the gallery image."));
+            return;
+          }
+
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL("image/webp", 0.82));
+        };
+
+        image.src = String(reader.result || "");
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    try {
+      const images = await Promise.all(files.map(readImage));
+
+      setEditor((current) => ({
+        ...current,
+        galleryImages: [...(current.galleryImages || []), ...images]
+      }));
+
+      setError("");
+    } catch (galleryError) {
+      setError(galleryError.message || "Unable to process gallery images.");
+    } finally {
+      event.target.value = "";
+    }
+  };
   const handleVariationImageChange = (index, event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -152,6 +217,7 @@ export default function AdminProductsView() {
       description: editor.description || "",
       category: editor.category || "",
       image: editor.image.trim(),
+      galleryImages: Array.isArray(editor.galleryImages) ? editor.galleryImages : [],
 
       isSale: Boolean(editor.isSale),
       isNewArrival: Boolean(editor.isNewArrival),
@@ -291,6 +357,55 @@ export default function AdminProductsView() {
     </p>
   </div>
 </div><section className="sm:col-span-2 rounded-lg border border-[#D2BCB0] bg-white p-4 space-y-4">
+  <div>
+    <h3 className="text-sm font-semibold text-[#43111F]">Additional Product Images</h3>
+    <p className="mt-1 text-xs text-[#7C6E72]">
+      Upload up to 5 extra product angles for the automatic slideshow.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    {(editor.galleryImages || []).map((image, index) => (
+      <div key={`${index}-${image.slice(0, 20)}`} className="rounded border border-[#E5D8D0] p-2">
+        <img
+          src={image}
+          alt={`Product angle ${index + 1}`}
+          className="h-28 w-full rounded bg-[#FFFDF8] object-contain"
+        />
+        <p className="mt-1 text-[11px] text-[#7C6E72]">Angle {index + 1}</p>
+        <button
+          type="button"
+          onClick={() => setEditor((current) => ({
+            ...current,
+            galleryImages: (current.galleryImages || []).filter(
+              (_, imageIndex) => imageIndex !== index
+            )
+          }))}
+          className="mt-2 w-full rounded border border-[#D2BCB0] px-2 py-1.5 text-xs text-[#6E1F35]"
+        >
+          Remove
+        </button>
+      </div>
+    ))}
+  </div>
+
+  <label
+    htmlFor="product-gallery-upload"
+    className="inline-flex cursor-pointer rounded bg-[#6E1F35] px-4 py-2 text-sm font-semibold text-white hover:bg-[#43111F]"
+  >
+    Choose additional images
+  </label>
+
+  <input
+    id="product-gallery-upload"
+    type="file"
+    multiple
+    accept="image/jpeg,image/png,image/webp"
+    onChange={handleGalleryImagesChange}
+    className="hidden"
+  />
+</section>
+<section className="sm:col-span-2 rounded-lg border border-[#D2BCB0] bg-white p-4 space-y-4">
   <div>
     <h3 className="text-sm font-semibold text-[#43111F]">Product variations (optional)</h3>
     <p className="mt-1 text-xs text-[#7C6E72]">Add options such as Color, Size or Material. Each option can have its own price and stock.</p>

@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { toast } from "sonner";
 import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
@@ -11,6 +11,7 @@ const productToRow = (product) => {
     description: product.description || "",
     category: product.category || "",
     image: product.image || "",
+    gallery_images: Array.isArray(product.galleryImages) ? product.galleryImages : [],
     in_stock: product.inStock !== false,
     is_sale: product.isSale === true,
     is_new_arrival: product.isNewArrival === true,
@@ -40,6 +41,7 @@ const productToRow = (product) => {
 
 const rowToProduct = (row) => ({
   ...row,
+  galleryImages: Array.isArray(row.gallery_images) ? row.gallery_images : [],
   inStock: row.in_stock,
   isSale: row.is_sale,
   isNewArrival: row.is_new_arrival,
@@ -264,7 +266,7 @@ export const AppProvider = ({ children }) => {
   }, []);
   const saveProducts = (nextProducts) => {
     setproducts(nextProducts);
-    localStorage.setItem(ADMIN_PRODUCTS_KEY, JSON.stringify(nextProducts));
+    safeSetLocalStorage(ADMIN_PRODUCTS_KEY, JSON.stringify(nextProducts));
     dispatchAdminDataEvent({ products: nextProducts });
   };
 
