@@ -19,6 +19,9 @@ const productToRow = (product) => {
     rating: Number(product.rating) || 0,
     reviews_count: Number(product.reviewsCount) || 0,
     sizes: Array.isArray(product.sizes) ? product.sizes : ["One Size"],
+    variations: product.variations && typeof product.variations === "object"
+      ? product.variations
+      : { name: "", options: [] },
     top_notes: Array.isArray(product.topNotes) ? product.topNotes : [],
     middle_notes: Array.isArray(product.middleNotes) ? product.middleNotes : [],
     base_notes: Array.isArray(product.baseNotes) ? product.baseNotes : [],
@@ -485,17 +488,79 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   const addToCart = (product, size = "M", qty = 1) => {
-    setCart(prevCart => {
-      const existingIndex = prevCart.findIndex(item => item.id === product.id && item.selectedSize === size);
+    const variation = product.variations && Array.isArray(product.variations.options)
+      ? product.variations
+      : null;
+    const options = variation?.options || [];
+    const selectedOption =
+      options.find((option) => String(option.value) === String(size)) ||
+      options[0] ||
+      null;
+    const selectedValue = selectedOption
+      ? String(selectedOption.value)
+      : String(size || "M");
+
+    if (selectedOption) {
+      const stock = Math.max(0, Math.floor(Number(selectedOption.stock) || 0));
+      const currentItem = cart.find(
+        (item) => item.id === product.id && item.selectedSize === selectedValue
+      );
+      const currentQuantity = Number(currentItem?.quantity) || 0;
+
+      if (stock <= 0) {
+        toast.error(`${selectedValue} is out of stock.`);
+        return;
+      }
+
+      if (currentQuantity + qty > stock) {
+        toast.error(`Only ${stock} unit(s) available for ${selectedValue}.`);
+        return;
+      }
+    }
+
+    const hasOptionPrice = selectedOption &&
+      selectedOption.price !== undefined &&
+      selectedOption.price !== null &&
+      selectedOption.price !== "";
+
+    const cartProduct = selectedOption
+      ? {
+          ...product,
+          price: hasOptionPrice
+            ? Math.max(0, Number(selectedOption.price) || 0)
+            : Number(product.price) || 0,
+          selectedVariationName: variation?.name || "Option",
+          selectedVariationValue: selectedValue,
+          variationStock: Math.max(0, Math.floor(Number(selectedOption.stock) || 0))
+        }
+      : product;
+
+    setCart((prevCart) => {
+      const existingIndex = prevCart.findIndex(
+        (item) => item.id === product.id && item.selectedSize === selectedValue
+      );
+
       if (existingIndex > -1) {
         const updated = [...prevCart];
-        updated[existingIndex].quantity += qty;
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + qty
+        };
         return updated;
-      } else {
-        return [...prevCart, { ...product, quantity: qty, selectedSize: size }];
       }
+
+      return [...prevCart, {
+        ...cartProduct,
+        quantity: qty,
+        selectedSize: selectedValue
+      }];
     });
-    toast.success(`Added ${product.name} (${size}) to your shopping cart.`);
+
+    toast.success(
+      selectedOption
+        ? `Added ${product.name} (${variation?.name || "Option"}: ${selectedValue}) to your shopping cart.`
+        : `Added ${product.name} (${selectedValue}) to your shopping cart.`
+    );
   };
 
   const updateCartQuantity = (id, size, newQty) => {
@@ -683,6 +748,8 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
+
+
 
 
 

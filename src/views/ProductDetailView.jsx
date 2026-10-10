@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Navbar from "../components/Navbar";
@@ -27,8 +27,29 @@ export default function ProductDetailView() {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   const product = products.find(p => p.id === id) || products[0];
-  const [selectedSize, setSelectedSize] = useState(product.sizes[1] || product.sizes[0] || "L");
+  const variationOptions = Array.isArray(product?.variations?.options)
+    ? product.variations.options
+    : [];
+  const [selectedSize, setSelectedSize] = useState(
+    variationOptions[0]?.value || product.sizes?.[1] || product.sizes?.[0] || "L"
+  );
   const [quantity, setQuantity] = useState(1);
+  const selectedVariation = variationOptions.find(
+    (option) => String(option.value) === String(selectedSize)
+  ) || null;
+  const selectedPrice = selectedVariation &&
+    selectedVariation.price !== undefined &&
+    selectedVariation.price !== null &&
+    selectedVariation.price !== ""
+      ? Number(selectedVariation.price) || 0
+      : Number(product.price) || 0;
+
+  useEffect(() => {
+    setSelectedSize(
+      variationOptions[0]?.value || product.sizes?.[1] || product.sizes?.[0] || "L"
+    );
+    setQuantity(1);
+  }, [id, product.id]);
 
   const isWishlisted = wishlist.includes(product.id);
 
@@ -111,7 +132,7 @@ export default function ProductDetailView() {
               </h1>
 
               <div className="text-2xl font-serif font-bold text-[#6E1F35] mt-3">
-                PKR {product.price} <span className="text-xs text-[#8A7A80] font-normal">PKR (Tax Included)</span>
+                PKR {selectedPrice} <span className="text-xs text-[#8A7A80] font-normal">PKR (Tax Included)</span>
               </div>
                 <div className="mt-2 text-sm font-semibold text-[#6E1F35]">                   Delivery Charges: PKR {Number(product.deliveryCharge || 0).toFixed(2)}                 </div>
             </div>
@@ -121,6 +142,45 @@ export default function ProductDetailView() {
             </p>
 
 
+            {variationOptions.length > 0 ? (
+              <div className="space-y-2 pt-2">
+                <label className="text-xs text-[#6E1F35] uppercase tracking-wider font-serif block">
+                  {product.variations?.name || "Choose an option"}
+                </label>
+                <select
+                  value={selectedSize}
+                  onChange={(event) => setSelectedSize(event.target.value)}
+                  className="w-full rounded border border-[#43111F]/40 bg-white px-3 py-3 text-sm text-[#43111F]"
+                >
+                  {variationOptions.map((option, index) => {
+                    const optionStock = Math.max(0, Number(option.stock) || 0);
+                    const optionPrice = option.price !== undefined && option.price !== null && option.price !== ""
+                      ? Number(option.price) || 0
+                      : Number(product.price) || 0;
+                    return (
+                      <option key={`${option.value}-${index}`} value={option.value} disabled={optionStock <= 0}>
+                        {option.value} — PKR {optionPrice.toFixed(2)} {optionStock <= 0 ? "(Out of stock)" : `(${optionStock} available)`}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            ) : Array.isArray(product.sizes) && product.sizes.length > 1 ? (
+              <div className="space-y-2 pt-2">
+                <label className="text-xs text-[#6E1F35] uppercase tracking-wider font-serif block">
+                  Size
+                </label>
+                <select
+                  value={selectedSize}
+                  onChange={(event) => setSelectedSize(event.target.value)}
+                  className="w-full rounded border border-[#43111F]/40 bg-white px-3 py-3 text-sm text-[#43111F]"
+                >
+                  {product.sizes.map((size, index) => (
+                    <option key={`${size}-${index}`} value={size}>{size}</option>
+                  ))}
+                </select>
+              </div>
+            ) : null}
             {/* Quantity Selector */}
             <div className="space-y-3 pt-2">
               <label className="text-xs text-[#6E1F35] uppercase tracking-wider font-serif block">Quantity</label>
@@ -176,6 +236,7 @@ export default function ProductDetailView() {
     </div>
   );
 }
+
 
 
 

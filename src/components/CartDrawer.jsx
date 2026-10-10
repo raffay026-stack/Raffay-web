@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useApp } from "../context/AppContext";
 import { X, Plus, Minus, Trash2, ArrowRight, ShieldCheck, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -87,7 +87,7 @@ export default function CartDrawer({ isOpen, onClose }) {
                     <div>
                       <span className="text-[10px] text-[#43111F] uppercase tracking-widest font-serif">{item.brand}</span>
                       <h5 className="font-serif text-sm font-medium text-[#6E1F35] line-clamp-1">{item.name}</h5>
-                      <div className="text-xs text-[#7C6E72] mt-0.5 font-serif">Size: <span className="text-[#43111F]">{item.selectedSize}</span></div>
+                      <div className="text-xs text-[#7C6E72] mt-0.5 font-serif">{item.selectedVariationName || "Size"}: <span className="text-[#43111F]">{item.selectedSize}</span></div>
                     </div>
                     
                     <div className="flex items-center justify-between mt-3">
@@ -197,6 +197,7 @@ export default function CartDrawer({ isOpen, onClose }) {
     </div>
   );
 }
+
 
 
 

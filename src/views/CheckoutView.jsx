@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 
 const JAZZCASH_NUMBER = "03001234567";
 const EASYPAISA_NUMBER = "03001234567";
@@ -247,7 +247,7 @@ export default function CheckoutView() {
 
               <div className="flex items-center justify-between border-b border-[#E5D8D0] pb-4">
                 <h3 className="text-lg font-serif font-bold text-[#43111F] flex items-center gap-2">
-                  <span className="text-xl">ðŸ’³</span>
+                  <span className="text-xl">Ã°Å¸â€™Â³</span>
                   <span>Payment Method</span>
                 </h3>
 
@@ -386,7 +386,7 @@ export default function CheckoutView() {
 
                   {/* Payment Note */}
                   <div className="flex gap-2 items-start text-[#5D5054]">
-                    <span className="text-[#43111F]">ⓘ</span>
+                    <span className="text-[#43111F]">â“˜</span>
 
                     <p className="text-[11px] leading-5">
                       After sending the payment, enter your payment number
@@ -418,7 +418,7 @@ export default function CheckoutView() {
                     <div className="flex-1">
                       <div className="text-[10px] text-[#43111F] uppercase tracking-wider font-serif">{item.brand}</div>
                       <div className="font-serif text-xs text-[#2D2326] line-clamp-1">{item.name}</div>
-                      <div className="text-[11px] text-[#7C6E72] font-serif">Size: {item.selectedSize} × {item.quantity}</div>
+                      <div className="text-[11px] text-[#7C6E72] font-serif">Size: {item.selectedSize} Ã— {item.quantity}</div>
                     </div>
                     <div className="font-serif text-xs font-bold text-[#43111F]">PKR {item.price * item.quantity}</div>
                   </div>
@@ -485,6 +485,7 @@ export default function CheckoutView() {
     </div>
   );
 }
+
 
 
 
