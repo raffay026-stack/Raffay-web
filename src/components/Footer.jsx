@@ -1,4 +1,4 @@
-﻿import { Crown } from "lucide-react";
+import { Crown } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ShieldCheck, Truck } from "lucide-react";
@@ -193,7 +193,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>© 2026 FK Decore. All rights reserved.</p>
+          <p>© 2026 FK Decore. All Rights Reserved.</p>
 
           <div className="mt-4 md:mt-0 text-center md:text-right">
             <a
