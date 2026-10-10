@@ -1,4 +1,4 @@
-import { Crown } from "lucide-react";
+﻿import { Crown } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ShieldCheck, Truck } from "lucide-react";
@@ -14,7 +14,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start space-y-3">
             <div className="p-3 bg-[#F7F1EC] border border-[#43111F]/30 rounded-full text-[#43111F]">
-              <Truck className="w-6 h-6" />
+              <Truck className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Fast Delivery</h4>
             <p className="text-xs text-[#8A7A80]">
@@ -24,7 +24,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start space-y-3">
             <div className="p-3 bg-[#F7F1EC] border border-[#43111F]/30 rounded-full text-[#43111F]">
-              <Sparkles className="w-6 h-6" />
+              <Sparkles className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Curated Decor Selection</h4>
             <p className="text-xs text-[#8A7A80]">
@@ -34,7 +34,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start space-y-3">
             <div className="p-3 bg-[#F7F1EC] border border-[#43111F]/30 rounded-full text-[#43111F]">
-              <ShieldCheck className="w-6 h-6" />
+              <ShieldCheck className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Premium Quality</h4>
             <p className="text-xs text-[#8A7A80]">
@@ -44,7 +44,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start space-y-3">
             <div className="p-3 bg-[#F7F1EC] border border-[#43111F]/30 rounded-full text-[#43111F]">
-              <Crown className="w-6 h-6" />
+              <Crown className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Perfect For Every Space</h4>
             <p className="text-xs text-[#8A7A80]">
@@ -76,7 +76,7 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 text-xs text-[#43111F] font-serif tracking-widest">
-              HOME • OFFICE • LOBBY • OUTDOOR
+              HOME â€¢ OFFICE â€¢ LOBBY â€¢ OUTDOOR
             </div>
           </div>
 
@@ -193,7 +193,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>© 2026 FK Decore. All rights reserved.</p>
+          <p>Â© 2026 FK Decore. All rights reserved.</p>
 
           <div className="mt-4 md:mt-0 text-center md:text-right">
             <a
@@ -209,5 +209,6 @@ export default function Footer() {
     </footer>
   );
 }
+
 
 
