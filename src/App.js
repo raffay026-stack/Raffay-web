@@ -150,6 +150,7 @@ function App() {
             <Route path="/catalog" element={<CatalogView />} />
             <Route path="/category/:slug" element={<CategoryView />} />
             <Route path="/Perfume/:id" element={<ProductDetailView />} />
+            <Route path="/product/:id" element={<ProductDetailView />} />
             <Route path="/checkout" element={<CheckoutView />} />
             <Route path="/order-confirmation/:id" element={<OrderConfirmationView />} />
             <Route path="/orders" element={<MyOrdersView />} />
@@ -198,4 +199,3 @@ export default App;
 
 
 import AboutUsView from "./views/AboutUsView";
-

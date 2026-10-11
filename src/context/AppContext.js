@@ -221,8 +221,8 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     let mounted = true;
-    localStorage.setItem(ADMIN_PRODUCTS_KEY, JSON.stringify([]));
-    localStorage.setItem("lixir_cart", JSON.stringify([]));
+    safeSetLocalStorage(ADMIN_PRODUCTS_KEY, JSON.stringify([]));
+    safeSetLocalStorage("lixir_cart", JSON.stringify([]));
     setCart([]);
 
     const loadProductsFromSupabase = async () => {
