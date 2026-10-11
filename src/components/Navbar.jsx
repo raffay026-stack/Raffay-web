@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { 
@@ -12,7 +12,7 @@ import {
   PackageCheck,
   LogOut
 } from "lucide-react";
-import Logo from "../assets/fk-logo.jpeg";
+import Logo from "../assets/fk-logo-transparent.png";
 import { useState } from "react";
 import { CART, HOME } from "../constants/testIds";
 
@@ -50,7 +50,7 @@ export default function Navbar({ onOpenCart }) {
             <Link to="/" className="flex items-center gap-4 group relative" data-testid="navbar-brand-logo">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#6E1F35]/20 to-[#87344D]/20 blur-xl rounded-full group-hover:blur-2xl transition-all duration-500"></div>
-                <img src={Logo} alt="FK Decore" className="relative w-16 h-16 object-contain group-hover:scale-110 transition-all duration-500 FK-Decore-logo-badge shadow-xl" style={{ filter: 'drop-shadow(0 4px 12px rgba(110, 31, 53, 0.25))' }} />
+                <img src={Logo} alt="FK Decore" className="relative w-16 h-16 object-contain flex-shrink-0" style={{ background: "transparent", boxShadow: "none", filter: "none", mixBlendMode: "multiply" }} />
               </div>
               <div className="flex flex-col">
                 <span className="text-4xl font-bold tracking-[0.16em] bg-gradient-to-r from-[#43111F] via-[#6E1F35] to-[#87344D] bg-clip-text text-transparent group-hover:tracking-[0.18em] transition-all duration-300" style={{ fontFamily: "Didot, Bodoni 72, Bodoni MT, Times New Roman, serif", textShadow: '0 2px 8px rgba(110, 31, 53, 0.15)' }}>FK Decore</span>
@@ -220,6 +220,8 @@ export default function Navbar({ onOpenCart }) {
     </header>
   );
 }
+
+
 
 
 

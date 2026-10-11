@@ -1,12 +1,12 @@
-import { Crown } from "lucide-react";
+﻿import { Crown } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ShieldCheck, Truck } from "lucide-react";
-import Logo from "../assets/fk-logo.jpeg";
+import Logo from "../assets/fk-logo-transparent.png";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-[#0A0506] via-[#050505] to-[#0A0506] border-t border-[#43111F]/40 text-[#7C6E72] pt-16 pb-12 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-[#0A0506] via-[#050505] to-[#0A0506] border-t border-[#43111F]/40 text-[#7C6E72] pt-8 pb-6 overflow-hidden">
       {/* Premium ambient lighting effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#6E1F35]/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#87344D]/5 rounded-full blur-3xl"></div>
@@ -14,7 +14,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Premium Decor Benefits with 3D Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-[#E5D8D0]/20 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-8 border-b border-[#E5D8D0]/20 text-center md:text-left">
 
           <div className="flex flex-col items-center md:items-start space-y-3 group">
             <div className="relative p-4 bg-gradient-to-br from-[#F7F1EC] to-[#EFE5D8] border border-[#43111F]/30 rounded-2xl text-[#43111F] shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
@@ -22,7 +22,7 @@ export default function Footer() {
               <Truck className="relative w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#F3EFE6] font-semibold group-hover:text-[#D8C3A5] transition-colors">Fast Delivery</h4>
-            <p className="text-xs text-[#8A7A80]">
+            <p className="text-sm text-[#D8C9C5]">
               Safe and reliable delivery for your selected decor pieces.
             </p>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
               <Sparkles className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Curated Decor Selection</h4>
-            <p className="text-xs text-[#8A7A80]">
+            <p className="text-sm text-[#D8C9C5]">
               Beautiful decorative pieces selected to elevate every space.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function Footer() {
               <ShieldCheck className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Premium Quality</h4>
-            <p className="text-xs text-[#8A7A80]">
+            <p className="text-sm text-[#D8C9C5]">
               Quality materials with refined finishing, detail, and lasting beauty.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function Footer() {
               <Crown className="w-6 h-6 text-[#43111F]" style={{ color: "#43111F", stroke: "#43111F" }} />
             </div>
             <h4 className="font-serif text-[#2D2326] font-medium">Perfect For Every Space</h4>
-            <p className="text-xs text-[#8A7A80]">
+            <p className="text-sm text-[#D8C9C5]">
               Ideal decor pieces for homes, offices, lobbies, and outdoor spaces.
             </p>
           </div>
@@ -60,28 +60,28 @@ export default function Footer() {
         </div>
 
         {/* Main Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 py-16 border-b border-[#E5D8D0]">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 py-8 border-b border-[#E5D8D0]">
 
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
               <img
                 src={Logo}
                 alt="FK Decore"
-                className="w-8 h-8 rounded-full object-cover FK Decore-logo-badge"
+                className="w-8 h-8 object-contain"
               />
               <span className="font-serif text-lg font-bold tracking-widest text-[#F3EFE6]">
                 FK Decore
               </span>
             </div>
 
-            <p className="text-xs text-[#7C6E72] max-w-sm leading-relaxed font-serif">
+            <p className="text-sm text-[#D8C9C5] max-w-sm leading-relaxed font-serif">
               An elegant destination for beautiful decoration pieces. We curate
               artificial plants, statement decor, and refined accents designed
               to bring beauty, warmth, and character to every space.
             </p>
 
             <div className="pt-2 text-xs text-[#43111F] font-serif tracking-widest">
-              HOME • OFFICE • LOBBY • OUTDOOR
+              HOME â€¢ OFFICE â€¢ LOBBY â€¢ OUTDOOR
             </div>
           </div>
 
@@ -90,7 +90,7 @@ export default function Footer() {
               Decor Collections
             </h5>
 
-            <ul className="space-y-2 text-xs font-serif">
+            <ul className="space-y-3 text-sm font-serif">
               <li>
                 <Link to="/catalog" className="hover:text-[#43111F] transition-colors">
                   Artificial Plants
@@ -124,7 +124,7 @@ export default function Footer() {
               Customer Care
             </h5>
 
-            <ul className="space-y-2 text-xs font-serif">
+            <ul className="space-y-3 text-sm font-serif">
               <li>
                 <Link to="/orders" className="hover:text-[#43111F] transition-colors">
                   Track Orders
@@ -165,7 +165,7 @@ export default function Footer() {
               Stay Inspired
             </h5>
 
-            <p className="text-xs text-[#7C6E72] mb-3 font-serif">
+            <p className="text-sm text-[#D8C9C5] mb-3 font-serif">
               Receive updates on new decor pieces, latest arrivals, and special offers.
             </p>
 
@@ -197,8 +197,8 @@ export default function Footer() {
 
         </div>
 
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#8A7A80] font-serif">
-          <p>© 2026 FK Decore. All Rights Reserved.</p>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-[#D8C9C5] font-serif">
+          <p>Â© 2026 FK Decore. All Rights Reserved.</p>
 
           <div className="mt-4 md:mt-0 text-center md:text-right">
             <a
@@ -214,6 +214,8 @@ export default function Footer() {
     </footer>
   );
 }
+
+
 
 
 
