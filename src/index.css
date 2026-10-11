@@ -6143,3 +6143,44 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     height: 100% !important;
   }
 }
+
+/* FK DECORE: MOBILE HERO PANORAMIC RATIO FIX */
+@media (max-width: 768px) {
+  #root section.Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 10 / 3 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    background: #f7f0e6 !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-hero-slider {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-desktop-slides {
+    display: none !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}
