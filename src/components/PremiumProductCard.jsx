@@ -23,7 +23,7 @@ export default function PremiumProductCard({
   };
 
   const handleCardClick = () => {
-    navigate(`/product/${product.id}`);
+    navigate(`/Perfume/${product.id}`);
   };
 
   return (

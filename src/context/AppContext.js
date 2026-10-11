@@ -240,7 +240,7 @@ export const AppProvider = ({ children }) => {
         const loadedProducts = (data || []).map(rowToProduct);
         if (mounted) {
           setproducts(loadedProducts);
-          localStorage.setItem(ADMIN_PRODUCTS_KEY, JSON.stringify(loadedProducts));
+          safeSetLocalStorage(ADMIN_PRODUCTS_KEY, JSON.stringify(loadedProducts));
           dispatchAdminDataEvent({ products: loadedProducts });
         }
       } catch (error) {
