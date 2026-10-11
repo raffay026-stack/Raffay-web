@@ -6184,3 +6184,96 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     object-position: center center !important;
   }
 }
+
+/* FK DECORE: FINAL RESPONSIVE HERO FIX */
+@media (min-width: 769px) {
+  #root section.Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 3 / 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-hero-slider,
+  #root section.Decore-cinematic-hero .Decore-desktop-slides {
+    height: 100% !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-desktop-slides img {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #root section.Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-hero-slider,
+  #root section.Decore-cinematic-hero .Decore-mobile-slides {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-desktop-slides {
+    display: none !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides {
+    display: block !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides img:nth-child(4) {
+    object-position: 68% center !important;
+  }
+
+  /* Keep the five shortcut links tidy on narrow screens. */
+  #root nav.fk-breadcrumb {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+  }
+
+  #root nav.fk-breadcrumb span {
+    display: none !important;
+  }
+
+  #root nav.fk-breadcrumb a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    padding: 10px 6px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    font-size: 11px !important;
+  }
+
+  #root nav.fk-breadcrumb a:last-of-type {
+    grid-column: 1 / -1 !important;
+  }
+}
