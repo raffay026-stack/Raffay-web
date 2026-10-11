@@ -6120,3 +6120,26 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     letter-spacing: 0.08em !important;
   }
 }
+
+
+/* FK DECORE: DESKTOP HERO RATIO FIX 10:3 */
+@media (min-width: 769px) {
+  #root section.Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 10 / 3 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-hero-slider {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-desktop-slides {
+    height: 100% !important;
+  }
+}
