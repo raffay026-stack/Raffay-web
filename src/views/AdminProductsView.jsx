@@ -8,6 +8,54 @@ const emptyProduct = () => ({
   galleryImages: [], isSale: false, isNewArrival: false, isHotArticle: false
 });
 
+const compressImageDataUrl = async (source) => {
+  if (typeof source !== "string" || !source.startsWith("data:image/")) {
+    return source || "";
+  }
+
+  try {
+    const image = new Image();
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = reject;
+      image.src = source;
+    });
+
+    const width = image.naturalWidth || image.width;
+    const height = image.naturalHeight || image.height;
+    if (!width || !height) return source;
+
+    const maxDimension = 1280;
+    const scale = Math.min(1, maxDimension / Math.max(width, height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(width * scale));
+    canvas.height = Math.max(1, Math.round(height * scale));
+
+    const context = canvas.getContext("2d");
+    if (!context) return source;
+
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const blob = await new Promise((resolve) => {
+      canvas.toBlob(resolve, "image/webp", 0.68);
+    });
+    if (!blob) return source;
+
+    const compressed = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+
+    return typeof compressed === "string" && compressed.length < source.length
+      ? compressed
+      : source;
+  } catch (error) {
+    console.warn("Image compression failed; keeping the original image.", error);
+    return source;
+  }
+};
 export default function AdminProductsView() {
   const { products, updateProduct, addProduct, deleteProduct, deleteAllProducts } = useApp();
   const [query, setQuery] = useState("");
@@ -210,27 +258,36 @@ export default function AdminProductsView() {
     event.preventDefault();
     if (!editor.name.trim()) { setError("Enter a product name."); return; }
     if (!editor.image.trim()) { setError("Please choose a product image."); return; } if (editor.isSale && ((Number(editor.price) || 0) <= 0 || (Number(editor.originalPrice) || 0) <= (Number(editor.price) || 0))) { setError("Old Price must be greater than Sale Price."); return; }
+        const compressedMainImage = await compressImageDataUrl(editor.image.trim());
+    const compressedGalleryImages = await Promise.all(
+      (Array.isArray(editor.galleryImages) ? editor.galleryImages : [])
+        .map((image) => compressImageDataUrl(image))
+    );
+    const compressedVariationOptions = await Promise.all(
+      (editor.variations?.options || [])
+        .filter((option) => String(option.value || "").trim())
+        .map(async (option) => ({
+          value: String(option.value).trim(),
+          price: Math.max(0, Number(option.price) || 0),
+          image: await compressImageDataUrl(String(option.image || ""))
+        }))
+    );
+
     const payload = {
       name: editor.name.trim(),
       price: Number(editor.price) || 0, originalPrice: editor.isSale ? (Number(editor.originalPrice) || 0) : null,
       deliveryCharge: Number(editor.deliveryCharge) || 0,
       description: editor.description || "",
       category: editor.category || "",
-      image: editor.image.trim(),
-      galleryImages: Array.isArray(editor.galleryImages) ? editor.galleryImages : [],
+      image: compressedMainImage,
+      galleryImages: compressedGalleryImages,
 
       isSale: Boolean(editor.isSale),
       isNewArrival: Boolean(editor.isNewArrival),
       isHotArticle: Boolean(editor.isHotArticle),
       variations: {
         name: String(editor.variations?.name || "").trim(),
-        options: (editor.variations?.options || [])
-          .filter((option) => String(option.value || "").trim())
-          .map((option) => ({
-            value: String(option.value).trim(),
-            price: Math.max(0, Number(option.price) || 0),
-            image: String(option.image || "")
-          }))
+        options: compressedVariationOptions
       }
     };
     try {
