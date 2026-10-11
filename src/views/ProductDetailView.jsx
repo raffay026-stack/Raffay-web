@@ -216,7 +216,7 @@ export default function ProductDetailView() {
               </h1>
 
               <div className="text-2xl font-serif font-bold text-[#6E1F35] mt-3">
-                PKR {selectedPrice} <span className="text-xs text-[#8A7A80] font-normal">PKR (Tax Included)</span>
+                PKR {selectedPrice}{product.isSale && Number(product.originalPrice) > Number(selectedPrice) && <span className="ml-3 text-lg font-normal text-[#8A7A80] line-through">PKR {product.originalPrice}</span>} <span className="text-xs text-[#8A7A80] font-normal">PKR (Tax Included)</span>
               </div>
                 <div className="mt-2 text-sm font-semibold text-[#6E1F35]">                   Delivery Charges: PKR {Number(product.deliveryCharge || 0).toFixed(2)}                 </div>
             </div>

@@ -190,11 +190,11 @@ export default function NewArrivalsView() {
 
                     <div>
                       <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">
-                        Price
+                        {product.isSale ? "Sale Price" : "Price"}
                       </span>
 
                       <span className="font-serif text-base font-bold text-[#43111F]">
-                        PKR {product.price}
+                        PKR {product.price}{product.isSale && Number(product.originalPrice) > Number(product.price) && <span className="ml-2 text-sm font-normal text-[#8A7A80] line-through">PKR {product.originalPrice}</span>}
                       </span>
                     </div>
 

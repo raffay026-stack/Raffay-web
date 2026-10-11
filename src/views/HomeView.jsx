@@ -351,7 +351,7 @@ export default function HomeView() {
                       </p>
 
                       <p className="font-serif text-base sm:text-lg font-semibold text-[#6E1F35]">
-                        PKR {product.price}
+                        PKR {product.price}{product.isSale && Number(product.originalPrice) > Number(product.price) && <span className="ml-2 text-sm font-normal text-[#8A7A80] line-through">PKR {product.originalPrice}</span>}
                       </p>
                     </div>
 

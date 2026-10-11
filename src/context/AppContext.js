@@ -6,7 +6,7 @@ const productToRow = (product) => {
   const row = {
     id: product.id,
     name: product.name || "",
-    price: Number(product.price) || 0,
+    price: Number(product.price) || 0, original_price: product.originalPrice === null || product.originalPrice === undefined || product.originalPrice === "" ? null : (Number(product.originalPrice) || 0),
     delivery_charge: Number(product.deliveryCharge) || 0,
     description: product.description || "",
     category: product.category || "",
@@ -43,7 +43,7 @@ const rowToProduct = (row) => ({
   ...row,
   galleryImages: Array.isArray(row.gallery_images) ? row.gallery_images : [],
   inStock: row.in_stock,
-  isSale: row.is_sale,
+  isSale: row.is_sale, originalPrice: row.original_price === null || row.original_price === undefined ? null : Number(row.original_price),
   isNewArrival: row.is_new_arrival,
   isHotArticle: row.is_hot_article,
   reviewsCount: row.reviews_count,

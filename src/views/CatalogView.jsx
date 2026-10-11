@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { PERFUME_BRANDS, PERFUME_CATEGORIES } from "../mock";
@@ -273,8 +273,8 @@ export default function CatalogView() {
 
                         <div className="flex items-center justify-between pt-3 border-t border-[#E5D8D0]">
                           <div>
-                            <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">Price</span>
-                            <span className="font-serif text-base font-bold text-[#43111F]">PKR {product.price}</span>
+                            <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block">{product.isSale ? "Sale Price" : "Price"}</span>
+                            <span className="font-serif text-base font-bold text-[#43111F]">PKR {product.price}{product.isSale && Number(product.originalPrice) > Number(product.price) && <span className="ml-2 text-sm font-normal text-[#8A7A80] line-through">PKR {product.originalPrice}</span>}</span>
                           </div>
 
                           <button

@@ -104,9 +104,9 @@ export default function PremiumProductCard({
         {/* Price & Add to Cart */}
         <div className="flex items-center justify-between pt-3 border-t border-[#E5D8D0]">
           <div>
-            <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block mb-0.5">Price</span>
+            <span className="text-[10px] text-[#8A7A80] uppercase tracking-widest block mb-0.5">{product.isSale ? "Sale Price" : "Price"}</span>
             <span className="font-serif text-lg font-bold text-[#6E1F35]">
-              PKR {product.price}
+              PKR {product.price}{product.isSale && Number(product.originalPrice) > Number(product.price) && <span className="ml-2 text-sm font-normal text-[#8A7A80] line-through">PKR {product.originalPrice}</span>}
             </span>
           </div>
 
