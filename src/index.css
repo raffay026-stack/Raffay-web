@@ -6570,3 +6570,28 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     background: transparent !important;
   }
 }
+
+/* FK DECORE: EQUAL MOBILE CATEGORY IMAGE FRAMES */
+@media (max-width: 768px) {
+  #root #categories .group > div:first-child {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+    background: #FFFDF8 !important;
+  }
+
+  #root #categories .group > div:first-child > img {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+  }
+}
