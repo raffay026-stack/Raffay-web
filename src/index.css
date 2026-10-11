@@ -6501,3 +6501,39 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     display: none !important;
   }
 }
+
+/* FK DECORE: MOBILE CATEGORY AND PRODUCT IMAGE FINAL FIX */
+@media (max-width: 768px) {
+  /* Keep category imagery centered and fully visible. */
+  #root #categories img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: none !important;
+    background: #FFFDF8 !important;
+  }
+
+  /* Preserve the complete All Products banner and its logo. */
+  #root div:has(> img[alt="All Products"]) {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 1 !important;
+    overflow: hidden !important;
+    background: #F7F1EC !important;
+  }
+
+  #root img[alt="All Products"] {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: #F7F1EC !important;
+  }
+
+  /* Disable desktop hover text overlays on mobile product images. */
+  #root .group .absolute.inset-x-0.bottom-0 {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

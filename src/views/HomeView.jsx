@@ -309,7 +309,7 @@ export default function HomeView() {
                     className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/95 flex items-center justify-center text-[#6E1F35] shadow-sm hover:bg-[#6E1F35] hover:text-white transition"
                     aria-label="Add to wishlist"
                   >
-                    ÃƒÂ¢Ã¢â€žÂ¢Ã‚Â¡
+                    &#9825;
                   </button>
 
                 </div>
@@ -324,7 +324,7 @@ export default function HomeView() {
                     </p>
 
                     <span className="text-xs text-[#6E1F35] whitespace-nowrap">
-                      ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦ {product.rating || "4.9"}
+                      &#9733; {product.rating || "4.9"}
                     </span>
 
                   </div>
@@ -519,7 +519,6 @@ export default function HomeView() {
     </div>
   );
 }
-
 
 
 
