@@ -6277,3 +6277,89 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     grid-column: 1 / -1 !important;
   }
 }
+
+/* FK DECORE: MOBILE PORTRAIT SLIDES AND NAV REFINEMENT */
+@media (max-width: 768px) {
+  #root section.Decore-cinematic-hero {
+    width: 100% !important;
+    aspect-ratio: 2 / 3 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    background: #f8f1e8 !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-hero-slider,
+  #root section.Decore-cinematic-hero .Decore-mobile-slides {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-desktop-slides {
+    display: none !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides {
+    display: block !important;
+  }
+
+  #root section.Decore-cinematic-hero .Decore-mobile-slides img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: #f8f1e8 !important;
+  }
+
+  /* Target the homepage shortcut navigation by class and link destinations. */
+  #root nav.fk-breadcrumb,
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+  }
+
+  #root nav.fk-breadcrumb > :not(a),
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) > :not(a) {
+    display: none !important;
+  }
+
+  #root nav.fk-breadcrumb a,
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 12px 6px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    font-size: 11px !important;
+  }
+
+  #root nav.fk-breadcrumb a::before,
+  #root nav.fk-breadcrumb a::after,
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) a::before,
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) a::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  #root nav.fk-breadcrumb a:last-of-type,
+  #root nav:has(a[href="/sale-products"]):has(a[href="/new-arrivals"]):has(a[href="/about-us"]) a:last-of-type {
+    grid-column: 1 / -1 !important;
+  }
+}
