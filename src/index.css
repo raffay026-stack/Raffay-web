@@ -6595,3 +6595,43 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     transform: none !important;
   }
 }
+
+/* FK DECORE: CORRECT CATEGORY IMAGE WRAPPER */
+@media (max-width: 768px) {
+  /* Restore the decorative overlay to absolute positioning.
+     It must not take up space above the category image. */
+  #root #categories button.group > div:first-child {
+    position: absolute !important;
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Target the actual div that contains the category img. */
+  #root #categories button.group > div:has(> img) {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    flex: none !important;
+  }
+
+  #root #categories button.group > div:has(> img) > img {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    transform: none !important;
+  }
+}
