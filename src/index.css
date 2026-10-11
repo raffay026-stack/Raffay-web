@@ -6537,3 +6537,36 @@ header a[data-testid="navbar-brand-logo"] > div:last-child > span:last-child {
     pointer-events: none !important;
   }
 }
+
+/* FK DECORE: FINAL MOBILE IMAGE FILL FIX */
+@media (max-width: 768px) {
+  /* Make every category image fill the same card frame. */
+  #root #categories img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: transparent !important;
+    transform: none !important;
+  }
+
+  /* Fill the All Products banner frame without shrinking its image. */
+  #root div:has(> img[alt="All Products"]) {
+    width: 100% !important;
+    aspect-ratio: 10 / 3 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    background: #F7F1EC !important;
+  }
+
+  #root img[alt="All Products"] {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: transparent !important;
+  }
+}
